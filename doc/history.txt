@@ -10,7 +10,7 @@ SiteBar 3 History
 [Bxx] - refers to https://secure.teamforge.net/bugzilla/show_bug.cgi?id=xx
 
 --------------------------------------------------------------------------------
-Release 3.4 Sharing Redesigned                                <not yet released>
+Release 3.4 Sharing Redesigned                                  February 12 2014
 --------------------------------------------------------------------------------
 
 Thanks to Stephane Schitter for help with localization cleanup.
