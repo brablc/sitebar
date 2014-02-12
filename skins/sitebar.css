@@ -1,0 +1,973 @@
+@charset "utf-8";
+
+/******************************************************************************
+ *  SiteBar 3 - The Bookmark Server for Personal and Team Use.                *
+ *  Copyright (C) 2004-2008  Ondrej Brablc <http://brablc.com/mailto?o>       *
+ *                                                                            *
+ *  This program is free software: you can redistribute it and/or modify      *
+ *  it under the terms of the GNU Affero General Public License as published  *
+ *  by the Free Software Foundation, either version 3 of the License, or      *
+ *  (at your option) any later version.                                       *
+ *                                                                            *
+ *  This program is distributed in the hope that it will be useful,           *
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of            *
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the             *
+ *  GNU Affero General Public License for more details.                       *
+ *                                                                            *
+ *  You should have received a copy of the GNU Affero General Public License  *
+ *  along with this program.  If not, see <http://www.gnu.org/licenses/>.     *
+ ******************************************************************************/
+
+@import url("common.css");
+
+body.siteBar
+{
+    font-size: x-small;
+    margin: 1px 1px;
+    padding: 0/*for Opera*/;
+}
+
+.siteBar span.red
+{
+    color: red;
+    font-weight: bold;
+}
+
+.siteBar div.menu div a
+{
+    color: black;
+    text-decoration: underline;
+    display: block;
+    width: 100%;
+}
+
+.siteBar span.sort_info
+{
+    text-align: right;
+    font-size: smaller;
+    color: gray;
+}
+
+.siteBar #versionCheck
+{
+    margin: 1px 2px 5px 2px;
+    padding: 1px;
+    border: 2px outset yellow;
+    background: yellow;
+    width: 180px;
+    z-index: 0;
+}
+
+.siteBar #versionCheck a
+{
+    color: black;
+    text-decoration: underline;
+}
+
+.siteBar #userCtxMenu
+{
+    margin-top: 10px;
+    border: 1px groove;
+    width: 183px;
+    z-index: 0;
+    padding: 1px;
+}
+
+.siteBar #linkCtxMenu,
+.siteBar #nodeCtxMenu,
+.siteBar #linkDragCtxMenu,
+.siteBar #nodeDragCtxMenu
+{
+    display: none;
+    width: 150px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 10;
+    padding: 1px;
+}
+
+.siteBar #dragNodeIcon,
+.siteBar #dragLinkIcon
+{
+    position: absolute;
+    left: 0;
+    top: 0;
+    visibility: hidden;
+    -moz-opacity: 0.5;
+    opacity: 0.5;
+    height: 16px;
+}
+
+.siteBar #toolTip
+{
+    display: none;
+    width: 150px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 10;
+    background: #FFFFD2; /* lightyellow */
+    border: 1px outset gray;
+}
+
+.siteBar #toolbar
+{
+    height: 21px;
+    width: 185px;
+    border: 1px solid;
+    margin-bottom: 5px;
+}
+
+.siteBar #toolbarPlace
+{
+    height: 22px;
+    width: 185px;
+    margin-bottom: 5px;
+}
+
+.siteBar #toolbar input
+{
+    vertical-align: top;
+}
+
+.siteBar #toolbar div
+{
+    margin-top: 1px;
+}
+
+.siteBar #toolbar img
+{
+    height: 16px;
+    border: 1px solid;
+}
+
+.siteBar #toolbar img.raised
+{
+    border: 1px outset black;
+}
+
+.siteBar #toolbar img.pressed
+{
+    border: 1px inset gray;
+}
+
+.siteBar #toolbar #tlbSearch
+{
+    margin: 1px 1px;
+    padding: 0;
+    float: left;
+    width: 125px;
+}
+
+.siteBar #toolbar #tlbOther
+{
+    margin-top: 1px;
+    margin-left: 125px;
+    text-align: right;
+}
+
+.siteBar #toolbar #fldSearch
+{
+    font-size: 7pt;
+    width: 57px;
+}
+
+.siteBar #info
+{
+    margin: 2px 2px 5px 2px;
+    padding: 1px;
+    border: 2px outset orange;
+    background: #FFE87F; /* pink */
+    width: 180px;
+    z-index: 0;
+}
+
+.siteBar #warning
+{
+    margin: 2px 2px 5px 2px;
+    padding: 1px;
+    border: 2px outset red;
+    background: #FFC8C8; /* pink */
+    width: 180px;
+    z-index: 0;
+}
+
+.siteBar #tail
+{
+    text-align: center;
+    width: 179px;
+    padding: 1px 3px;
+    margin-top: 5px;
+}
+
+.siteBar #tail a
+{
+    color: black;
+    text-decoration: none;
+}
+
+.siteBar #tail div.poweredBy
+{
+    margin-bottom: 3px;
+    font-size: 0.95em;
+}
+
+.siteBar #tail div.designedBy
+{
+    font-size: 0.95em;
+}
+
+.siteBar #stat
+{
+    text-align: center;
+    border: 1px dotted black;
+    font-size: 0.95em;
+    color: gray;
+    margin-top: 10px;
+    width: 179px;
+}
+
+.siteBar #sponsorSitebarBottom
+{
+    margin-top: 10px;
+    text-align: center;
+    width: 179px;
+}
+
+
+.siteBar #messengerInformation,
+.siteBar #pendingInvitation
+{
+    margin: 2px 2px 5px 2px;
+    padding: 1px;
+    width: 180px;
+    z-index: 0;
+    border: 2px outset gray;
+    color: black;
+}
+
+.siteBar #pendingInvitation td.pendingInvitationButtons span
+{
+    width: 100%;
+    padding-left: 1px;
+    padding-right: 1px;
+}
+
+.siteBar #pendingInvitation td.pendingInvitationButtons span.accept
+{
+    background: #4edc2e;
+}
+
+.siteBar #pendingInvitation td.pendingInvitationButtons span.reject
+{
+    background: #f45456;
+}
+
+.siteBar #pendingInvitation td.pendingInvitationButtons span a
+{
+    color: black;
+}
+
+.siteBar div.menu
+{
+    cursor: default;
+    overflow: hidden;
+
+    border: 2px outset;
+    padding: 3px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.siteBar div.item
+{
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.siteBar div.menu .more
+{
+    cursor: pointer;
+    padding-top: 2px;
+    text-align: center;
+}
+
+.siteBar div.menu .active
+{
+    cursor: pointer;
+}
+
+.siteBar div.menu .disabled
+{
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.siteBar div.menu .optional
+{
+    font-style: italic;
+    display: none;
+}
+
+.siteBar div.menu .separator
+{
+    margin-top: 1px;
+    border-top: #6a8ccb solid 1px;
+    margin-bottom: 1px;
+}
+
+.siteBar div.tree
+{
+    margin: 0 0 2px 0;
+}
+
+.siteBar div.tree div
+{
+    white-space: nowrap;
+    margin: 0;
+}
+
+.siteBar div.tree div.node
+{
+    display: block;
+    margin: 0;
+}
+
+.siteBar div.tree div.node a
+{
+    cursor: pointer;
+}
+
+.siteBar div.tree div.node div.childrenCollapsed
+{
+    display: none;
+}
+
+.siteBar div.tree div.node div.childrenExpanded
+{
+    display: block;
+}
+
+.siteBar div.tree div.link
+{
+    height: 16px;
+}
+
+.siteBar div.tree img
+{
+    border: 0;
+    height: 16px;
+}
+
+.siteBar div.tree img.root
+{
+    margin-right: 1px;
+    height: 18px;
+    width: 18px;
+}
+
+.siteBar div.tree img.favicon
+{
+    width: 16px;
+    margin-right: 1px;
+}
+
+.siteBar div.tree img.menu
+{
+    margin-left: 1px;
+    margin-right: 2px;
+    width: 12px;
+    height: 16px;
+}
+
+.siteBar div.tree a
+{
+    text-decoration: none;
+    color: #444;
+}
+
+.siteBar div.tree a.private
+{
+    font-style: italic;
+}
+
+.siteBar div.tree a.dead
+{
+    text-decoration: line-through;
+}
+
+.siteBar div.tree a.acl,
+.siteBar div.tree span.acl
+{
+    text-decoration: underline;
+}
+
+.siteBar div.tree a.highlight
+{
+    background-color: yellow;
+}
+
+.siteBar div.hidden
+{
+    display: none;
+}
+
+.siteBar div.tree div.tutorial
+{
+    margin-top: 1px;
+    margin-left: 1px;
+    padding-left: 1px;
+    width: 180px;
+    border: 1px gray dashed;
+    white-space: normal;
+}
+
+.siteBar .fixed
+{
+    font-family: courier;
+    font-size: small;
+}
+
+/*** Command Window ***/
+
+body.siteBarCmdWin
+{
+    margin: 0;
+}
+
+body.siteBarCmdWin #commandHead
+{
+    color: white;
+    font-size: 14pt;
+    text-align: center;
+    font-weight: bold;
+}
+
+body.siteBarCmdWin #errorHead
+{
+    background: red;
+    color: yellow;
+    font-size: 14pt;
+    text-align: center;
+    font-weight: bold;
+}
+
+body.siteBarCmdWin #warnHead
+{
+    color: yellow;
+    font-size: 14pt;
+    text-align: center;
+    font-weight: bold;
+}
+
+body.siteBarCmdWin #commandBody,
+body.siteBarCmdWin #errorBody,
+body.siteBarCmdWin #warnBody
+{
+    margin: 5px;
+    width: 179px;
+}
+
+body.siteBarCmdWin #command
+{
+    border-right: 2px solid white;
+    margin-right: 16px;
+}
+
+body.siteBarCmdWin #help
+{
+    padding: 0px;
+    float: right;
+    margin: 1px;
+    cursor: pointer;
+}
+
+body.siteBarCmdWin #foot
+{
+    text-align: right;
+    width: 179px;
+}
+
+body.siteBarCmdWin #showMore,
+body.siteBarCmdWin #showLess
+{
+    margin-top: 5px;
+    border: 1px outset gray;
+    text-align: center;
+    padding-left: 2px;
+    margin-bottom: 5px;
+    cursor: pointer;
+}
+
+body.siteBarCmdWin #showLess
+{
+    display: none;
+}
+
+body.siteBarCmdWin #optionalFields
+{
+    display: none;
+    border: 1px black dotted;
+    padding: 2px;
+}
+
+body.siteBarCmdWin span.mandatory
+{
+    color: red;
+    font-size: 1em;
+}
+
+body.siteBarCmdWin a
+{
+    color: black;
+    text-decoration: underline;
+}
+
+body.siteBarCmdWin .label
+{
+    font-weight: bold;
+}
+
+body.siteBarCmdWin .data
+{
+    font-size: x-small;
+    text-align: left;
+}
+
+body.siteBarCmdWin .data input,
+body.siteBarCmdWin .data textarea
+{
+    width: 97%;
+}
+
+body.siteBarCmdWin .data select
+{
+    width: 100%;
+}
+
+body.siteBarCmdWin .data input.readonly
+{
+    color: black;
+    background-color: #E6E6E6; /* lightgray */;
+}
+
+body.siteBarCmdWin .buttons
+{
+    margin-top: 5px;
+    text-align: right;
+}
+
+body.siteBarCmdWin ul
+{
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+body.siteBarCmdWin input.button
+{
+    font-size: x-small;
+    margin-top: 2px;
+}
+
+body.siteBarCmdWin input.customButton,
+body.siteBarCmdWin select.language,
+body.siteBarCmdWin select.help
+{
+    font-size: x-small;
+    width: 100%;
+}
+
+body.siteBarCmdWin img.favicon
+{
+    width: 16px;
+    height: 16px;
+    border: 0;
+}
+
+body.siteBarCmdWin td.iconcommands img
+{
+    padding: 1px;
+}
+
+body.siteBarCmdWin td.iconcommands img.raised
+{
+    border: 1px outset black;
+    padding: 0;
+}
+
+body.siteBarCmdWin td.iconcommands img.pressed
+{
+    border: 1px inset gray;
+    padding: 0;
+}
+
+body.siteBarCmdWin table
+{
+    margin-top: 5px;
+    width: 100%;
+    border-collapse: collapse;
+    font-size: x-small;
+}
+
+body.siteBarCmdWin table tr.userCheck
+{
+    padding-top: 2px;
+    border-top: solid 1px black;
+}
+
+body.siteBarCmdWin table tr.group td
+{
+    border-top: gray solid 1px;
+}
+
+body.siteBarCmdWin table th
+{
+    color: black;
+    font-size: x-small;
+}
+
+body.siteBarCmdWin table .group
+{
+    width: 100%;
+    text-align: left;
+}
+
+body.siteBarCmdWin table .right
+{
+    height : auto !important;
+    text-align : center;
+    margin : 1px !important;
+    padding : 1px !important;
+}
+
+body.siteBarCmdWin table .right input
+{
+    height : auto !important;
+    margin : 1px !important;
+    padding : 1px !important;
+}
+
+body.siteBarCmdWin table input.order
+{
+    font-size: 7pt;
+    width: 3em;
+    margin-bottom: 1px;
+}
+
+body.siteBarCmdWin table.users
+{
+    white-space: nowrap;
+    border-collapse: collapse;
+}
+
+body.siteBarCmdWin div.legend
+{
+    text-align: center;
+    color: gray;
+}
+
+body.siteBarCmdWin select.fldList
+{
+    font-size: 10px;
+}
+
+body.siteBarCmdWin select option.noinsert
+{
+    background: gray;
+}
+
+body.siteBarCmdWin tr.memberSelector td
+{
+    background-repeat:no-repeat;
+    background-position:1px 3px;
+    padding-left:20px;
+    height:24px;
+}
+
+body.siteBarCmdWin tr.memberSelector div.label
+{
+    background-repeat:no-repeat;
+    background-position:0px 0px;
+    padding-left:15px;
+    background-image:url(more_arrow.png);
+}
+
+body.siteBarCmdWin tr.memberSelector div.select
+{
+    display: none;
+}
+
+body.siteBarCmdWin tr.memberSelector option
+{
+    background-repeat:no-repeat;
+    background-position:bottom left;
+    padding-left: 18px;
+    background-image:url(./member_keep.png);
+}
+
+body.siteBarCmdWin tr.memberSelector .keep
+{
+    background-image:url(./member_keep.png);
+}
+body.siteBarCmdWin tr.memberSelector .contributor
+{
+    background-image:url(./member_contributor.png);
+}
+body.siteBarCmdWin tr.memberSelector .moderator
+{
+    background-image:url(./member_moderator.png);
+}
+body.siteBarCmdWin tr.memberSelector .remove
+{
+    background-image:url(./member_remove.png);
+}
+
+/*** Integrator window ***/
+
+body.siteBarIndex #main
+{
+    margin: 0;
+    float: left;
+}
+
+body.siteBarIndex #home
+{
+    margin-bottom: 10px;
+    width: 190px;
+    text-align: center;
+    float: left;
+}
+
+body.siteBarIndex #tip
+{
+    height: 7em;
+    margin-left: 200px;
+}
+
+body.siteBarIndex #launcher
+{
+    padding: 2px;
+    width: 55em;
+    margin-top: 1px;
+    margin-right: 2px;
+}
+
+body.siteBarIndex #launcher h2
+{
+    font-size: larger;
+    margin-bottom: 1px;
+    margin-top: 2px;
+    margin-left: 2px;
+}
+
+body.siteBarIndex #launcher #all
+{
+    text-decoration: none;
+    text-align: right;
+}
+
+body.siteBarIndex #launcher p
+{
+    margin-left: 3px;
+    margin-top: 1px;
+    margin-bottom: 1px;
+}
+
+body.siteBarIndex #launcher p.comment
+{
+    margin-top: 1px;
+    margin-bottom: 7px;
+    font-style: italic;
+}
+
+body.siteBarIndex #launcher p.browsertip
+{
+    color: red;
+}
+
+body.siteBarIndex #launcher table
+{
+    text-align: left;
+    font-size: x-small;
+    margin: 0;
+}
+
+body.siteBarIndex #launcher #tips th.tip
+{
+    width: 15%;
+}
+
+body.siteBarIndex #launcher #tips td.desc
+{
+    vertical-align: top;
+    border-bottom: black 1px solid;
+}
+
+body.siteBarIndex #launcher #tips td.extra
+{
+    vertical-align: top;
+    font-weight: bold;
+}
+
+body.siteBarIndex #launcher #tips td.general
+{
+    vertical-align: top;
+    width: 15%;
+}
+
+body.siteBarIndex #launcher .selected
+{
+    color: black;
+    border-bottom: dashed 1px black;
+    text-decoration: none;
+}
+
+body.siteBarIndex #trailer
+{
+    margin-left: 4px;
+    font-style: italic;
+    font-size: 8pt;
+}
+
+body.siteBarIndex #sponsorIntegratorVerticalRight
+{
+    padding-left: 5px;
+    padding-top: 1px;
+}
+
+/*** Translator window! ***/
+
+
+body.siteBarLocale
+{
+    margin: 5px;
+}
+
+body.siteBarLocale table
+{
+    text-align: left;
+    font-size: 10pt;
+    border-collapse: collapse;
+}
+
+body.siteBarLocale table th
+{
+    text-align: left;
+    font-size: 10pt;
+    background: #295bb1;
+    color: white;
+}
+
+body.siteBarLocale table.stat td
+{
+    background: #b2ccf7;
+}
+
+body.siteBarLocale table.stat td.stat
+{
+    text-align: right;
+    vertical-align: middle;
+}
+
+body.siteBarLocale table.stat td.statCmd
+{
+    text-align: left;
+    vertical-align: middle;
+    font-size: 6pt;
+}
+
+body.siteBarLocale table.stat td.stat a
+{
+    font-size: 7pt;
+}
+
+body.siteBarLocale table.edit,
+body.siteBarLocale table.edit input,
+body.siteBarLocale table.edit textarea
+{
+    width: 100%;
+}
+
+body.siteBarLocale table.edit td.label
+{
+    background: #295bb1;
+    color: white;
+    white-space: pre;
+}
+
+body.siteBarLocale table.edit td.comment
+{
+    background: #E6E6E6; /* lightgray */
+    color: gray;
+    white-space: pre;
+}
+
+body.siteBarLocale table.edit td.value
+{
+    background: #b2ccf7;
+}
+
+body.siteBarLocale table.edit td.missing input,
+body.siteBarLocale table.edit td.missing textarea
+{
+    background: yellow;
+}
+
+body.siteBarLocale table.edit td.update input,
+body.siteBarLocale table.edit td.update textarea
+{
+    background: #C8FFC8; /* lightgreen */
+}
+
+body.siteBarLocale table.edit td.updateFromOriginal input,
+body.siteBarLocale table.edit td.updateFromOriginal textarea
+{
+    background: green;
+}
+
+/*** Config window - please ignore! ***/
+
+body.siteBarConfig
+{
+    margin: 5px;
+    width: 179px;
+}
+
+body.siteBarConfig table
+{
+    background: #295bb1;
+    color: white;
+    text-align: left;
+    font-size: 10pt;
+    color: white;
+    width: 100%;
+}
+
+body.siteBarConfig table th
+{
+    background: #295bb1;
+}
+
+body.siteBarConfig div.error
+{
+    background: red;
+    color: yellow;
+    font-size: larger;
+    text-align: center;
+    font-weight: bold;
+}
+
+body.siteBarConfig div.message
+{
+    background: #b2ccf7;
+    color: black;
+    font-size: larger;
+    text-align: center;
+    font-weight: bold;
+}
+
+body.siteBarConfig input
+{
+    width: 97%;
+}

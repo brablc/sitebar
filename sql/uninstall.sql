@@ -1,0 +1,16 @@
+DROP TABLE IF EXISTS `sitebar_acl`;
+DROP TABLE IF EXISTS `sitebar_cache`;
+DROP TABLE IF EXISTS `sitebar_config`;
+DROP TABLE IF EXISTS `sitebar_data`;
+DROP TABLE IF EXISTS `sitebar_group`;
+DROP TABLE IF EXISTS `sitebar_link`;
+DROP TABLE IF EXISTS `sitebar_member`;
+DROP TABLE IF EXISTS `sitebar_node`;
+DROP TABLE IF EXISTS `sitebar_root`;
+DROP TABLE IF EXISTS `sitebar_session`;
+DROP TABLE IF EXISTS `sitebar_token`;
+DROP TABLE IF EXISTS `sitebar_user_data`;
+DROP TABLE IF EXISTS `sitebar_user`;
+DROP TABLE IF EXISTS `sitebar_visit`;
+DROP TABLE IF EXISTS `sitebar_message`;
+DROP TABLE IF EXISTS `sitebar_message_folder`;

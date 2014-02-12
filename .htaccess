@@ -1,0 +1,13 @@
+<ifmodule mod_rewrite.c>
+	RewriteEngine On
+	RewriteRule ^user/(\w+)/(\w+)/(\w+) index.php?user=$1&w=$2&root=$3 [L,QSA]
+	RewriteRule ^user/(\w+)/(\w+)       index.php?user=$1&w=$2 [L,QSA]
+	RewriteRule ^user/(\w+)             index.php?user=$1 [L,QSA]
+	RewriteRule ^dir/(\w+)/flat         index.php?w=dir&flat=1&root=$1 [L,QSA]
+	RewriteRule ^dir/(\w+)              index.php?w=dir&root=$1 [L,QSA]
+	RewriteRule ^dir/                   index.php?w=dir [L,QSA]
+	RewriteRule ^root/(\w+)             index.php?root=$1 [L,QSA]
+	RewriteRule ^news/(\w+)/(\w+)/(\w+) index.php?w=$1&flat=1&sort=$2&root=$3 [L,QSA]
+	RewriteRule ^news/(\w+)             news.php?root=$1 [L,QSA]
+	RewriteRule ^root/(\w+)             index.php?root=$1 [L,QSA]
+</ifmodule>

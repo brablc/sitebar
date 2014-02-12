@@ -1,0 +1,50 @@
+@charset "utf-8";
+
+.siteBarBaseFont
+{
+    font-family: Verdana, Tahoma, Geneva, Arial, Helvetica, sans-serif;
+    font-size: x-small;
+}
+
+.siteBarPageBackground
+{
+    background: ButtonFace;
+}
+
+.siteBar .cmnTitle
+{
+    color: ButtonText;
+    background: ButtonShadow;
+}
+
+.siteBar .cmnTitleColorInverse
+{
+    color: ButtonShadow;
+}
+
+.siteBar .cmnSubTitle
+{
+    color: ButtonText;
+    background: ButtonFace;
+}
+
+.siteBar .cmnSubTitleColorInverse
+{
+    color: ButtonFace;
+}
+
+.siteBar .cmnMenu
+{
+    background: ButtonFace ;
+}
+
+.siteBar .cmnMenuItem
+{
+    color: HighlightText;
+    background: Highlight;
+}
+
+.siteBar table th
+{
+    background: ButtonShadow;
+}

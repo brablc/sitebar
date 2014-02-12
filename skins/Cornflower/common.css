@@ -1,0 +1,51 @@
+@charset "utf-8";
+
+.siteBarBaseFont
+{
+    font-family: Verdana, Tahoma, Geneva, Arial, Helvetica, sans-serif;
+    font-size: x-small;
+}
+
+.siteBarPageBackground
+{
+    background: #ebecfb;
+}
+
+.siteBar .cmnTitle
+{
+    color: #d5d7fd;
+    background: #807ad6;
+}
+
+.siteBar .cmnTitleColorInverse
+{
+    color: #807ad6;
+}
+
+.siteBar .cmnSubTitle
+{
+    color: #295bb1;
+    background: #dddfff;
+}
+
+.siteBar .cmnSubTitleColorInverse
+{
+    color: #dddfff;
+}
+
+.siteBar .cmnMenu
+{
+    background: #dddfff;
+}
+
+.siteBar .cmnMenuItem
+{
+    background: navy;
+    color: white;
+}
+
+.siteBar table th
+{
+    background: #807ad6;
+    color: #d5d7fd;
+}

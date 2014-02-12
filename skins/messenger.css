@@ -1,0 +1,111 @@
+@charset "utf-8";
+
+/******************************************************************************
+ *  SiteBar 3 - The Bookmark Server for Personal and Team Use.                *
+ *  Copyright (C) 2006-2008  Ondrej Brablc <http://brablc.com/mailto?o>       *
+ *                                                                            *
+ *  This program is free software: you can redistribute it and/or modify      *
+ *  it under the terms of the GNU Affero General Public License as published  *
+ *  by the Free Software Foundation, either version 3 of the License, or      *
+ *  (at your option) any later version.                                       *
+ *                                                                            *
+ *  This program is distributed in the hope that it will be useful,           *
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of            *
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the             *
+ *  GNU Affero General Public License for more details.                       *
+ *                                                                            *
+ *  You should have received a copy of the GNU Affero General Public License  *
+ *  along with this program.  If not, see <http://www.gnu.org/licenses/>.     *
+ ******************************************************************************/
+
+@import url("common.css");
+
+body.siteBar
+{
+    margin: 5px 5px;
+}
+
+.siteBar div.title
+{
+    font-size: large;
+    text-align: left;
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid;
+}
+
+.siteBar div.folders
+{
+  margin-bottom: 5px;
+  font-size: larger;
+  float: left;
+}
+
+.siteBar div.buttons
+{
+  text-align: right;
+  margin-bottom: 5px;
+}
+
+
+.siteBar div.buttons input
+{
+  font-size: x-small;
+}
+
+.siteBar div.message
+{
+  margin-bottom: 5px;
+}
+
+.siteBar table
+{
+  width: 100%;
+  border: outset gray 2px;
+}
+
+.siteBar td.cmnMenuItem
+{
+  width: 100px;
+  font-size: x-small;
+  text-align: left;
+}
+
+.siteBar td.highlight
+{
+  font-weight: bold;
+}
+
+.siteBar td
+{
+  font-size: x-small;
+  text-align: left;
+}
+
+.siteBar td.icon
+{
+  width: 20px;
+  font-size: x-small;
+}
+
+.siteBar td.check
+{
+  width: 20px;
+  font-size: x-small;
+}
+
+.siteBar td.message
+{
+  border: 1px inset gray;
+  background: white;
+}
+
+.siteBar td>pre
+{
+  font-size: medium;
+}
+
+.siteBar a.states
+{
+    color: black;
+}

@@ -1,0 +1,533 @@
+@charset "utf-8";
+@import url("../sitebar.css");
+@import url("common.css");
+
+body.siteBar
+{
+    margin: 0px 0px;
+    padding: 0px;
+}
+
+.siteBar #logo
+{
+    width: 188px;
+}
+
+.siteBar #toolTip
+{
+    display: none;
+    width: 150px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    background: InfoBackground;
+    color: InfoText;
+    border-top: 1px solid #000000;
+    border-bottom: 1px solid #000000;
+    border-left: 1px solid #000000;
+    border-right: 1px solid #000000;
+    padding: 1px;
+    padding-left: 3px;
+}
+
+.siteBar #userCtxMenu
+{
+    margin-top: 10px;
+    border: 1px solid #6681D9;
+    width: 165px;
+    z-index: 0;
+    margin-left: 8px;
+    background: #EDF2FC;
+}
+
+.siteBar #linkCtxMenu, #nodeCtxMenu
+{
+    display: none;
+    width: 125px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+}
+
+.siteBar #toolbar
+{
+    width: 188px;
+    height: 54px;
+    background-image: url(toolbarbg.png);
+    background-repeat: no-repeat;
+    margin-bottom: 4px;
+    border: 0;
+}
+
+.siteBar #toolbarPlace
+{
+    width: 188px;
+    height: 54px;
+    margin-bottom: 4px;
+    border: 0;
+}
+
+.siteBar #toolbar input
+{
+    margin-bottom: 0px;
+    border: 1px solid #7f9db9;
+    height: 16px;
+    width: 3em;
+    font-family: Tahoma, Geneva, Arial, Helvetica, sans-serif;
+    padding-left: 2px;
+    padding-top: 1px;
+}
+
+.siteBar #toolbar div
+{
+    margin-top: 0px;
+}
+
+.siteBar #toolbar img
+{
+    border: 0px;
+    height: 16px;
+    width: 16px;
+    cursor: pointer;
+    padding: 3px;
+}
+
+.siteBar #toolbar img.raised
+{
+    border: 0px;
+    /* filter:alpha(opacity=25);
+    -moz-opacity:.25;opacity:.25; */
+    background: url(button_bg.png) no-repeat center center;
+    padding: 3px;
+}
+
+.siteBar #toolbar img.pressed
+{
+    border: 0px;
+    background: url(button_bg_down.png) no-repeat center center;
+    padding: 3px;
+}
+
+.siteBar #toolbar #tlbSearch
+{
+    margin: 0px;
+    float: none;
+    text-align: left;
+    width: 100%;
+    padding-top: 2px;
+}
+
+.siteBar #toolbar #tlbOther
+{
+    margin-top: 4px;
+    margin-left: 3px;
+    margin-right: 3px;
+    text-align: left;
+}
+
+.siteBar #toolbar #fldSearch
+{
+    font-size: 8pt;
+    background: Window;
+    width: 106px;
+    margin-top: 1px;
+    margin-right: 3px;
+    margin-left: 3px;
+}
+
+.siteBar #tail
+{
+    border: 0px;
+    width: 162px;
+    margin-left: 10px;
+}
+
+.siteBar #tail div.sponsor img
+{
+    width: 88px;
+    height: 31px;
+}
+
+.siteBar div.menu
+{
+    cursor: default;
+    overflow: hidden;
+    border: 1px solid GrayText;
+    background: #FFFFFF;
+    padding: 0;
+}
+
+.siteBar div.menu .more
+{
+    padding-left: 0;
+}
+
+.siteBar div.item
+{
+    padding-left: 15px;
+    padding-right: 0px;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    margin: 2px;
+}
+
+.siteBar div.menu .active
+{
+    padding-left: 15px;
+    padding-right: 0px;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    margin: 2px;
+    color: #FFFFFF;
+    background: #6487DC;
+}
+
+.siteBar div.menu .disabled
+{
+    padding-left: 15px;
+    padding-right: 0px;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    margin: 2px;
+    color: GrayText ;
+    width: 100%;
+}
+
+.siteBar div.menu .separator
+{
+    margin-top: 2px;
+    margin-bottom: 4px;
+    margin-left: 3px;
+    margin-right: 3px;
+    border-bottom: 1px solid GrayText;
+    border-top: 0;
+    border-left: 0;
+    border-right: 0;
+}
+
+.siteBar div.menu .disabled .menuLink
+{
+    text-decoration: none;
+    cursor: default;
+}
+
+.siteBar div.menu .active .menuLink
+{
+    text-decoration: none;
+    color: #FFFFFF;
+    cursor: default;
+}
+
+.siteBar div.tree
+{
+    padding-left: 4px;
+    font-size: 8pt;
+}
+
+.siteBar div.root
+{
+    left: 0;
+    margin-bottom: 2px;
+}
+
+.siteBar div.tree img
+{
+    height: 16px;
+    margin: 0;
+}
+
+.siteBar div.tree div.link
+{
+    height: 18px;
+    margin: 0;
+}
+
+.siteBar div.root div.node img.root
+{
+    height: 18px;
+    vertical-align: text-bottom;
+    border: 0;
+    margin-right: 2px;
+}
+
+.siteBar div.tree div.node img
+{
+    height: 18px;
+    margin-right: 3px;
+
+}
+
+.siteBar div.tree div.node img.favicon
+{
+    height: 16px;
+    width: 16px;
+    vertical-align: text-bottom;
+    border: 0;
+    margin-right: 4px;
+}
+
+.siteBar div.tree a
+{
+    text-decoration: none;
+    color: #333;
+}
+
+.siteBar div.tree a:hover
+{
+    text-decoration: underline;
+    color: #6487DC;
+}
+
+.siteBar div.tree a:hover .selected
+{
+    color: #FF0000;
+}
+
+.siteBar div.tree a.highlight
+{
+    color: #339900;
+}
+
+.siteBar div.tree a.highlight:hover
+{
+    color: #339900;
+}
+
+/*** Command Window ***/
+
+.siteBar #commandHead
+{
+    background: url(head.png) repeat-x;
+    color: #000000;
+    font-family: Trebuchet MS;
+    font-size: 10pt;
+    padding-top: 4px;
+    padding-left: 6px;
+    padding-right: 80px;
+    text-align: left;
+    font-weight: bold;
+    height: 60px;
+}
+
+.siteBar #errorHead
+{
+    background: url(head_error.png) repeat-x;
+    color: #000000;
+    font-family: Trebuchet MS;
+    font-size: 10pt;
+    padding-top: 4px;
+    padding-left: 6px;
+    padding-right: 80px;
+    text-align: left;
+    font-weight: bold;
+    height: 60px;
+}
+
+.siteBar #warnHead
+{
+    background: url(head_warn.png) repeat-x;
+    color: #000000;
+    font-family: Trebuchet MS;
+    font-size: 10pt;
+    padding-top: 4px;
+    padding-left: 6px;
+    padding-right: 80px;
+    text-align: left;
+    font-weight: bold;
+    height: 60px;
+}
+
+.siteBar #commandBody, #errorBody, #warnBody
+{
+    margin-left: 8px;
+    width: 174px;
+}
+
+body.siteBarCmdWin #command
+{
+    border-right: 2px solid black;
+    margin-right: 16px;
+}
+
+body.siteBarCmdWin .label
+{
+    font-weight: bold;
+    margin-top: 3px;
+    margin-bottom: 1px;
+}
+
+body.siteBarCmdWin .data select
+{
+    width: 171px;
+    font-size: 8pt;
+    margin-bottom: 2px;
+}
+
+body.siteBarCmdWin .data select.fixed
+{
+    max-height: 18px;
+}
+
+body.siteBarCmdWin .data input
+{
+    width: 162px;
+    min-width: 171px;
+    font-size: 8pt;
+    padding-left: 2px;
+    margin-bottom: 2px;
+}
+
+body.siteBarCmdWin .check
+{
+    margin-top: 2px;
+
+}
+
+body.siteBarCmdWin .check label
+{
+    vertical-align: text-bottom;
+
+}
+
+body.siteBarCmdWin .check input
+{
+    margin-left: -3px;
+    margin-left: 1px;
+    vertical-align: -2px;
+    vertical-align: -4px;
+}
+
+body.siteBarCmdWin .data textarea
+{
+    width: 162px;
+    min-width: 171px;
+    font-size: 8pt;
+    padding-left: 2px;
+}
+
+body.siteBarCmdWin input.button
+{
+    font-size: 8pt;
+    margin-top: 5px;
+}
+
+body.siteBarCmdWin input.customButton
+{
+    font-size: 8pt;
+    margin-top: 5px;
+    width: 171px;
+}
+
+body.siteBarCmdWin input.order
+{
+    margin-right: 5px;
+}
+
+body.siteBarCmdWin table
+{
+    margin-top: 5px;
+    width: 171px;
+    font-size: 8pt;
+}
+
+body.siteBarCmdWin table th
+{
+    background: #FFFFFF;
+    color: #000000;
+    font-size: 8pt;
+    padding: 2px;
+}
+
+body.siteBarCmdWin table .right
+{
+    text-align: center;
+}
+
+body.siteBarCmdWin div.legend
+{
+    text-align: center;
+    color: gray;
+    margin-top: 5px;
+    width: 171px;
+}
+
+.siteBar #foot
+{
+    text-align: right;
+    width: 178px;
+}
+
+body.siteBarCmdWin
+{
+    background: ButtonFace;
+}
+
+/*** Integrator window ***/
+
+
+/*** Ostalo ***/
+
+.siteBar #stat
+{
+    font-family: Tahoma, Geneva, Arial, Helvetica, sans-serif;
+    text-align: left;
+    border: 1px dotted gray;
+    font-size: 7pt;
+    color: gray;
+    margin-top: 5px;
+    margin-bottom: 10px;
+    margin-left: 8px;
+    width: 168px;
+}
+
+.siteBar div.poweredBy a
+{
+    font-weight: normal;
+    font-style: normal;
+    font-family: Tahoma, Geneva, Arial, Helvetica, sans-serif;
+    font-size: 7pt;
+    color: #46609B;
+    text-decoration: none;
+}
+
+.siteBar div.poweredBy a:hover
+{
+    font-size: 7pt;
+    color: #6487DC;
+    text-decoration: underline;
+}
+
+.siteBar #tail div.poweredBy
+{
+    font-weight: normal;
+    font-style: normal;
+    font-family: Tahoma, Geneva, Arial, Helvetica, sans-serif;
+    font-size: 7pt;
+}
+
+.siteBar #tail div.designedBy
+{
+    font-weight: normal;
+    font-style: normal;
+    font-family: Tahoma, Geneva, Arial, Helvetica, sans-serif;
+    font-size: 7pt;
+}
+
+.siteBar div.designedBy a
+{
+    font-weight: normal;
+    font-style: normal;
+    font-family: Tahoma, Geneva, Arial, Helvetica, sans-serif;
+    font-size: 7pt;
+    color: #46609B;
+    text-decoration: none;
+}
+
+.siteBar div.designedBy a:hover
+{
+    font-size: 7pt;
+    color: #6487DC;
+    text-decoration: underline;
+}

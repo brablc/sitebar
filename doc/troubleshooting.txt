@@ -1,0 +1,54 @@
+SiteBar 3 Troubleshooting
+=========================
+
+[All file paths in this document are relative to the location of this file!]
+
+In  case  of  some  strange  behavior,  or  even   blank   screens   open   file
+../inc/errorhandler.inc.php and set following define to have value true 
+(the easiest is to change the word false to true.
+
+	define('SB_DEBUGGING', defined('SB_DEVELOPMENT') || false);
+
+Verify that your http server has write right to the path where does the following
+define points to (alternatively change the path):
+
+    define("SB_LOG_FILE_PATH", "sitebar.log");
+
+All classes with exception of Localizer are subclasses of ErrorHandler  so,  the
+static dump and log functions can be called via $this->dump() and  $this->log().
+All errors and warnings are written to the log file as well.
+
+HTTP communication and SQL operations can be logged by changing define in the
+mentioned file ../inc/errorhandler.inc.php:
+
+    define ("SB_LOG_HTTP", true);
+    define ("SB_LOG_SQL", true);
+
+FAQ
+---
+Q: What means error message 'Cannot connect to database!'
+A: This means that either your database server is down, or
+   you have entered wrong information when configuring database
+   connection. Verify your credentials using mysql command line
+   or using web application like phpMyAdmin. By default only root user
+   exists in each mysql application. If you are using other username
+   you may need to create the user first. See install.txt for some 
+   MySQL hints
+
+   In order to get more information switch on logging by defining path
+   to the log file (see above). In the log file you will find an error
+   message from your database driver. The information is intentionally
+   hidden to the log file, to prevent other users seeing details about
+   your database in case the connection fails from any reason.
+
+   In case the connection parameters are incorrect, simply delete file
+   ../inc/config.inc.php and click on [Check Settings] button.
+
+Q: I have wrongly setup Base URL in SiteBar Settings. How can I fix it?
+A: Please edit ../inc/page.inc.php and instead of null in the following
+   define define( 'ABS_BASE_URL', null); empty string or proper URL.
+   Fix URL in SiteBar Settings and change the define back.
+
+Q: I have setup redirection from HTTP to HTTPS for SiteBar. Now some
+   things do not work as expected.
+A: Please setup Base URL in SiteBar Settings to the HTTPS URL.

@@ -1,0 +1,180 @@
+@charset "utf-8";
+@import url("../sitebar.css");
+@import url("common.css");
+
+body.siteBar
+{
+    margin: 1px 2px;
+}
+
+.siteBar #logo
+{
+    width: 181px;
+    margin-left: 3px;
+    margin-bottom: 5px;
+}
+
+.siteBar #userCtxMenu
+{
+    border: 1px groove ButtonHighlight;
+}
+
+.siteBar #toolbar
+{
+    border: 2px groove ButtonHighlight;
+}
+
+.siteBar #toolbar img
+{
+    border: 1px solid ButtonFace;
+}
+
+.siteBar #toolbar #fldSearch
+{
+    background: Window;
+}
+
+.siteBar #stat
+{
+    width: 179px;
+}
+
+.siteBar div.menu
+{
+    font : menu;
+    border: 2px outset ButtonHighlight;
+    background: ButtonFace ;
+    padding-left: 3px;
+    padding-right: 3px;
+}
+
+.siteBar div.item
+{
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+.siteBar div.menu .active
+{
+    padding-left: 15px;
+    padding-right: 15px;
+    color: HighlightText;
+    background: Highlight;
+}
+
+.siteBar div.menu .disabled
+{
+    padding-left: 15px;
+    padding-right: 15px;
+    color: GrayText ;
+}
+
+.siteBar div.menu .separator
+{
+    margin-top: 3px;
+    border-top: ButtonShadow  solid 1px;
+    border-bottom: ButtonHighlight  solid 1px;
+}
+
+.siteBar div.tree
+{
+    color: ButtonText ;
+}
+
+.siteBar div.root
+{
+    left: 0;
+}
+
+.siteBar div.root img
+{
+    position: relative;
+    left: 0;
+}
+
+.siteBar div.tree div.node
+{
+    display: block;
+    cursor : default;
+}
+
+.siteBar div.tree div.link
+{
+    height: 18px;
+}
+
+.siteBar div.tree div.node img
+{
+    vertical-align: text-bottom;
+    border: 0;
+    height: 18px;
+}
+
+.siteBar div.tree div.node img.favicon
+{
+    height: 16px;
+    vertical-align: text-bottom;
+    border: 0;
+}
+
+.siteBar div.tree a
+{
+    text-decoration: none;
+    color: ButtonText ;
+}
+
+.siteBar div.tree a:hover
+{
+    color: black;
+    background: #dddfff;
+}
+
+.siteBar div.tree a:hover .selected
+{
+    color: yellow;
+    background: #aaafff;
+}
+
+.siteBar div.tree a.highlight
+{
+    background-color: InfoBackground ;
+    color : InfoText;
+    border: ButtonShadow  solid 1px;
+}
+/*** Command Window ***/
+
+
+body.siteBarCmdWin table th
+{
+    color: ButtonText;
+}
+
+/*** Integrator window ***/
+.siteBar #launcher
+{
+    border: 1px groove #807ad6;
+}
+
+.siteBar #launcher h2
+{
+    color: ButtonText;
+}
+
+.siteBar #launcher table th
+{
+    background: #807ad6;
+    color: #d5d7fd;
+    vertical-align: top;
+    font-size: x-small;
+}
+
+.siteBar span.compatibleNo
+{
+    color: #dddddd;
+}
+
+.siteBar span.compatibleYes
+{
+    color: white;
+    font-weight: bold;
+}

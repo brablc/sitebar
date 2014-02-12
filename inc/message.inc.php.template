@@ -1,0 +1,33 @@
+<?php
+/******************************************************************************
+ *  SiteBar 3 - The Bookmark Server for Personal and Team Use.                *
+ *  Copyright (C) 2005-2006  Ondrej Brablc <http://brablc.com/mailto?o>       *
+ *                                                                            *
+ *  This program is free software; you can redistribute it and/or modify      *
+ *  it under the terms of the GNU General Public License as published by      *
+ *  the Free Software Foundation; either version 2 of the License, or         *
+ *  (at your option) any later version.                                       *
+ *                                                                            *
+ *  This program is distributed in the hope that it will be useful,           *
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of            *
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the             *
+ *  GNU General Public License for more details.                              *
+ *                                                                            *
+ *  You should have received a copy of the GNU General Public License         *
+ *  along with this program; if not, write to the Free Software               *
+ *  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA *
+ ******************************************************************************/
+
+/**
+* Rename this file to message.inc.php and customize its content to inform
+* all users about important things.
+*/
+?>
+<div style="margin: 2px 2px 5px 2px;padding: 1px;border: 2px outset green;background: lightgreen;width: 180px;z-index: 0;">
+This is a message to all users.
+<?php if (!$this->um->verified): ?>
+    <p>
+        This is message to users, which have not verified their email yet.
+    </p>
+<?php endif; ?>
+</div>

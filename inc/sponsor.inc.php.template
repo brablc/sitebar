@@ -1,0 +1,46 @@
+<?php
+/******************************************************************************
+ *  SiteBar 3 - The Bookmark Server for Personal and Team Use.                *
+ *  Copyright (C) 2005-2006  Ondrej Brablc <http://brablc.com/mailto?o>       *
+ *                                                                            *
+ *  This program is free software; you can redistribute it and/or modify      *
+ *  it under the terms of the GNU General Public License as published by      *
+ *  the Free Software Foundation; either version 2 of the License, or         *
+ *  (at your option) any later version.                                       *
+ *                                                                            *
+ *  This program is distributed in the hope that it will be useful,           *
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of            *
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the             *
+ *  GNU General Public License for more details.                              *
+ *                                                                            *
+ *  You should have received a copy of the GNU General Public License         *
+ *  along with this program; if not, write to the Free Software               *
+ *  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA *
+ ******************************************************************************/
+
+/**
+* Rename this file to sponsor.inc.php and customize its content to place
+* sponsor or other images on predefined places in SiteBar.
+*/
+
+class SB_Sponsor extends SB_SponsorInterface
+{
+    function SB_Sponsor(&$hook)
+    {
+        $this->SB_SponsorInterface($hook);
+    }
+
+    function integratorVerticalRight()
+    {
+    }
+
+    function sitebarBottom()
+    {
+?>
+        <a href="http://sourceforge.net/" <?php echo SB_Page::target()?>>
+            <img src="<?php echo $this->hook->getStyle('sf_logo_src')?>" alt="SourceForge.net Logo">
+        </a>
+<?php
+    }
+}
+?>

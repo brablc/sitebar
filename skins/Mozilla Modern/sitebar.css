@@ -1,0 +1,136 @@
+@charset "utf-8";
+@import url("../sitebar.css");
+@import url("common.css");
+
+.siteBar #logo
+{
+    height: 20px;
+    padding: 0;
+}
+
+.siteBar #userCtxMenu
+{
+    width: 206px;
+}
+
+.siteBar #toolbar
+{
+    width: 208px;
+    height: 22px;
+}
+
+.siteBar #toolbar img
+{
+    height: 16px;
+    width: 16px;
+    border: 1px solid #7a8ca7;
+}
+
+.siteBar #toolbar #fldSearch
+{
+    background: white;
+}
+
+.siteBar div.menu
+{
+    background:#fff;
+    padding-left: 3px;
+    padding-right: 3px;
+}
+
+.siteBar div.menu .active
+{
+    background: #7a8ca7;
+}
+
+.siteBar div.menu .disabled
+{
+    color: #8d8d8d;
+}
+
+.siteBar div.menu .separator
+{
+    border-top: #7a8ca7 solid 1px;
+}
+
+.siteBar div.tree
+{
+    color: #444;
+}
+
+.siteBar div.tree a
+{
+    color:black;
+}
+
+.siteBar div.tree a:hover
+{
+    color:white;
+    background: #424f63;
+    text-decoration:none;
+
+}
+
+.siteBar div.tree a:hover .selected
+{
+    color:white;
+    background: #7a8ca7;
+    text-decoration:none;
+
+}
+
+.siteBar #tail
+{
+    width: 200px;
+}
+
+.siteBar #stat
+{
+    width: 204px;
+}
+
+/*** Command Window ***/
+
+.siteBar #errorHead
+{
+    background: black;
+    color: red;
+}
+
+.siteBar #warnHead
+{
+    background: black;
+}
+
+body.siteBarCmdWin table td.check
+{
+    width: 20px;
+}
+
+/*** Integrator window ***/
+
+.siteBar #tip
+{
+    margin-left: 220px;
+}
+
+.siteBar #launcher
+{
+    border: 1px groove #807ad6;
+}
+
+.siteBar #launcher h2
+{
+    color: #606060;
+}
+
+.siteBar #launcher table th
+{
+    border: 1px solid #002d96;
+    background: #7a8ca7;
+}
+
+.siteBar span.compatibleNo
+{
+    color: #606060;
+}

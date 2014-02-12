@@ -1,0 +1,129 @@
+@charset "utf-8";
+@import url("../sitebar.css");
+@import url("common.css");
+
+.siteBar #logo
+{
+    border: 1px solid #002d96;
+    height: 20px;
+    width: 185px;
+    padding: 0;
+}
+
+.siteBar #userCtxMenu
+{
+    border: 1px groove #807ad6;
+    width: 183px;
+}
+
+.siteBar #toolbar
+{
+    border: 1px solid #002d96;
+}
+
+.siteBar #toolbar img
+{
+    border: 1px solid #b2ccf7;
+}
+
+.siteBar div.menu
+{
+    border: 2px outset #807ad6;
+    background: #f6f6f6;
+}
+
+.siteBar div.item
+{
+    border: 1px solid #f6f6f6;
+}
+
+.siteBar div.menu .more
+{
+    background: #e0e0e0;
+}
+
+.siteBar div.menu .active
+{
+    cursor: pointer;
+    border: 1px solid #000080;
+    background: #ffeec2;
+}
+
+.siteBar div.menu .disabled
+{
+    color: #8d8d8d;
+}
+
+.siteBar div.menu .optional
+{
+    border: 1px solid #e0e0e0;
+    background: #e0e0e0;
+    font-style: normal;
+}
+
+.siteBar div.tree a:hover
+{
+    color: black;
+    background: #ece9d8;
+    cursor: pointer;
+}
+
+.siteBar div.tree a:hover .selected
+{
+    color: white;
+    background: #316ac5;
+    cursor: move;
+}
+
+.siteBar #stat
+{
+    width: 183px;
+}
+
+/*** Command Window ***/
+
+.siteBar #warnHead
+{
+    background: #033893;
+}
+
+body.siteBarCmdWin select.fldList option.fldList
+{
+    color: white;
+    background: #295bb1;
+}
+
+body.siteBarCmdWin select.fldList option.fldList1
+{
+    background: #699bf1;
+}
+
+body.siteBarCmdWin select.fldList option.fldList2,
+body.siteBarCmdWin select.fldList option.fldList3,
+body.siteBarCmdWin select.fldList option.fldList4,
+body.siteBarCmdWin select.fldList option.fldList5,
+body.siteBarCmdWin select.fldList option.fldList6,
+body.siteBarCmdWin select.fldList option.fldList7,
+body.siteBarCmdWin select.fldList option.fldList8,
+body.siteBarCmdWin select.fldList option.fldList9,
+body.siteBarCmdWin select.fldList option.fldList10
+{
+    background: #79abf1;
+}
+
+/*** Integrator window ***/
+
+.siteBarIndex #launcher
+{
+    border: 1px groove #807ad6;
+}
+
+.siteBarIndex #launcher h2
+{
+    color: #295bb1;
+}
+
+.siteBarIndex #launcher table th
+{
+    border: 1px solid #002d96;
+}

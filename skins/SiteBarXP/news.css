@@ -1,0 +1,120 @@
+@charset "utf-8";
+@import url("../news.css");
+@import url("common.css");
+
+body.siteBar
+{
+    margin: 5px 5px;
+    color: gray;
+    font-family: Tahoma, Geneva, Arial, Helvetica, sans-serif;
+}
+
+.siteBar div.title
+{
+    font-size: 12pt;
+    font-weight: bold;
+    text-align: left;
+    margin-bottom: 12px;
+    padding-bottom: 2px;
+    border-bottom: 1px solid;
+    color: #6487DC;
+}
+
+.siteBar div.footer
+{
+    font-size: 8pt;
+    text-align: right;
+    margin-top: 10px;
+    border-top: 1px solid;
+    padding-top: 2px;
+    color: #6487DC;
+}
+
+.siteBar div.footer a
+{
+    text-decoration: none;
+    color: gray;
+}
+
+.siteBar div.footer a:hover
+{
+    text-decoration: underline;
+    color: #333;
+}
+
+.siteBar div.folder
+{
+    font-size: 8pt;
+    font-weight: bold;
+    margin-left: 0px;
+    margin-bottom: 6px;
+    background-color: #f0f0f0;
+    padding-left: 6px;
+    padding-top: 4px;
+    padding-bottom: 6px;
+}
+
+.siteBar div.folder img
+{
+    margin-right: 4px;
+}
+
+.siteBar body div.folder
+{
+    color: gray;
+}
+
+.siteBar div.folder a
+{
+    text-decoration: none;
+    color: #333;
+}
+
+.siteBar div.folder a:hover
+{
+    text-decoration: none;
+    color: #6487DC;
+}
+
+.siteBar div.bookmark
+{
+    margin-top: 4px;
+    margin-left: 1px;
+    font-size: 10px;
+}
+
+.siteBar div.bookmark a
+{
+    font-weight: bold;
+    font-size: 8pt;
+    text-decoration: none;
+    color: #333;
+}
+
+.siteBar div.bookmark a:hover
+{
+    text-decoration: underline;
+    color: #6487DC;
+}
+
+.siteBar div.bookmark a.dead
+{
+    text-decoration: line-through;
+}
+
+.siteBar div.desc
+{
+    white-space: pre;
+    color: #444;
+}
+
+.siteBar div.info
+{
+    color: gray;
+    font-size: 8pt;
+}
+
+.siteBar .url
+{
+    color: green;
+}

@@ -1,0 +1,49 @@
+SiteBar 3 Install & Upgrade Guide
+=================================
+
+1) Download and unpack the package (X stands for current release version):
+
+   tar xfj SiteBar-X.tar.bz2
+
+   - or -
+
+   unzip SiteBar-X.zip
+
+Files will be unpacked into a new directory having the same base name as the
+file "SiteBar-X".
+
+2) Move the content of the installation package to a place  accessible  to  your
+HTTP server (let's assume it will be accessible at http://localhost/sitebar/ ).
+You can move the files on Linux with:
+
+    mv SiteBar-X/* sitebar/
+
+    - or -
+
+    cp -R SiteBar-X/* sitebar/
+
+3) Open page  http://localhost/sitebar/index.php  and  let  yourself  be  guided
+through the rest of  the  installation/upgrade.  Please  note  that  on  the  DB
+Configuration page you are asked for parameters of your  MySQL  connection  like
+username/password and database host address.  The  installation  ends  with  the
+message that you are welcome to SiteBar. Upgrade ends on your login screen or if
+you were logged in before installation then you might still be logged (if  there
+was no change in login mechanism).
+
+Notes:
+======
+
+Installation assumes you either already have the database or have the  right  to
+create it from a PHP script.
+
+For MySQL beginners: If you have just installed your MySQL to run  SiteBar  then
+the password of the root user is empty. It is not the root user of your  server.
+You may want to read more on MySQL security topic:
+    http://dev.mysql.com/doc/mysql/en/security-against-attack.html
+
+The SiteBar 3.3 and higher use centralized integrator page. This allows latest
+integration and usage tips be available to all SiteBar users without any need
+to upgrade. The centralized page is located at SiteBar project webspace
+http://my.sitebar.org/integrator.php . In case this address becomes slow
+or in any other case you can switch in "SiteBar Settings" to use local
+integrator page.
