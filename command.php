@@ -1387,7 +1387,7 @@ class SB_CommandWindow extends SB_ErrorHandler
             $fields['URL']['value'] = $this->um->getParam('user','default_url');
         }
 
-        if ($name)
+        if ($name && empty($fields['Bookmark Name']['value']) )
         {
             $fields['Bookmark Name']['value'] = $name;
         }
@@ -1587,7 +1587,7 @@ class SB_CommandWindow extends SB_ErrorHandler
                 $c = new SB_Converter($this->um->getParam('config','use_conv_engine'),$cp);
 
 
-                if (!$link->name && isset($page->info['TITLE']))
+                if (isset($page->info['TITLE']))
                 {
                     $link->name = $c->utf8RawUrlDecode($page->info['TITLE']);
                 }
