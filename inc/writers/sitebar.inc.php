@@ -76,7 +76,6 @@ class SB_Writer_sitebar extends SB_WriterInterface
 
     function setOutputHandler()
     {
-        return;
         // If we want to use compression and it is not used yet
         if ($this->um->getParam('config','use_compression')
         &&  !@ini_get('zlib.output_compression'))
