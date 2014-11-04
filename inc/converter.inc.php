@@ -120,7 +120,7 @@ class SB_Converter extends SB_ErrorHandler
             return $engine;
         }
 
-        $suffix = (defined('PHP_OS') && eregi('win', PHP_OS));
+        $suffix = (defined('PHP_OS') && stripos(PHP_OS, 'win') !== false);
 
         if (!function_exists('iconv') && !extension_loaded('iconv'))
         {
@@ -178,7 +178,7 @@ class SB_Converter extends SB_ErrorHandler
             $str = $_SERVER['HTTP_USER_AGENT'];
             foreach ($this->languages as $key => $value)
             {
-                if (eregi('(\(|\[|;[[:space:]])(' . $value[0] . ')(;|\]|\))', $str))
+                if (preg_match('(\(|\[|;[[:space:]])(' . preg_quote($value[0]) . ')(;|\]|\))/i', $str))
                 {
                     return $key;
                 }

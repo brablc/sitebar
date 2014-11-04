@@ -159,7 +159,7 @@ class SB_Localizer
             {
                 $dir = str_replace('_','-',$lang['dir']);
 
-                if (eregi('(\(|\[|;[[:space:]])(' . $dir . ')(;|\]|\))', $str))
+                if (preg_match('/(\(|\[|;[[:space:]])(' . preg_quote($dir) . ')(;|\]|\))/i', $str))
                 {
                     return $lang['dir'];
                 }
@@ -169,7 +169,7 @@ class SB_Localizer
             {
                 list($ln,$country) = explode('_',$lang['dir']);
 
-                if (eregi('(\(|\[|;[[:space:]])(' . $ln . ')(;|\]|\))', $str))
+                if (preg_match('/(\(|\[|;[[:space:]])(' . preg_quote($ln) . ')(;|\]|\))/i', $str))
                 {
                     return $lang['dir'];
                 }
