@@ -3421,27 +3421,27 @@ class SB_CommandWindow extends SB_ErrorHandler
             $this->reload = true;
             $this->close = false;
 
-            $params = array(SB_reqVal('username'));
+            $vermsg = '';
 
             if ($mustVerify && $mustApprove)
             {
-                $params[] = SB_P('command::signup_verify_approve');
+                $vermsg = SB_P('command::signup_verify_approve');
             }
             else if ($mustVerify)
             {
-                $params[] = SB_P('command::signup_verify');
+                $vermsg = SB_P('command::signup_verify');
             }
-            if ($mustApprove)
+            else if ($mustApprove)
             {
-                $params[] = SB_P('command::signup_approve');
-            }
-            else
-            {
-                $params[] = '';
+                $vermsg = SB_P('command::signup_approve');
             }
 
-            $params[] = SB_T('Show Menu Icon');
-            $params[] = SB_T('User Settings');
+            $params = array(
+                SB_reqVal('username'),
+                $vermsg,
+                SB_T('Show Menu Icon'),
+                SB_T('User Settings'),
+            );
 
             $this->message = SB_P('command::welcome',$params);
         }
