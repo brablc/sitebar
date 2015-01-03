@@ -86,7 +86,7 @@ class SB_Token extends SB_ErrorHandler
         # The list of characters that can appear in a randomly generated password.
         # Note that users can put any character into a password they choose
         # themselves.
-        $tkchars = '-_@#$^*';
+        $tkchars = '-_@$^*';
 
         for ($i=0; $i<=9; $i++)
         {
