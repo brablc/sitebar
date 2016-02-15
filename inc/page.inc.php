@@ -211,7 +211,7 @@ class SB_Skin extends SB_ErrorHandler
 {
     var $current = 'Modern';
 
-    function & staticInstance()
+    public static function & staticInstance()
     {
         static $skin = null;
         if (!$skin)
@@ -222,13 +222,13 @@ class SB_Skin extends SB_ErrorHandler
         return $skin;
     }
 
-    function get()
+    public static function get()
     {
         $i =& SB_Skin::staticInstance();
         return $i->current;
     }
 
-    function set($skin)
+    public static function set($skin)
     {
         if ($skin)
         {
@@ -246,7 +246,7 @@ class SB_Skin extends SB_ErrorHandler
         }
     }
 
-    function img($filename, $prefix='', $id='', $class=null)
+    public static function img($filename, $prefix='', $id='', $class=null)
     {
         $imgid = '';
 
@@ -259,22 +259,22 @@ class SB_Skin extends SB_ErrorHandler
                ' src="'. SB_Skin::imgsrc($filename) .'" alt="">';
     }
 
-    function imgsrc($filename)
+    public static  function imgsrc($filename)
     {
         return SB_Skin::webPath() . '/' . $filename . '.png';
     }
 
-    function src($filename='')
+    public static function src($filename='')
     {
         return SB_Skin::webPath() . ($filename?'/':'') . $filename;
     }
 
-    function path()
+    public static function path()
     {
         return 'skins/'. SB_Skin::get();
     }
 
-    function webPath()
+    public static function webPath()
     {
         return SB_Page::cdnBaseUrl() . 'skins/'. rawurlencode(SB_Skin::get());
     }
@@ -282,24 +282,24 @@ class SB_Skin extends SB_ErrorHandler
 
 class SB_Page extends SB_ErrorHandler
 {
-    function title()
+    public static function title()
     {
         return 'SiteBar';
     }
 
     // Backward compatibility
-    function baseurl($override=null)
+    public static function baseurl($override=null)
     {
         return SB_Page::absBaseUrlShort($override);
     }
 
-    function absBaseUrlShort($override=null)
+    public static function absBaseUrlShort($override=null)
     {
         $url = SB_Page::absBaseUrl($override);
         return substr($url,0,strlen($url)-1);
     }
 
-    function absBaseUrl($override=null)
+    public static function absBaseUrl($override=null)
     {
         static $url = null;
 
@@ -333,7 +333,7 @@ class SB_Page extends SB_ErrorHandler
         return $url;
     }
 
-    function cdnBaseUrl($override=null)
+    public static function cdnBaseUrl($override=null)
     {
         static $url = null;
 
@@ -356,7 +356,7 @@ class SB_Page extends SB_ErrorHandler
         return $url;
     }
     
-    function relBaseUrl($override=null)
+    public static function relBaseUrl($override=null)
     {
         static $url = null;
 
@@ -378,7 +378,7 @@ class SB_Page extends SB_ErrorHandler
         return $url;
     }
 
-    function isMSIE()
+    public static function isMSIE()
     {
         static $isMSIE = null;
 
@@ -390,7 +390,7 @@ class SB_Page extends SB_ErrorHandler
         return $isMSIE;
     }
 
-    function isIPHONE()
+    public static function isIPHONE()
     {
         static $isIPHONE = null;
 
@@ -403,7 +403,7 @@ class SB_Page extends SB_ErrorHandler
     }
 
     // Exclude Opera
-    function isOPERA()
+    public static function isOPERA()
     {
         static $isOPERA = null;
 
@@ -415,7 +415,7 @@ class SB_Page extends SB_ErrorHandler
         return $isOPERA;
     }
 
-    function isGECKO()
+    public static function isGECKO()
     {
         static $isGECKO= null;
 
@@ -427,7 +427,7 @@ class SB_Page extends SB_ErrorHandler
         return $isGECKO;
     }
 
-    function dragDropNode($nid)
+    public static function dragDropNode($nid)
     {
         if (SB_Page::isOPERA())
         {
@@ -441,7 +441,7 @@ class SB_Page extends SB_ErrorHandler
             (SB_Page::isGECKO()?' ondragover="return SBCFF_dragOver(event)" ondrop="return SBCFF_nodeDrop(event,this.parentNode,'. $nid .')"':'');
     }
 
-    function dragDropLink($nid, $lid)
+    public static function dragDropLink($nid, $lid)
     {
         if (SB_Page::isOPERA())
         {
@@ -455,12 +455,12 @@ class SB_Page extends SB_ErrorHandler
             (SB_Page::isGECKO()?' ondragover="return SBCFF_dragOver(event)" ondrop="return SBCFF_nodeDrop(event,this.parentNode,'. $nid .','. $lid .')"':'');
     }
 
-    function toolTip()
+    public static function toolTip()
     {
         return ' onmouseover="SB_toolTip(this,event);" onmouseout="SB_toolTipHide();" ';
     }
 
-    function targetWindow()
+    public static function targetWindow()
     {
         static $trg = null;
 
@@ -481,7 +481,7 @@ class SB_Page extends SB_ErrorHandler
         return $trg;
     }
 
-    function target($setdefault=null)
+    public static function target($setdefault=null)
     {
         static $trg = null;
 
@@ -492,7 +492,7 @@ class SB_Page extends SB_ErrorHandler
         return $trg;
     }
 
-    function head($title, $bodyClass=null, $inscript=null, $onLoad=null, $meta=null)
+    public static function head($title, $bodyClass=null, $inscript=null, $onLoad=null, $meta=null)
     {
         // Media="All" is used to hide the styles from Netscape 4.x
 
@@ -562,7 +562,7 @@ SB_gSkinDir = '<?php echo SB_Skin::webPath()?>/';
 <?php
     }
 
-    function quoteValue($value)
+    public static function quoteValue($value)
     {
         // XML entities: &lt; &gt; &amp; &quot;
 
