@@ -133,7 +133,7 @@ class SB_UserManager extends SB_ErrorHandler
         $data['groups'] = $rec['count'];
     }
 
-    function & staticInstance()
+    public static function & staticInstance()
     {
         static $um;
 
