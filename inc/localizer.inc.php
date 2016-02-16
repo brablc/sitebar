@@ -151,31 +151,6 @@ class SB_Localizer
             }
         }
 
-        if (!empty($_SERVER['HTTP_USER_AGENT']))
-        {
-            $str = $_SERVER['HTTP_USER_AGENT'];
-
-            foreach ($this->getLanguages() as $lang)
-            {
-                $dir = str_replace('_','-',$lang['dir']);
-
-                if (eregi('(\(|\[|;[[:space:]])(' . $dir . ')(;|\]|\))', $str))
-                {
-                    return $lang['dir'];
-                }
-            }
-
-            foreach ($this->getLanguages() as $lang)
-            {
-                list($ln,$country) = explode('_',$lang['dir']);
-
-                if (eregi('(\(|\[|;[[:space:]])(' . $ln . ')(;|\]|\))', $str))
-                {
-                    return $lang['dir'];
-                }
-            }
-        }
-
         return null;
     }
 

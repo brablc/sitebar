@@ -120,12 +120,10 @@ class SB_Converter extends SB_ErrorHandler
             return $engine;
         }
 
-        $suffix = (defined('PHP_OS') && eregi('win', PHP_OS));
-
         if (!function_exists('iconv') && !extension_loaded('iconv'))
         {
             $this->useHandler(false);
-            @dl('iconv' . $suffix);
+            @dl('iconv');
             $this->useHandler();
         }
 
@@ -142,7 +140,7 @@ class SB_Converter extends SB_ErrorHandler
             if (!function_exists('recode_string') && !extension_loaded('recode'))
             {
                 $this->useHandler(false);
-                @dl('recode' . $suffix);
+                @dl('recode');
                 $this->useHandler();
             }
 
@@ -167,18 +165,6 @@ class SB_Converter extends SB_ErrorHandler
             foreach ($this->languages as $key => $value)
             {
                 if (preg_match('/^(' . $value[0] . ').*?(;q=[0-9]\\.[0-9])?$/', $str))
-                {
-                    return $key;
-                }
-            }
-        }
-
-        if (!empty($_SERVER['HTTP_USER_AGENT']))
-        {
-            $str = $_SERVER['HTTP_USER_AGENT'];
-            foreach ($this->languages as $key => $value)
-            {
-                if (eregi('(\(|\[|;[[:space:]])(' . $value[0] . ')(;|\]|\))', $str))
                 {
                     return $key;
                 }
