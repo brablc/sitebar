@@ -122,7 +122,7 @@ class SB_StopWatch
         return $this->pause();
     }
 
-    function getMicroTime()
+    public static function getMicroTime()
     {
         list($usec, $sec) = explode(' ',microtime());
         return ((float)$usec + (float)$sec);
