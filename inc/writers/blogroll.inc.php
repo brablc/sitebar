@@ -29,7 +29,7 @@ require_once('./inc/writer.inc.php');
 class SB_Writer_blogroll extends SB_WriterInterface
 {
 
-    function SB_Writer_blogroll()
+    function __construct()
     {
         parent::__construct();
         $this->switches['flat'] = true;

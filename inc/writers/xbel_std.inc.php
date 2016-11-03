@@ -28,7 +28,7 @@ require_once('./inc/writers/xbel.inc.php');
 
 class SB_Writer_xbel_std extends SB_Writer_xbel
 {
-    function SB_Writer_xbel_std()
+    function __construct()
     {
         parent::__construct();
     }

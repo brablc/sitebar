@@ -63,7 +63,7 @@ class SB_Writer_sitebar extends SB_WriterInterface
 
     var $appError = null;
 
-    function SB_Writer_sitebar()
+    function __construct()
     {
         parent::__construct();
 

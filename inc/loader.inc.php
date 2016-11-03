@@ -31,7 +31,7 @@ class SB_LoaderInterface extends SB_Converter
     var $childs = array();
     var $root;
 
-    function SB_LoaderInterface($useEngine=true, $charSet=null)
+    function __construct($useEngine=true, $charSet=null)
     {
         $this->SB_Converter($useEngine, $charSet);
     }

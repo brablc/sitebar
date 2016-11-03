@@ -14,8 +14,8 @@ CREATE TABLE `sitebar_acl` (
 COMMENT='Access control list. Defines rights of groups to root nodes.';
 
 CREATE TABLE `sitebar_config` (
-  `release` varchar(10) NOT NULL DEFAULT '3.4',
-  `changed` datetime NOT NULL default '0000-00-00 00:00:00',
+  `release` varchar(10) NOT NULL DEFAULT '3.5',
+  `changed` datetime NOT NULL default CURRENT_TIMESTAMP,
   `params` text
 )
 COMMENT='Basic Sitebar parameters';
@@ -37,10 +37,10 @@ CREATE TABLE `sitebar_link` (
   `private` tinyint(1) default '0',
   `comment` longtext,
   `favicon` text,
-  `added` datetime NOT NULL default '0000-00-00 00:00:00',
-  `changed` datetime NOT NULL default '0000-00-00 00:00:00',
-  `visited` datetime NOT NULL default '0000-00-00 00:00:00',
-  `tested` datetime NOT NULL default '0000-00-00 00:00:00',
+  `added` datetime NOT NULL default CURRENT_TIMESTAMP,
+  `changed` datetime,
+  `visited` datetime,
+  `tested` datetime,
   `deleted_by` int(10) unsigned default NULL,
   `is_dead` tinyint(1) NOT NULL default '0',
   `is_feed` tinyint(1) NOT NULL default '0',
@@ -57,7 +57,7 @@ COMMENT='Each link must belong to a node.';
 CREATE TABLE `sitebar_visit` (
   `lid` int(10) unsigned NOT NULL,
   `uid` int(10) unsigned NOT NULL,
-  `visited` datetime NOT NULL default '0000-00-00 00:00:00',
+  `visited` datetime,
   PRIMARY KEY  (`lid`,`uid`)
 )
 COMMENT='Last link visit for each user';
@@ -107,7 +107,7 @@ CREATE TABLE `sitebar_user` (
   `demo` tinyint(1) NOT NULL default '0',
   `comment` text,
   `params` text,
-  `visited` datetime NOT NULL default '0000-00-00 00:00:00',
+  `visited` datetime,
   `visits` int(11) unsigned NOT NULL default '0',
   PRIMARY KEY  (`uid`),
   UNIQUE KEY `username` (`username`)
@@ -117,7 +117,7 @@ COMMENT='Users of the application.';
 CREATE TABLE `sitebar_token` (
   `uid` int(10) unsigned NOT NULL,
   `type` varchar(10) DEFAULT '',
-  `issued` datetime NOT NULL default '0000-00-00 00:00:00',
+  `issued` datetime NOT NULL default CURRENT_TIMESTAMP,
   `expires` int(11) NOT NULL DEFAULT '0',
   `token` varchar(8) DEFAULT ''
 )
@@ -138,8 +138,8 @@ CREATE TABLE `sitebar_message`
   `mid` int(10) unsigned NOT NULL auto_increment,
   `uid` int(10) unsigned NOT NULL,
   `gid` int(10) unsigned,
-  `sent` datetime NOT NULL default '0000-00-00 00:00:00',
-  `expires` datetime NOT NULL default '0000-00-00 00:00:00',
+  `sent` datetime NOT NULL default CURRENT_TIMESTAMP,
+  `expires` datetime,
   `role` varchar(10),
   `format` varchar(10),
   `to_label` text,
@@ -163,8 +163,8 @@ CREATE TABLE `sitebar_cache` (
   `type` varchar(10) NOT NULL,
   `ckey` varchar(255) NOT NULL,
   `cvalue` LONGBLOB NOT NULL,
-  `created` datetime NOT NULL default '0000-00-00 00:00:00',
-  `expires` datetime NOT NULL default '0000-00-00 00:00:00',
+  `created` datetime NOT NULL default CURRENT_TIMESTAMP,
+  `expires` datetime,
   PRIMARY KEY (`type`, `ckey`)
 )
 COMMENT='Contains multipurpose cache.';

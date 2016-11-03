@@ -1,0 +1,51 @@
+<?php
+
+/**
+ * Debug Bar loader template.
+ *
+ * It uses Font Awesome by Dave Gandy - http://fontawesome.io
+ *
+ * This file is part of the Tracy (https://tracy.nette.org)
+ * Copyright (c) 2004 David Grudl (https://davidgrudl.com)
+ */
+
+namespace Tracy;
+
+use Tracy;
+
+?>
+
+
+
+
+<!-- Tracy Debug Bar -->
+<div id="tracy-debug" data-id="<?= htmlspecialchars($contentId) ?>"></div>
+<script>
+(function(){
+	if (!document.documentElement.dataset) {
+		throw new Error('Tracy requires IE 11+');
+	} else if (localStorage.getItem('tracy-style') && localStorage.getItem('tracy-script') && localStorage.getItem('tracy-version') === <?= json_encode(Debugger::VERSION) ?>) {
+		start();
+	} else {
+		create('script', {src: <?= json_encode($baseUrl . http_build_query(['_tracy_bar' => 'assets', 'v' => Debugger::VERSION], NULL, '&')) ?>, onload: start});
+	}
+
+	function start() {
+		create('style', {textContent: localStorage.getItem('tracy-style'), className: 'tracy-debug'});
+		create('script', {textContent: localStorage.getItem('tracy-script')});
+<?php if ($contentId): ?>
+		create('script', {src: <?= json_encode($baseUrl . http_build_query(['_tracy_bar' => "content.$contentId"], NULL, '&')) ?>});
+<?php else: ?>
+		Tracy.Debug.init(<?= json_encode($content) ?>, <?= json_encode($dumps) ?>);
+<?php endif ?>
+	}
+
+	function create(name, props) {
+		var el = document.createElement(name);
+		for (var id in props) {
+			el[id] = props[id];
+		}
+		document.head.appendChild(el);
+	}
+})();
+</script>

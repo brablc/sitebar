@@ -29,7 +29,7 @@ require_once('./inc/writer.inc.php');
 
 class SB_Writer_atom extends SB_WriterInterfaceXML
 {
-    function SB_Writer_atom()
+    function __construct()
     {
         parent::__construct();
         $this->switches['flat'] = true;

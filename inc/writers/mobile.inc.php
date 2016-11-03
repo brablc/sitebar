@@ -30,7 +30,7 @@ require_once('./inc/writers/sitebar.inc.php');
 
 class SB_Writer_mobile extends SB_Writer_sitebar
 {
-    function SB_Writer_mobile()
+    function __construct()
     {
         parent::__construct();
     }

@@ -29,14 +29,15 @@ define('SB_SHOW_PHP_ERRORS', SB_DEBUGGING);
 define('SB_LOG_HTTP', SB_DEBUGGING && false);
 define('SB_LOG_SQL', SB_DEBUGGING && true);
 
+require_once './lib/vendor/tracy/tracy/src/tracy.php';
+use Tracy\Debugger;
+
+
 if (SB_SHOW_PHP_ERRORS)
 {
-    require_once './lib/Nette/Debug.php';
-    // enable Nette\Debug
-    Debug::enable(NULL, ini_get('error_log'));
     error_reporting(E_ALL | E_STRICT); // We want to see all errors, regardless of php.ini
+    Debugger::enable(Debugger::DEVELOPMENT);
 }
-
 // This should be a static class variable, if PHP 4 were OO language :-)
 $SB_errorHandler__errorCount = 0;
 $SB_errorHandler__warnCount = 0;
@@ -301,7 +302,7 @@ class SB_ErrorHandler
         if (SB_DEBUGGING)
         {
             $this->useHandler(false);
-            Debug::fireLog($prefix.": ".$data);
+            Debugger::fireLog($prefix.": ".$data);
             $this->useHandler();
         }
         return $data;
@@ -309,7 +310,7 @@ class SB_ErrorHandler
 
     function dump($expr,$inscript=0)
     {
-        Debug::fireDump($expr);
+        Debugger::fireDump($expr);
     }
 }
 

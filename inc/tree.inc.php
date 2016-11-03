@@ -69,7 +69,7 @@ class SB_Tree_Link extends SB_ErrorHandler
     var $order = 1000;
     var $type_flag = 'l';
 
-    function SB_Tree_Link($rlink)
+    function __construct($rlink)
     {
         // Map DB fields to class member variables
         static $map = array

@@ -32,7 +32,7 @@ require_once('./inc/writer.inc.php');
 
 class SB_Writer_rss extends SB_WriterInterfaceXML
 {
-    function SB_Writer_rss()
+    function __construct()
     {
         parent::__construct();
     }

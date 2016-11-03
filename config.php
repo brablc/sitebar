@@ -50,7 +50,7 @@ class Configuration extends SB_ErrorHandler
     var $pass;
     var $pass2;
 
-    function Configuration()
+    function __construct()
     {
         $this->file = './adm/'.$this->base;
 

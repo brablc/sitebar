@@ -28,7 +28,7 @@ require_once('./inc/writers/xbel.inc.php');
 
 class SB_Writer_dir extends SB_Writer_xbel
 {
-    function SB_Writer_dir()
+    function __construct()
     {
         parent::__construct();
         $this->um->setParam('user','mix_mode','nodes');

@@ -23,7 +23,7 @@ require_once('./inc/writer.inc.php');
 
 class SB_Writer_netscape extends SB_WriterInterface
 {
-    function SB_Writer_netscape()
+    function __construct()
     {
         parent::__construct();
     }

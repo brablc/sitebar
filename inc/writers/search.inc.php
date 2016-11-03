@@ -35,7 +35,7 @@ class SB_Writer_search extends SB_Writer_dir
     var $found = 0;
     var $engineURL = '';
 
-    function SB_Writer_search()
+    function __construct()
     {
         parent::__construct();
         $this->switches['flat'] = 1;

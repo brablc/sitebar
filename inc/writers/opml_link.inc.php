@@ -28,7 +28,7 @@ require_once('./inc/writer.inc.php');
 
 class SB_Writer_opml_link extends SB_WriterInterfaceXML
 {
-    function SB_Writer_opml_link()
+    function __construct()
     {
         parent::__construct();
     }
