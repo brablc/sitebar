@@ -96,7 +96,7 @@ class SB_StopWatch
     var $started = 0;
     var $elapsed = 0;
 
-    function SB_StopWatch()
+    function __construct()
     {
         $this->start();
     }

@@ -21,7 +21,7 @@ $SB_loader_title['rss'] = 'RSS 2.0';
 
 class SB_Loader_rss extends SB_LoaderInterface
 {
-    function SB_Loader_rss($useEngine=true, $charSet=null)
+    function __construct($useEngine=true, $charSet=null)
     {
         parent::__construct($useEngine, $charSet);
     }

@@ -30,7 +30,7 @@ class SB_SanityCheck
     var $db;
     var $checked = array();
 
-    function SB_SanityCheck()
+    function __construct()
     {
         $this->um =& SB_UserManager::staticInstance();
         $this->tree =& SB_Tree::staticInstance();

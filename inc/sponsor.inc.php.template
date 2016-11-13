@@ -25,7 +25,7 @@
 
 class SB_Sponsor extends SB_SponsorInterface
 {
-    function SB_Sponsor(&$hook)
+    function __construct(&$hook)
     {
         $this->SB_SponsorInterface($hook);
     }

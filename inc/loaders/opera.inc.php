@@ -23,7 +23,7 @@ class SB_Loader_opera extends SB_LoaderInterface
 {
     var $lines;
 
-    function SB_Loader_opera($useEngine=true, $charSet=null)
+    function __construct($useEngine=true, $charSet=null)
     {
         parent::__construct($useEngine, $charSet);
     }

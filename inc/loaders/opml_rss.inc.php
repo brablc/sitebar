@@ -21,7 +21,7 @@ $SB_loader_title['opml_rss'] = 'OPML RSS Type';
 
 class SB_Loader_opml_rss extends SB_LoaderInterface
 {
-    function SB_Loader_opml_rss($useEngine=true, $charSet=null)
+    function __construct($useEngine=true, $charSet=null)
     {
         parent::__construct($useEngine, $charSet);
     }

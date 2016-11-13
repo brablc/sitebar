@@ -318,7 +318,7 @@ class SB_Page extends SB_ErrorHandler
         {
             $hostvar = isset($_SERVER['HTTP_HOST'])?'HTTP_HOST':'SERVER_NAME';
             $scripturl = isset($_SERVER['SCRIPT_URL'])?$_SERVER['SCRIPT_URL']:$_SERVER['SCRIPT_NAME'];
-            $basedir = dirname($_SERVER[$hostvar].$scripturl);
+            $basedir = $_SERVER[$hostvar].dirname($scripturl);
             $https = $_SERVER['SERVER_PORT']!=80
                   && isset($_SERVER['HTTPS'])
                   && strtolower($_SERVER['HTTPS']) == 'on';

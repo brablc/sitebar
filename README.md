@@ -1,7 +1,7 @@
 :: SiteBar :: The Online Bookmark Manager | The Bookmark Server
 
 Version 3.x Architecture, Security Model and Code:
-   Copyright (C) 2003-2006 Ondrej Brablc <http://brablc.com/mailto?o>
+   Copyright (C) 2003-2016 Ondrej Brablc <http://brablc.com/mailto?o>
 Version 3.x Code parts:
    Copyright (C) 2004 SiteBar Team <http://sitebar.org/team.php>
 Version 2.x Code, Concept and Design:
@@ -59,8 +59,9 @@ System Requirements
 ===================
 
    Backend:
-   - MySQL 3.23.58+ or 4.x
-   - PHP 4.1.0 or 5.x
+   - MySQL 5.x
+   - PHP 7.0
+     - `apt-get -y install libapache2-mod-php7.0 php7.0-mysql php7.0-xml`
    - outbound HTTP connection for link validation and favicon harvesting
    (see http://sitebar.org/requirements.php for more details)
 
