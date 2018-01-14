@@ -1064,7 +1064,7 @@ _DOC;
             $this->tree->statistics($stat);
         }
 
-        $this->hook->foot($this->um->config['release'].(SB_DEVELOPMENT?'-svn':''),$stat,$this->um);
+        $this->hook->foot($this->um->config['release'].(SB_DEVELOPMENT?'-git':''),$stat,$this->um);
 
         $sponsor = new SB_SponsorInterface($this->hook);
         $file = './inc/sponsor.inc.php';
