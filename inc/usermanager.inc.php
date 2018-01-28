@@ -179,7 +179,7 @@ class SB_UserManager extends SB_ErrorHandler
                             $sub = "SB_UserManager$count";
                             $sup = ($count>1?'SB_UserManager'.($count-1):'SB_UserManager');
                             $classes .= "class $sub extends $sup\n{\n";
-                            $classes .= "    function $sub() { \$this->$sup(); }\n";
+                            $classes .= "    function __construct() { parent::__construct(); }\n";
                             continue;
                         }
 
