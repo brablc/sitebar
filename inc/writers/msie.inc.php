@@ -23,7 +23,7 @@ require_once('./inc/writers/netscape.inc.php');
 
 class SB_Writer_msie extends SB_Writer_netscape
 {
-    function SB_Writer_msie()
+    function __construct()
     {
         parent::__construct();
     }

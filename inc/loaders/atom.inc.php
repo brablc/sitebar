@@ -21,7 +21,7 @@ $SB_loader_title['atom'] = 'Atom 0.3';
 
 class SB_Loader_atom extends SB_LoaderInterface
 {
-    function SB_Loader_atom($useEngine=true, $charSet=null)
+    function __construct($useEngine=true, $charSet=null)
     {
         parent::__construct($useEngine, $charSet);
     }

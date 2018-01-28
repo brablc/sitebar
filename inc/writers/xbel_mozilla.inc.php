@@ -31,7 +31,7 @@ class SB_Writer_xbel_mozilla extends SB_Writer_xbel
 {
     var $metaAttr;
 
-    function SB_Writer_xbel_mozilla()
+    function __construct()
     {
         parent::__construct();
         $this->metaAttr = array('owner' => 'Mozilla');

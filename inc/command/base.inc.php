@@ -63,7 +63,7 @@ class SB_CommandWindowBase extends SB_ErrorHandler
 
     var $persistentParams = array('target','mode','w');
 
-    function SB_CommandWindowBase()
+    function __construct()
     {
         $this->command = SB_reqVal('command');
 

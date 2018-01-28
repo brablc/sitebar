@@ -69,7 +69,7 @@ class SB_Tree_Link extends SB_ErrorHandler
     var $order = 1000;
     var $type_flag = 'l';
 
-    function SB_Tree_Link($rlink)
+    function __construct($rlink)
     {
         // Map DB fields to class member variables
         static $map = array
@@ -101,6 +101,11 @@ class SB_Tree_Link extends SB_ErrorHandler
             if (isset($map[$col]))
             {
                 $member = $map[$col];
+                if (in_array($col, array('added','changed','modified','tested','visited'))) {
+                    if (preg_match('/T/', $value)) {
+                        $value = strftime('%Y-%m-%d %H:%M:%S', strtotime($value));
+                    }
+                }
                 $this->$member = $value;
             }
         }
@@ -164,7 +169,7 @@ class SB_Tree_Node extends SB_ErrorHandler
     var $um;
     var $tree;
 
-    function SB_Tree_Node($rnode=null, $special=null)
+    function __construct($rnode=null, $special=null)
     {
         $this->db =& SB_Database::staticInstance();
         $this->um =& SB_UserManager::staticInstance();
@@ -540,7 +545,7 @@ class SB_Tree extends SB_ErrorHandler
     // Special sharing variables
     var $mergedUserId = null;
 
-    function SB_Tree()
+    function __construct()
     {
         $this->db =& SB_Database::staticInstance();
         $this->um =& SB_UserManager::staticInstance();

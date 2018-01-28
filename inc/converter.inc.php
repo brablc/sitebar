@@ -36,7 +36,7 @@ class SB_Converter extends SB_ErrorHandler
     var $useEngine = false;
 
 
-    function SB_Converter($useEngine=true, $charSet='utf-8')
+    function __construct($useEngine=true, $charSet='utf-8')
     {
         $this->useEngine = $useEngine;
 

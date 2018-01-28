@@ -48,7 +48,7 @@ class SB_UserManager extends SB_ErrorHandler
     var $params = array('config'=>array(),'user'=>array());
     var $hiddenFolders = array();
 
-    function SB_UserManager()
+    function __construct()
     {
         $this->db =& SB_Database::staticInstance();
 

@@ -29,7 +29,7 @@ class SB_Writer_weblinks extends SB_WriterInterface
 {
     var $path = '';
 
-    function SB_Writer_weblinks()
+    function __construct()
     {
         parent::__construct();
     }

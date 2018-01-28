@@ -27,7 +27,7 @@ class SB_Writer_sitebar_ajax extends SB_Writer_sitebar
     var $arrFilled = false;
     var $level = 0;
 
-    function SB_Writer_sitebar_ajax()
+    function __construct()
     {
         parent::__construct();
         $this->switches['root'] = SB_reqVal('nid');

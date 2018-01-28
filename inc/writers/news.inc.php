@@ -31,7 +31,7 @@ class SB_Writer_news extends SB_Writer_dir
 {
     var $wantLoad = true;
 
-    function SB_Writer_news()
+    function __construct()
     {
         parent::__construct();
         $this->switches['flat'] = 1;

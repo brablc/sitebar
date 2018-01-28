@@ -38,7 +38,7 @@ class SB_Validator extends SB_ErrorHandler
     var $db;
     var $fc;
 
-    function SB_Validator()
+    function __construct()
     {
         $this->um =& SB_UserManager::staticInstance();
         $this->tree =& SB_Tree::staticInstance();

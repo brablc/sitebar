@@ -21,7 +21,7 @@ $SB_loader_title['rdf'] = 'RDF/RSS';
 
 class SB_Loader_rdf extends SB_LoaderInterface
 {
-    function SB_Loader_rdf($useEngine=true, $charSet=null)
+    function __construct($useEngine=true, $charSet=null)
     {
         parent::__construct($useEngine, $charSet);
     }

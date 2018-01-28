@@ -186,7 +186,7 @@ class SB_SponsorInterface
 {
     var $hook = null;
 
-    function SB_SponsorInterface(&$hook)
+    function __construct(&$hook)
     {
         $this->hook =& $hook;
     }
@@ -318,7 +318,7 @@ class SB_Page extends SB_ErrorHandler
         {
             $hostvar = isset($_SERVER['HTTP_HOST'])?'HTTP_HOST':'SERVER_NAME';
             $scripturl = isset($_SERVER['SCRIPT_URL'])?$_SERVER['SCRIPT_URL']:$_SERVER['SCRIPT_NAME'];
-            $basedir = dirname($_SERVER[$hostvar].$scripturl);
+            $basedir = $_SERVER[$hostvar].dirname($scripturl);
             $https = $_SERVER['SERVER_PORT']!=80
                   && isset($_SERVER['HTTPS'])
                   && strtolower($_SERVER['HTTPS']) == 'on';
@@ -535,14 +535,14 @@ class SB_Page extends SB_ErrorHandler
 <?php
         }
 */
-        SB_Page::headerContent($inscript);
+        self::headerContent($inscript);
 ?>
 </head>
 <body class="siteBar siteBarBaseFont siteBarPageBackground <?php echo $bodyClass?>" <?php echo ($onLoad?' onLoad="'.$onLoad.'"':'')?> onmouseup="SB_cancelDragging();">
 <?php
     }
 
-    function headerContent($inscript)
+    static function headerContent($inscript)
     {
 ?>
     <link rel="stylesheet" type="text/css" href="<?php echo SB_Skin::webPath() ?>/sitebar.css?version=<?php echo STATIC_VERSION ?>" media="all">

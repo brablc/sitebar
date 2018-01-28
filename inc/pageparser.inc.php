@@ -69,7 +69,7 @@ class SB_HTTPStream extends SB_ErrorHandler
     // Port
     var $port;
 
-    function SB_HTTPStream($timeout=5)
+    function __construct($timeout=5)
     {
         $this->timeout = $timeout;
     }
@@ -177,9 +177,9 @@ class SB_HTTPStream extends SB_ErrorHandler
 
 class SB_HTTPStream430 extends SB_HTTPStream
 {
-    function SB_HTTPStream430($timeout=5)
+    function __construct($timeout=5)
     {
-        $this->SB_HTTPStream($timeout);
+        parent::__construct($timeout);
     }
 
     function setTimeOut($timeout=null)
@@ -226,7 +226,7 @@ class SB_PageParser extends SB_ErrorHandler
     // Information error messages
     var $errorCode = array();
 
-    function SB_PageParser($url)
+    function __construct($url)
     {
         $this->um =& SB_UserManager::staticInstance();
 

@@ -31,9 +31,9 @@ class SB_LoaderInterface extends SB_Converter
     var $childs = array();
     var $root;
 
-    function SB_LoaderInterface($useEngine=true, $charSet=null)
+    function __construct($useEngine=true, $charSet=null)
     {
-        $this->SB_Converter($useEngine, $charSet);
+        parent::__construct($useEngine, $charSet);
     }
 
     function getAttributeMap() { die('Abstract class.'); }
@@ -67,7 +67,8 @@ class SB_LoaderInterface extends SB_Converter
         }
         xml_parser_free($xml_parser);
 
-        $xmlTree = $this->xmlGetChildren($vals, $i = 0);
+        $i = 0;
+        $xmlTree = $this->xmlGetChildren($vals, $i);
         $this->parseTree($this->root, $xmlTree);
 
         return true;
@@ -216,7 +217,7 @@ class SB_Loader extends SB_ErrorHandler
     var $useEngine = true;
     var $charSet = null;
 
-    function SB_Loader($useEngine=true, $charSet=null)
+    function __construct($useEngine=true, $charSet=null)
     {
         if (!$charSet)
         {

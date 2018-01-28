@@ -23,7 +23,7 @@ require_once('./inc/writer.inc.php');
 
 class SB_Writer_opera extends SB_WriterInterface
 {
-    function SB_Writer_opera()
+    function __construct()
     {
         parent::__construct();
     }

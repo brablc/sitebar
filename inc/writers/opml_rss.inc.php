@@ -28,7 +28,7 @@ require_once('./inc/writers/opml_link.inc.php');
 
 class SB_Writer_opml_rss extends SB_Writer_opml_link
 {
-    function SB_Writer_opml_rss()
+    function __construct()
     {
         parent::__construct();
     }

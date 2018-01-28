@@ -29,7 +29,7 @@ class SB_Localizer
     var $langDefault = 'en_US';
     var $pluginPaths = array();
 
-    function SB_Localizer()
+    function __construct()
     {
         $this->lang = $this->langDefault;
 

@@ -25,7 +25,7 @@ class SB_Loader_netscape extends SB_LoaderInterface
 {
     var $lines;
 
-    function SB_Loader_netscape($useEngine=true, $charSet=null)
+    function __construct($useEngine=true, $charSet=null)
     {
         parent::__construct($useEngine, $charSet);
     }

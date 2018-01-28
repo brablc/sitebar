@@ -17,7 +17,7 @@
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.     *
  ******************************************************************************/
 
-define( 'SB_CURRENT_RELEASE', '3.4');
+define( 'SB_CURRENT_RELEASE', '3.5');
 
 require_once('./inc/errorhandler.inc.php');
 
@@ -30,7 +30,7 @@ class SB_Database extends SB_ErrorHandler
     var $count = 0; // Count of executed statements
     var $sw;
 
-    function SB_Database()
+    function __construct()
     {
         $this->sw = new SB_StopWatch();
     }
@@ -386,11 +386,11 @@ class SB_Database extends SB_ErrorHandler
 
 class SB_DatabaseMySQL extends SB_Database
 {
-    function SB_DatabaseMySQL($ignoreError=false)
+    function __construct($ignoreError=false)
     {
-        parent::SB_Database();
+        parent::__construct();
 
-        if (!extension_loaded('mysql') || !function_exists('mysql_connect'))
+        if (!extension_loaded('mysqli') || !function_exists('mysqli_connect'))
         {
             die('SiteBar: No support for MySQL detected!');
         }
@@ -432,7 +432,7 @@ class SB_DatabaseMySQL extends SB_Database
     {
         $this->sw->cont();
         SB_ErrorHandler::useHandler(false);
-        $ret = @mysql_connect($host, $user, $pass);
+        $ret = @mysqli_connect($host, $user, $pass);
         SB_ErrorHandler::useHandler(true);
         $this->sw->pause();
         return $ret;
@@ -441,60 +441,60 @@ class SB_DatabaseMySQL extends SB_Database
     function close()
     {
         $this->sw->cont();
-        mysql_close($this->connection);
+        mysqli_close($this->connection);
         $this->sw->pause();
         $this->connection = null;
     }
 
     function escapeString($str)
     {
-        return mysql_escape_string(str_replace('\\0','\\\\0',$str));
+        return mysqli_escape_string($this->connection, str_replace('\\0','\\\\0',$str));
     }
 
     function fetchArray($request)
     {
         $this->sw->cont();
-        $data = mysql_fetch_array($request, MYSQL_ASSOC);
+        $data = mysqli_fetch_array($request, MYSQLI_ASSOC);
         $this->sw->pause();
         return $data;
     }
 
     function getAffectedRows()
     {
-        return mysql_affected_rows($this->connection);
+        return mysqli_affected_rows($this->connection);
     }
 
     function getErrorCode()
     {
-        return mysql_errno($this->connection);
+        return mysqli_errno($this->connection);
     }
 
     function getErrorText()
     {
         if ($this->connection)
         {
-            return mysql_error($this->connection);
+            return mysqli_error($this->connection);
         }
         else
         {
-            return mysql_error();
+            return mysqli_error();
         }
     }
 
     function getLastId()
     {
-        return mysql_insert_id($this->connection);
+        return mysqli_insert_id($this->connection);
     }
 
     function hasDB($db)
     {
-        return mysql_select_db($db, $this->connection) ;
+        return mysqli_select_db($this->connection, $db) ;
     }
 
     function hasTable($table)
     {
         $this->useHandler(false);
-        $fields = @mysql_query("SHOW COLUMNS FROM ".$table, $this->connection);
+        $fields = @mysqli_query($this->connection, "SHOW COLUMNS FROM ".$table);
         $this->useHandler(true);
         return $fields;
     }
@@ -522,7 +522,7 @@ class SB_DatabaseMySQL extends SB_Database
         $this->lastsql = $sql;
         if (SB_LOG_SQL) $this->log("SQL", str_replace("\n",' ',$sql));
         $this->sw->cont();
-        $res = mysql_query($sql, $this->connection);
+        $res = mysqli_query($this->connection, $sql);
         $this->sw->pause();
         return $res;
     }
@@ -530,15 +530,13 @@ class SB_DatabaseMySQL extends SB_Database
 
 class SB_DatabaseMySQLPhp43 extends SB_DatabaseMySQL
 {
-    function SB_DatabaseMySQLPhp43($ignoreError=false)
+    function __construct($ignoreError=false)
     {
-        parent::SB_DatabaseMySQL($ignoreError);
+        parent::__construct($ignoreError);
     }
 
     function escapeString($str)
     {
-        return mysql_real_escape_string(str_replace('\\0','\\\\0',$str), $this->connection);
+        return mysqli_real_escape_string(str_replace('\\0','\\\\0',$str), $this->connection);
     }
 }
-
-?>

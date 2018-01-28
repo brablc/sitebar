@@ -29,7 +29,7 @@ class SB_Writer_phplm extends SB_WriterInterface
 {
     var $path = '';
 
-    function SB_Writer_phplm()
+    function __construct()
     {
         parent::__construct();
     }

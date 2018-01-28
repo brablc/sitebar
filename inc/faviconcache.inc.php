@@ -30,7 +30,7 @@ class SB_FaviconCache extends SB_ErrorHandler
     // And the usermanager for user related functions
     var $um;
 
-    function SB_FaviconCache()
+    function __construct()
     {
         $this->db =& SB_Database::staticInstance();
         $this->um =& SB_UserManager::staticInstance();

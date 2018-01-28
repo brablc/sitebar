@@ -24,7 +24,7 @@ class SB_Loader_xbel extends SB_LoaderInterface
     var $bookmarksToolbarFolder;
     var $unfiledBookmarksFolder;
 
-    function SB_Loader_xbel($useEngine=true, $charSet=null)
+    function __construct($useEngine=true, $charSet=null)
     {
         parent::__construct($useEngine, $charSet);
     }

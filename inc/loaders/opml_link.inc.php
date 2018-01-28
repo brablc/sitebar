@@ -21,7 +21,7 @@ $SB_loader_title['opml_link'] = 'OPML Link Type';
 
 class SB_Loader_opml_link extends SB_LoaderInterface
 {
-    function SB_Loader_opml_link($useEngine=true, $charSet=null)
+    function __construct($useEngine=true, $charSet=null)
     {
         parent::__construct($useEngine, $charSet);
     }
