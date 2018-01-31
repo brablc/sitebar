@@ -412,7 +412,7 @@ class SB_DatabaseMySQL extends SB_Database
         }
 
         // Compatibility with 5.7 and its strict NO_ZERO_DATE
-        mysqli_query($ret, "SET SESSION sql_mode = 'TRADITIONAL'");
+        mysqli_query($this->connection, "SET SESSION sql_mode = 'TRADITIONAL'");
 
         if (!$this->hasDB($config['name']))
         {
