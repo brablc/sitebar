@@ -36,7 +36,7 @@ class SB_Token extends SB_ErrorHandler
         $this->um =& SB_UserManager::staticInstance();
     }
 
-    function & staticInstance()
+    static function & staticInstance()
     {
         static $token;
 

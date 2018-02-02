@@ -109,7 +109,7 @@ $browsers = array
         'platforms'=>'9.0/All',
         'usage' => '',
         'exclude'  =>array(),
-        'extra'  =>array('sitebar_client','sitebar','sidebar','livebookmarks','search_engine','iframe','google'),
+        'extra'  =>array('sitebar_client','sitebar','hotlist','livebookmarks','search_engine','iframe','google'),
     ),
     'konqueror' => array
     (

@@ -60,6 +60,14 @@ if (strstr($writer,'xbel2'))
     $writer = 'dir';
 }
 
+// Live bookmarks
+if ($writer == 'rss' &&  SB_reqVal('sd') == '0' && !isset($_SERVER['HTTPS']))
+{
+    header("Content-Type=application/xml; charset=utf-8");
+    readfile('premium.rss');
+    exit;
+}
+
 if ($writer && !strstr($writer,'.'))
 {
     $writerFile = './inc/writers/'.$writer.'.inc.php';
