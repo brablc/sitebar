@@ -58,7 +58,7 @@ if (preg_match('/^\w+/', $_GET['lang']))
 {
     SB_SetLanguage($_GET['lang']);
 }
-$um->setParam('user',$_COOKIE['popup_params']);
+// $um->setParam('user',$_COOKIE['popup_params']);
 
 if (isset($_REQUEST['install']))
 {
