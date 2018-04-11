@@ -44,8 +44,12 @@ class SB_SanityCheck
 
     function run()
     {
-        $doall = isset($_GET['do_all']) || !count($_GET);
+        $doall = isset($_GET['do_all']);
 
+        if ($doall || isset($_GET['do_deadusers']))
+        {
+            $this->deadusers();
+        }
         if ($doall || isset($_GET['do_orphans']))
         {
             $this->orphans();
@@ -231,6 +235,25 @@ class SB_SanityCheck
         {
             $this->checkNodeACL($rec['nid']);
         }
+    }
+
+    function deadusers()
+    {
+        echo "Delete users with no visits ...\r";
+
+        $sql =<<<_SQL
+SELECT u.uid, u.email
+FROM `sitebar_user` u
+WHERE u.uid > 2 AND visits = 0;
+_SQL;
+
+        $rset = $this->db->raw($sql);
+        while (($rec = $this->db->fetchRecord($rset)))
+        {
+            echo "Deleting user #${rec['uid']} ${rec['email']}\r";
+            $this->um->removeUser($rec['uid']);
+        }
+        echo "\n";
     }
 
     function fixgroups()

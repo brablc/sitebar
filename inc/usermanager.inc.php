@@ -1027,7 +1027,8 @@ class SB_UserManager extends SB_ErrorHandler
             $this->db->update('sitebar_user', array
             (
                 'visits' => array('visits+'=>'1'),
-                'visited'=>array('now'=>null)
+				'visited' => array('now'=>null),
+				'last_ip' => $_SERVER['REMOTE_ADDR'], 
             )
             ,array
             (

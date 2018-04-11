@@ -1019,7 +1019,7 @@ _DOC;
         $toolTip = ($link->comment?substr($link->comment,0,255).(strlen($link->comment)>255?'...':''):$link->origURL);
 
         echo ($this->lmenu?$ifavicon.$this->lmenu.$sort_info:'') .
-             '<a id="a'. $linkname .'" '. ($this->useToolTips?'x_':'').'title="'. $this->quoteAtt($toolTip) . '" '.
+             '<a rel="nofollow" id="a'. $linkname .'" '. ($this->useToolTips?'x_':'').'title="'. $this->quoteAtt($toolTip) . '" '.
              ($class?" class=\"$class\"":'') .
              'href="' . $this->quoteAtt($link->url) . '" '.
              'onmousedown="return SB_go(this,'.$link->id .')" '.

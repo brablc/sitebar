@@ -94,7 +94,7 @@ class SB_Writer_sitebar_plain extends SB_WriterInterface
     {
         $filler = str_repeat("\t", $node->level);
 
-        echo $filler . '<dt><a href="' . $link->url . '">' . $link->name . "</a>\r";
+        echo $filler . '<dt><a rel="nofollow" href="' . $link->url . '">' . $link->name . "</a>\r";
 
         if ($link->comment)
         {

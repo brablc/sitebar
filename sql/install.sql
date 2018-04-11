@@ -109,6 +109,7 @@ CREATE TABLE `sitebar_user` (
   `params` text,
   `visited` datetime,
   `visits` int(11) unsigned NOT NULL default '0',
+  `last_ip` varchar(15) DEFAULT NULL,
   PRIMARY KEY  (`uid`),
   UNIQUE KEY `username` (`username`)
 )

@@ -10,6 +10,16 @@ SiteBar 3 History
 [Bxx] - refers to https://secure.teamforge.net/bugzilla/show_bug.cgi?id=xx
 
 --------------------------------------------------------------------------------
+Release 3.6 PHP7 Supportsigned                                     April 11 2018
+--------------------------------------------------------------------------------
+
+Major changes:
+
+[*] Added support for PHP7
+[*] All links are rendered with rel="nofollow" to stop spammers abuse.
+[+] Last IP address for each user is now kept.
+
+--------------------------------------------------------------------------------
 Release 3.4 Sharing Redesigned                                  February 12 2014
 --------------------------------------------------------------------------------
 

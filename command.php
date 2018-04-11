@@ -3547,7 +3547,7 @@ class SB_CommandWindow extends SB_ErrorHandler
             return;
         }
 
-        if ($user->demo)
+        if ($user['demo'])
         {
             $this->um->accessDenied();
             return;
