@@ -1025,7 +1025,7 @@ class SB_CommandWindow extends SB_ErrorHandler
 <?php
                 }
 
-                $this->$params['function'](isset($params['params'])?$params['params']:null);
+                $this->{$params['function']}(isset($params['params'])?$params['params']:null);
             }
             elseif (isset($params['type']) &&  $params['type'] == 'callbackextern')
             {
