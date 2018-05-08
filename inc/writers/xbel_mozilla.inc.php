@@ -88,7 +88,7 @@ class SB_Writer_xbel_mozilla extends SB_Writer_xbel
         $bmkAtt['visited'] = $this->getDateISO8601($link->visited);
     }
 
-    function drawLink(&$node, &$link)
+    function drawLink(&$node, &$link, $last=false)
     {
         $bmkAtt = array();
         $this->getLinkAttMap($bmkAtt, $node, $link);

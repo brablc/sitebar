@@ -55,7 +55,7 @@ class SB_Writer_blogroll extends SB_WriterInterface
         echo $this->js('<ul>');
     }
 
-    function drawLink(&$node, &$link)
+    function drawLink(&$node, &$link, $last=false)
     {
         echo $this->js('<li><a href=\"' . $this->quoteAtt($link->url) . '\">' . $this->quoteAtt($link->name) . '<\/a><\/li>');
     }

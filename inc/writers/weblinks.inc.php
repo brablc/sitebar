@@ -44,7 +44,7 @@ class SB_Writer_weblinks extends SB_WriterInterface
         echo "++00Sucess\r";
     }
 
-    function drawNodeOpen(&$node)
+    function drawNodeOpen(&$node, $last=false)
     {
         $this->path = implode('/', $this->nodes);
 
@@ -56,7 +56,7 @@ class SB_Writer_weblinks extends SB_WriterInterface
         ));
     }
 
-    function drawLink(&$node, &$link)
+    function drawLink(&$node, &$link, $last=false)
     {
         $this->path = implode('/', $this->nodes);
         $url = $link->url;

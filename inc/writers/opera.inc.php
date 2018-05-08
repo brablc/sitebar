@@ -39,7 +39,7 @@ class SB_Writer_opera extends SB_WriterInterface
         echo "Options: encoding = " . $this->charSet . ", version=3\r\r";
     }
 
-    function drawNodeOpen(&$node)
+    function drawNodeOpen(&$node, $last=false)
     {
         echo "#FOLDER\r";
         echo "\tNAME=".$node->name."\r";
@@ -63,7 +63,7 @@ class SB_Writer_opera extends SB_WriterInterface
         return $comment;
     }
 
-    function drawLink(&$node, &$link)
+    function drawLink(&$node, &$link, $last=false)
     {
         echo "#URL\r";
         echo "\tNAME=".$link->name."\r";

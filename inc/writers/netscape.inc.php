@@ -53,7 +53,7 @@ class SB_Writer_netscape extends SB_WriterInterface
 <?php
     }
 
-    function drawNodeOpen(&$node)
+    function drawNodeOpen(&$node, $last=false)
     {
         $filler = str_repeat("\t", $node->level);
 
@@ -74,7 +74,7 @@ class SB_Writer_netscape extends SB_WriterInterface
         echo $filler . "</DL><p>\r";
     }
 
-    function drawLink(&$node, &$link)
+    function drawLink(&$node, &$link, $last=false)
     {
         $filler = str_repeat("\t", $node->level);
 

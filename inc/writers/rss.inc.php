@@ -81,7 +81,7 @@ class SB_Writer_rss extends SB_WriterInterfaceXML
         $this->drawTag('ttl', null, '60');
     }
 
-    function drawLink(&$node, &$link)
+    function drawLink(&$node, &$link, $last=false)
     {
         $this->drawTagOpen('item');
 

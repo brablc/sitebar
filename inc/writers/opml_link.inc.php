@@ -94,7 +94,7 @@ class SB_Writer_opml_link extends SB_WriterInterfaceXML
         $this->drawTagOpen('body');
     }
 
-    function drawNodeOpen(&$node)
+    function drawNodeOpen(&$node, $last=false)
     {
         $this->drawTagOpen('outline', $this->getNodeAtt($node));
     }
@@ -104,7 +104,7 @@ class SB_Writer_opml_link extends SB_WriterInterfaceXML
         $this->drawTagClose('outline');
     }
 
-    function drawLink(&$node, &$link)
+    function drawLink(&$node, &$link, $last=false)
     {
         $this->drawTag('outline', $this->getLinkAtt($node, $link));
     }

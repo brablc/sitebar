@@ -70,7 +70,7 @@ class SB_Writer_atom extends SB_WriterInterfaceXML
         $this->drawTag('modified', null, $this->getGMDateISO8601($this->root->changed));
     }
 
-    function drawLink(&$node, &$link)
+    function drawLink(&$node, &$link, $last=false)
     {
         $this->drawTagOpen('entry');
         $this->drawTag('title', null, $this->quoteText($link->name));

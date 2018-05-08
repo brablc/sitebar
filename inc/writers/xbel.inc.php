@@ -119,7 +119,7 @@ class SB_Writer_xbel extends SB_WriterInterfaceXML
         }
     }
 
-    function drawNodeOpen(&$node)
+    function drawNodeOpen(&$node, $last=false)
     {
         $nodeAtt = array();
         $this->getNodeAttMap($nodeAtt, $node);
@@ -162,7 +162,7 @@ class SB_Writer_xbel extends SB_WriterInterfaceXML
         }
     }
 
-    function drawLink(&$node, &$link)
+    function drawLink(&$node, &$link, $last=false)
     {
         $bmkAtt = array();
         $this->getLinkAttMap($bmkAtt, $node, $link);
