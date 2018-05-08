@@ -17,7 +17,7 @@
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.     *
  ******************************************************************************/
 
-define('SB_DEVELOPMENT', true);
+define('SB_DEVELOPMENT', false);
 
 // Change the "false" to "true" to perform logging on basic level in production
 // software.
