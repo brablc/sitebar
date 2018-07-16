@@ -540,6 +540,6 @@ class SB_DatabaseMySQLPhp43 extends SB_DatabaseMySQL
 
     function escapeString($str)
     {
-        return mysqli_real_escape_string(str_replace('\\0','\\\\0',$str), $this->connection);
+        return mysqli_real_escape_string($this->connection, str_replace('\\0','\\\\0',$str));
     }
 }
