@@ -14,7 +14,7 @@ CREATE TABLE `sitebar_acl` (
 COMMENT='Access control list. Defines rights of groups to root nodes.';
 
 CREATE TABLE `sitebar_config` (
-  `release` varchar(10) NOT NULL DEFAULT '3.6',
+  `release` varchar(10) NOT NULL DEFAULT '3.6.1',
   `changed` datetime NOT NULL default CURRENT_TIMESTAMP,
   `params` text
 )
@@ -109,7 +109,7 @@ CREATE TABLE `sitebar_user` (
   `params` text,
   `visited` datetime,
   `visits` int(11) unsigned NOT NULL default '0',
-  `last_ip` varchar(15) DEFAULT NULL,
+  `last_ip` varchar(45) DEFAULT NULL,
   PRIMARY KEY  (`uid`),
   UNIQUE KEY `username` (`username`)
 )
@@ -129,7 +129,7 @@ CREATE TABLE `sitebar_session` (
   `code` varchar(32) NOT NULL DEFAULT '',
   `created` datetime NOT NULL,
   `expires` int(11) NOT NULL DEFAULT '0',
-  `ip` varchar(15) NOT NULL DEFAULT '',
+  `ip` varchar(45) NOT NULL DEFAULT '',
   PRIMARY KEY  (`code`)
 )
 COMMENT='Session management';
