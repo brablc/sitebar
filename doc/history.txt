@@ -10,7 +10,20 @@ SiteBar 3 History
 [Bxx] - refers to https://secure.teamforge.net/bugzilla/show_bug.cgi?id=xx
 
 --------------------------------------------------------------------------------
-Release 3.6 PHP7 Supportsigned                                     April 11 2018
+Release 3.6.2 Maintenance                                       November 18 2018
+--------------------------------------------------------------------------------
+
+Bugfixes:
+
+[-] Fix upgrading to 3.5 (change upgrade script)
+[-] Add support for InnoDB >= 5.6.6 to upgrade scripts. install.sql was already
+    compatible, but older databases moved to newer InnoDB did not allow
+    inserting to some tables because of ZERO date. The upgrade script should
+    change the defaults, while allowing the installations with older InnoDB
+    to keep their defaults.
+
+--------------------------------------------------------------------------------
+Release 3.6 PHP7 Support                                           April 11 2018
 --------------------------------------------------------------------------------
 
 Major changes:

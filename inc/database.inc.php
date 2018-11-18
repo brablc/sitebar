@@ -17,7 +17,7 @@
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.     *
  ******************************************************************************/
 
-define( 'SB_CURRENT_RELEASE', '3.6.1');
+define( 'SB_CURRENT_RELEASE', '3.6.2');
 
 require_once('./inc/errorhandler.inc.php');
 

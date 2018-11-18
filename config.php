@@ -411,6 +411,11 @@ MSG;
 
     function loadSQL($filename)
     {
+        $res = $this->db->raw('select @@innodb_version version');
+        $rec = $this->db->fetchRecord($res);
+        $version = $rec['version'];
+        $old = version_compare($version,'5.6.5') < 0;
+
         if (!($fp=fopen($filename,'r')))
         {
             $this->error('Cannot open file '.$filename.'!');
@@ -428,6 +433,11 @@ MSG;
             {
                 $line = substr($line,0,$size-1);
                 $sql .= ' ' . $line;
+
+                if ($old) {
+                    $sql = str_replace("datetime NOT NULL DEFAULT CURRENT_TIMESTAMP", "datetime NOT NULL DEFAULT '0000-00-00 00:00:00'", $sql);
+                }   
+        
                 if (!$this->db->raw($sql))
                 {
                     $this->error($this->db->getErrorText().' ['.$sql.']');
