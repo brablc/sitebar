@@ -14,7 +14,7 @@ CREATE TABLE `sitebar_acl` (
 COMMENT='Access control list. Defines rights of groups to root nodes.';
 
 CREATE TABLE `sitebar_config` (
-  `release` varchar(10) NOT NULL DEFAULT '3.6.1',
+  `release` varchar(10) NOT NULL DEFAULT '3.6.2',
   `changed` datetime NOT NULL default CURRENT_TIMESTAMP,
   `params` text
 )
