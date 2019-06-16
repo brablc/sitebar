@@ -28,23 +28,27 @@ if ($link)
 {
     $node = $tree->getNode($link->id_parent);
     $acl =& $node->getACL();
-    $url = isset($_GET['url'])?$_GET['url']:'';
 
     // But if it has been changed, we only let authorized users to see the new value
     if ($acl && $acl['allow_select'])
     {
         $url = $link->getUrl();
+
+        if (strlen($url))
+        {
+            $url = str_replace('%SEARCH%', SB_safeVal($_COOKIE,'SB3SEARCH'), $url);
+            $tree->countVisit($link);
+            header('Location: '. $url );
+            exit;
+        }
     }
 
-    if (strlen($url))
-    {
-	$url = str_replace('%SEARCH%', SB_safeVal($_COOKIE,'SB3SEARCH'), $url);
-        $tree->countVisit($link);
-        header('Location: '. $url );
-	exit;
-    }
+    header("HTTP/1.0 403 Forbidden");
+    header('Content-type: text/plain; charset=utf-8');
+    print SB_T('Access denied!');
+    exit;
 }
 
+header("HTTP/1.0 410 Gone");
 header('Content-type: text/plain; charset=utf-8');
-print SB_T('Access denied!');
-?>
+print SB_T('Gone');

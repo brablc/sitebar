@@ -537,16 +537,9 @@ class SB_WriterInterface extends SB_Converter
                             $child->url{0}=='m' && strpos($child->url,'mailto:')!==false
                         );
 
-                    if ($child->id && !$child->ignoreHits && false)
+                    if ($child->id && !$child->ignoreHits)
                     {
-                        if ($this->switches['shorten'])
-                        {
-                            $child->url = 'go.php?id='.$child->id;
-                        }
-                        else
-                        {
-                            $child->url = SB_Page::absBaseUrl().'go.php?id='.$child->id.'&url='.urlencode($child->getUrl());
-                        }
+                        $child->url = 'go.php?id='.$child->id;
                     }
                 }
 
