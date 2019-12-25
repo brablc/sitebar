@@ -618,12 +618,18 @@ class SB_CommandWindowBase extends SB_ErrorHandler
             }
         }
 
-        $groups = $this->um->getOwnGroups($this->um->uid);
+		$groups = null;
 
-        foreach ($this->um->getGroups() as $gid => $rec)
+		if ($this->um->isAdmin()) {
+			$groups = $this->um->getGroups();
+		}
+		else
+		{
+			$groups = $this->um->getOwnGroups($this->um->uid);
+		}
+
+        foreach ($groups as $gid => $rec)
         {
-            if (!$this->um->isAdmin() && !in_array($gid, array_keys($groups))) continue;
-
             if ($gregexp)
             {
                 if (!preg_match($gregexp, $rec['completename']))
