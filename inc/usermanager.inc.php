@@ -1840,6 +1840,14 @@ class SB_UserManager extends SB_ErrorHandler
         return $groups[0];
     }
 
+    function getGroupByName($name)
+    {
+        $rset = $this->db->select(null, 'sitebar_group', array( 'name'=> $name), 'uid, name');
+        $groups = $this->db->fetchRecords($rset);
+        $this->enrichGroups($groups);
+        return $groups[0];
+    }
+
     function getGroups()
     {
         $rset = $this->db->select('g.*', 'sitebar_group g, sitebar_user u', 'g.uid=u.uid', 'username, name');
