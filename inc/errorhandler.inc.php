@@ -176,7 +176,7 @@ class SB_ErrorHandler
         global $SB_errorHandler__errorCount;
         $SB_errorHandler__errorCount++;
         $errors =& SB_ErrorHandler::getErrors();
-        $errors[] = array(E_ERROR,SB_ErrorHandler::formatError($msg, $arr));
+        $errors[] = array(E_ERROR,SB_ErrorHandler::formatError($msg ?? "Unknown error", $arr));
     }
 
     /**

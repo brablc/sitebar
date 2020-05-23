@@ -863,7 +863,7 @@ class SB_PageParser extends SB_ErrorHandler
 
         if (isset($new['path']) && strlen($new['path']))
         {
-            if ($new['path']{0} == '/')
+            if ($new['path'][0] == '/')
             {
                 return $this->getUrlBase($new) . $new['path'];
             }

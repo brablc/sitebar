@@ -112,7 +112,7 @@ class SB_CommandWindowWorker extends SB_CommandWindowBase
         {
             foreach ($fields as $name => $param)
             {
-                if ($name{0} != '-')
+                if ($name[0] != '-')
                 {
                     $fields[$name]['disabled'] = null;
                 }

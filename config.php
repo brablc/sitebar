@@ -429,7 +429,7 @@ MSG;
             $line = rtrim(fgets($fp,4096));
             $size = strlen($line);
 
-            if ($size>0 && $line{$size-1}==';')
+            if ($size>0 && $line[$size-1] ==';')
             {
                 $line = substr($line,0,$size-1);
                 $sql .= ' ' . $line;

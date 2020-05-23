@@ -61,7 +61,7 @@ class SB_Writer_weblinks extends SB_WriterInterface
         $this->path = implode('/', $this->nodes);
         $url = $link->url;
 
-        if (!($url{0}=='j' && strpos($url,'javascript:')!==false))
+        if (!($url[0]=='j' && strpos($url,'javascript:')!==false))
         {
             $url = SB_Page::absBaseUrl().'go.php?id='.$link->id.'&url='.$link->url;
         }

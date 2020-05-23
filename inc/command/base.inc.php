@@ -334,7 +334,7 @@ class SB_CommandWindowBase extends SB_ErrorHandler
 
         foreach ($params as $param => $value)
         {
-            if ($value!=='' && $param{0}!='_')
+            if ($value!=='' && $param[0]!='_')
             {
                 if ($param=='type' && $value=='textarea')
                 {
@@ -612,7 +612,7 @@ class SB_CommandWindowBase extends SB_ErrorHandler
         if (SB_reqChk('gregexp'))
         {
             $gregexp = SB_reqVal('gregexp');
-            if (!strlen($gregexp) || $gregexp{0} != '/')
+            if (!strlen($gregexp) || $gregexp[0] != '/')
             {
                 $gregexp = '/'.$gregexp.'/i';
             }
@@ -650,7 +650,7 @@ class SB_CommandWindowBase extends SB_ErrorHandler
         if (SB_reqChk('gregexp'))
         {
             $gregexp = SB_reqVal('gregexp');
-            if (!strlen($gregexp) || $gregexp{0} != '/')
+            if (!strlen($gregexp) || $gregexp[0] != '/')
             {
                 $gregexp = '/'.$gregexp.'/i';
             }
@@ -690,7 +690,7 @@ class SB_CommandWindowBase extends SB_ErrorHandler
         if (SB_reqChk('gregexp'))
         {
             $gregexp = SB_reqVal('gregexp');
-            if ($gregexp{0} != '/')
+            if ($gregexp[0] != '/')
             {
                 $gregexp = '/'.$gregexp.'/i';
             }
@@ -950,7 +950,7 @@ class SB_CommandWindowBase extends SB_ErrorHandler
             $disabled = !$params || array_key_exists('disabled', $params);
 
             // Is at least one field enabled
-            $enabled = ($name{0} != '-' && !$disabled) || $enabled;
+            $enabled = ($name[0] != '-' && !$disabled) || $enabled;
 
             // If we have disabled field then keep the value that would
             // be otherwise lost. Needed to go back.
@@ -963,7 +963,7 @@ class SB_CommandWindowBase extends SB_ErrorHandler
                 $params['name'] = ''; // Don't use name with disabled fields.
             }
 
-            if ($name{0} == '-')
+            if ($name[0] == '-')
             {
                 $params['value'] = str_replace('"',"'",$params['value']);
 ?>

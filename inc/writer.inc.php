@@ -532,9 +532,9 @@ class SB_WriterInterface extends SB_Converter
                         strlen($child->url)
                         &&
                         (
-                            $child->url{0}=='j' && strpos($child->url,'javascript:')!==false
+                            $child->url[0]=='j' && strpos($child->url,'javascript:')!==false
                             ||
-                            $child->url{0}=='m' && strpos($child->url,'mailto:')!==false
+                            $child->url[0]=='m' && strpos($child->url,'mailto:')!==false
                         );
 
                     if ($child->id && !$child->ignoreHits)

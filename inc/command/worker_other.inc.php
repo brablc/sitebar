@@ -257,7 +257,7 @@ class SB_CommandWindowWorker extends SB_CommandWindowBase
         $ua = SB_reqVal('web_search_user_agents');
         if (strlen($ua))
         {
-            if ($ua{0} != '/')
+            if ($ua[0] != '/')
             {
                 $ua = '/' . $ua . '/i';
             }
@@ -1150,7 +1150,7 @@ class SB_CommandWindowWorker extends SB_CommandWindowBase
             if (strlen(SB_reqVal('uregexp')))
             {
                 $uregexp = SB_reqVal('uregexp');
-                if ($uregexp{0} != '/')
+                if ($uregexp[0] != '/')
                 {
                     $uregexp = '/'.$uregexp.'/i';
                 }

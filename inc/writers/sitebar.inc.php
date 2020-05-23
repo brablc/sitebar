@@ -270,7 +270,7 @@ class SB_Writer_sitebar extends SB_WriterInterface
 
             while ($node = array_pop($states))
             {
-                $nodes[substr($node,1)] = $node{0};
+                $nodes[substr($node,1)] = $node[0];
             }
         }
 
@@ -792,7 +792,7 @@ _DOC;
         {
             if (!$value) continue;
             list($prefix, $name) = explode('_',$right);
-            $node->aclstr .= $name{0};
+            $node->aclstr .= $name[0];
         }
 
         if ($node->deleted_by)

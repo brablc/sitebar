@@ -44,7 +44,7 @@ else if (!SB_reqChk('uniq')) // We do not have reload from screen
 
     if (strlen($ua))
     {
-        if ($ua{0}!='/')
+        if ($ua[0]!='/')
         {
             $ua = '/' . $ua . '/i';
         }
