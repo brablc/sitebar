@@ -139,13 +139,13 @@ function SB_buttonOut(btn, force)
 function SB_storeSearch()
 {
     var searchText = document.getElementById('fldSearch').value;
-    document.cookie = 'SB3SEARCH='+encodeURIComponent(searchText);
+    document.cookie = 'SB3SEARCH='+encodeURIComponent(searchText)+";SameSite=None;Secure";
 }
 
 function SB_storePosition()
 {
-    document.cookie = 'SB3TOP='+SB_getTop();
-    document.cookie = 'SB3LEFT='+SB_getLeft();
+    document.cookie = 'SB3TOP='+SB_getTop()+";SameSite=None;Secure";
+    document.cookie = 'SB3LEFT='+SB_getLeft()+";SameSite=None;Secure";
 }
 
 function SB_hasClass(obj, className)
@@ -732,7 +732,7 @@ function SB_WFI(imgObj)
 
 function SB_initCommander()
 {
-    document.cookie = 'SB3COOKIE=1';
+    document.cookie = 'SB3COOKIE=1'+";SameSite=None;Secure";
 
     if (document.getElementById('focused'))
     {
@@ -880,7 +880,7 @@ function SB_saveState(id, state)
 function SB_saveCookie(value)
 {
     var expires = new Date(new Date().getTime()+1000*60*60*24*7).toGMTString();
-    document.cookie = 'SB3NODES='+value+'; expires=' + expires;
+    document.cookie = 'SB3NODES='+value+'; expires=' + expires+";SameSite=None;Secure";
 }
 
 /**
@@ -1224,7 +1224,7 @@ function SB_menuOn(event, obj)
 
     if (menuDIV=='node')
     {
-        document.cookie = 'SB3CTXROOT='+obj.id.substr(1);
+        document.cookie = 'SB3CTXROOT='+obj.id.substr(1)+";SameSite=None;Secure";
     }
 
     // Mark folder as opened

@@ -257,7 +257,7 @@ class SB_UserManager extends SB_ErrorHandler
         if (version_compare(PHP_VERSION, "5.2.0", ">="))
         {
             // set HttpOnly if PHP supports it
-            setcookie($name, $value, $expires, "/", "", isset($_SERVER["HTTPS"]), $httponly);
+            setcookie($name, $value, $expires, "/; SameSite=None", "", isset($_SERVER["HTTPS"]), $httponly);
         }
         else
         {
