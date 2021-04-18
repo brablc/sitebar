@@ -411,6 +411,12 @@ class SB_DatabaseMySQL extends SB_Database
             return;
         }
 
+        if (isset($config['charset']))
+        {
+            mysqli_set_charset($this->connection, $config['charset']);
+        }
+
+        //
         // Compatibility with 5.7 and its strict NO_ZERO_DATE
         mysqli_query($this->connection, "SET SESSION sql_mode = 'TRADITIONAL'");
 
