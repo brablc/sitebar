@@ -43,8 +43,10 @@ class SB_Writer_sitebar_ajax extends SB_Writer_sitebar
         {
             array_push($this->treearr, $this->iempty);
         }
-
-        $node->root->isRoot = false;
+	if(!is_null($node->root))
+	{
+            $node->root->isRoot = false;
+	}
     }
 
 /* Opera 8.5 does not support responseXML

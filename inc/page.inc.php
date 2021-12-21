@@ -36,7 +36,7 @@ if (!function_exists('version_compare') || version_compare(phpversion(), MIN_VER
 
 /******************************************************************************/
 
-if (get_magic_quotes_gpc()) // We need this until PHP 6.0?
+if (function_exists("get_magic_quotes_gpc") && get_magic_quotes_gpc()) // We need this until PHP 6.0?
 {
    function stripslashes_deep($value)
    {
@@ -325,7 +325,7 @@ class SB_Page extends SB_ErrorHandler
             $url = 'http' . ($https?'s':'') . '://' . $basedir;
         }
 
-        if ($url{strlen($url)-1} != '/')
+        if ($url[strlen($url)-1] != '/')
         {
             $url .= '/';
         }
@@ -370,7 +370,7 @@ class SB_Page extends SB_ErrorHandler
             $url = '';
         }
 
-        if (strlen($url)>0 && $url{strlen($url)-1} != '/')
+        if (strlen($url)>0 && $url[strlen($url)-1] != '/')
         {
             $url .= '/';
         }
@@ -554,7 +554,7 @@ SB_gSkinDir = '<?php echo SB_Skin::webPath()?>/';
 <?php
     }
 
-    function foot()
+    public static function foot()
     {
 ?>
 </body>

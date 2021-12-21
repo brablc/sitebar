@@ -848,7 +848,7 @@ class SB_PageParser extends SB_ErrorHandler
 
         if (isset($base['path']))
         {
-            if ($base['path']{strlen($base['path'])-1} == '/')
+            if ($base['path'][strlen($base['path'])-1] == '/')
             {
                 $oldpath = $base['path'];
             }
