@@ -102,7 +102,7 @@ class SB_Token extends SB_ErrorHandler
         $tkcharslen = strlen($tkchars)-1;
         for ($i=0 ; $i<$size ; $i++ )
         {
-            $token .= $tkchars{rand(0,$tkcharslen)};
+            $token .= $tkchars[rand(0,$tkcharslen)];
         }
         return $token;
     }
