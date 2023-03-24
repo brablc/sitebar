@@ -3277,10 +3277,19 @@ class SB_CommandWindow extends SB_ErrorHandler
             $this->error('Sorry, your comment looks like spam!');
             $this->goBack();
             return;
-        } 
+        }
+
+        if (strlen($comment)>140) {
+            $this->error('Sorry, only 140 characters allowed!');
+            $this->goBack();
+            return;
+        }
+
+        $ctx = SB_reqVal('ctx', false, 'no');
+        $added = sprintf(' [ctx=%s, ip=%s]', $ctx, $_SERVER['REMOTE_ADDR']);
 
         $this->um->mailToAdmins(
-            'SiteBar: Contact Admin',
+            'SiteBar: Contact Admin' . $added,
             'command::contact',
             array($comment,SB_Page::absBaseUrl()),
             $name,

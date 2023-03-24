@@ -1167,7 +1167,7 @@ class SB_UserManager extends SB_ErrorHandler
     function mailToAdmins($subject, $bodyid, $bodyparams, $from_name='', $from_email='', $lang=null)
     {
         $case = '';
-        if ($subject == 'SiteBar: Contact Admin')
+        if (preg_match('/^SiteBar: Contact Admin/', $subject))
         {
             $caseNum = intval($this->db->getData('admin','case'))+1;
             $this->db->setData('admin','case',$caseNum);
