@@ -3236,6 +3236,11 @@ class SB_CommandWindow extends SB_ErrorHandler
         {
             $fields['Your E-mail'] = array('name'=>'email');
         }
+        $ctx = SB_reqVal('ctx', false, NULL);
+        if ($ctx) {
+            $fields['-hidden-'] = array('name'=>'ctx', 'value'=>$ctx);
+        }
+        
         return array_merge($fields,$this->_buildSendEmail('Feedback or Other Comment'));
     }
 
