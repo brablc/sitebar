@@ -217,7 +217,7 @@ $extra = array
     (
         'label' => 'Sidebar',
         'url' => null,
-        'desc' => SB_P('integrator::hint_sidebar_konqueror', SB_Page::absBaseUrl()),
+        'desc' => SB_P('integrator::hint_sidebar_konqueror', array(SB_Page::absBaseUrl())),
     ),
 
     'hotlist' => array
@@ -281,7 +281,7 @@ $extra = array
     (
         'label' => 'PHP Layers Menu',
         'url' => 'http://phplayersmenu.sourceforge.net/',
-        'desc' => SB_P('integrator::hint_phplm', sprintf('%sindex.php?w=phplm', SB_Page::absBaseUrl())),
+        'desc' => SB_P('integrator::hint_phplm', array(sprintf('%sindex.php?w=phplm', SB_Page::absBaseUrl()))),
     ),
 
 );

@@ -217,6 +217,7 @@ class SB_ErrorHandler
         }
         else
         {
+            // TODO-php8 Many usages of warn() and error() unaudited $arr must be array()
             $txt = SB_T($msg,$arr);
         }
 

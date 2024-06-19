@@ -710,7 +710,7 @@ _DOC;
 
         if ($this->switches['user'] && strlen($this->switches['user']))
         {
-            $message = SB_T("Hide bookmarks from %s!", $this->switches['user']);
+            $message = SB_T("Hide bookmarks from %s!", array($this->switches['user']));
             echo '
 <div id="info"><a href="'.SB_Page::absBaseUrl().'?user=">'.$message.'</a></div>
 ';

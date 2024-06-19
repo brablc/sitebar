@@ -829,11 +829,11 @@ class SB_CommandWindow extends SB_ErrorHandler
             // No translation here
             if ($ret)
             {
-                $this->warn('%s', sprintf($okStr, $user['completenamehtml']));
+                $this->warn('%s', array(sprintf($okStr, $user['completenamehtml'])));
             }
             else
             {
-                $this->error('%s', sprintf($errorStr, $user['completenamehtml']));
+                $this->error('%s', array(sprintf($errorStr, $user['completenamehtml'])));
             }
         }
 
@@ -854,7 +854,7 @@ class SB_CommandWindow extends SB_ErrorHandler
     {
         if (!strstr($email,'@'))
         {
-            $this->error('The e-mail %s does not look correctly!', $email);
+            $this->error('The e-mail %s does not look correctly!', array($email));
             return false;
         }
         return true;
@@ -2424,7 +2424,7 @@ class SB_CommandWindow extends SB_ErrorHandler
 
         if ($counter>1)
         {
-            $this->warn('Sent to %s recipients.', $counter);
+            $this->warn('Sent to %s recipients.', array($counter));
         }
     }
 
@@ -3542,11 +3542,11 @@ class SB_CommandWindow extends SB_ErrorHandler
                 {
                     if ($item=='username')
                     {
-                        $this->error('User with username "%s" does not exist!', $value);
+                        $this->error('User with username "%s" does not exist!', array($value));
                     }
                     else
                     {
-                        $this->error('User with email "%s" does not exist!', $value);
+                        $this->error('User with email "%s" does not exist!', array($value));
                     }
                     $this->goBack();
                     return;
@@ -3790,7 +3790,7 @@ class SB_CommandWindow extends SB_ErrorHandler
 
             if ($user==null)
             {
-                $this->warn('User with username "%s" has already been rejected!', $username);
+                $this->warn('User with username "%s" has already been rejected!', array($username));
                 return;
             }
 
@@ -3815,7 +3815,7 @@ class SB_CommandWindow extends SB_ErrorHandler
 
             if ($user==null)
             {
-                $this->warn('User with uid %d has already been rejected!', $uid);
+                $this->warn('User with uid %d has already been rejected!', array($uid));
                 continue;
             }
 
@@ -4393,7 +4393,7 @@ class SB_CommandWindow extends SB_ErrorHandler
 
         if ($this->um->uid == SB_reqVal('uid',true))
         {
-            $this->error('Use "%s" command to delete own account!', SB_T('Delete Account'));
+            $this->error('Use "%s" command to delete own account!', array(SB_T('Delete Account')));
             return null;
         }
 
@@ -5154,7 +5154,7 @@ class SB_CommandWindow extends SB_ErrorHandler
 
         if (preg_match('/[<>"]/',SB_reqVal('name')))
         {
-            $this->error('Group name must not contain following characters [%s]!', '&lt;&gt;&quot;');
+            $this->error('Group name must not contain following characters [%s]!', array('&lt;&gt;&quot;'));
             return;
         }
 
