@@ -155,7 +155,11 @@ class SB_HTTPStream extends SB_ErrorHandler
 
     function read($size=4096)
     {
-        $data = fread($this->connection, $size);
+        if($this->connection) {
+            $data = fread($this->connection, $size);
+        } else {
+            $data = "";
+        }
         if (SB_LOG_HTTP) $this->log('< ', $data);
         return $data;
     }

@@ -316,10 +316,16 @@ class SB_FaviconCache extends SB_ErrorHandler
     // For backward compatibility PHP < 4.3.0
     function file_get_contents($filename)
     {
-       $fd = fopen($filename, "rb");
-       $content = fread($fd, filesize($filename));
-       fclose($fd);
-       return $content;
+        $fd = fopen($filename, "rb");
+        $fsize = filesize($filename);
+        if($fsize > 0) {
+            $content = fread($fd, filesize($filename));
+        } else {
+            // TODO: Is this a good fix for empty file?
+            $content = "";
+        }
+        fclose($fd);
+        return $content;
     }
 
     // If lid is not specified, the cache wont be updated
