@@ -11,3 +11,8 @@
 	RewriteRule ^news/(\w+)             news.php?root=$1 [L,QSA]
 	RewriteRule ^root/(\w+)             index.php?root=$1 [L,QSA]
 </ifmodule>
+
+#Turns off the expires headers for Apache
+<IfModule mod_expires.c>
+  ExpiresActive Off
+</IfModule>
