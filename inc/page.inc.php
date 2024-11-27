@@ -277,6 +277,18 @@ class SB_Page extends SB_ErrorHandler
         return 'SiteBar';
     }
 
+    public static function validateUrl($url)
+    {
+        if (!filter_var($url, FILTER_VALIDATE_URL)) {
+            return false;
+        }
+        $urlParts = parse_url($url);
+        if (!isset($urlParts['scheme']) || !in_array($urlParts['scheme'], ['http', 'https'])) {
+            return false;
+        }
+        return true;
+    }
+
     // Backward compatibility
     public static function baseurl($override = null)
     {
@@ -293,7 +305,7 @@ class SB_Page extends SB_ErrorHandler
     {
         static $url = null;
 
-        if ($override !== null) {
+        if ($override !== null && self::validateUrl($override)) {
             $url = $override;
         }
 
