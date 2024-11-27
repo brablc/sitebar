@@ -385,7 +385,7 @@ MSG;
 
     public function loadSQL($filename)
     {
-        $res = $this->db->raw('select @@innodb_version version');
+        $res = $this->db->raw('select VERSION() as version');
         $rec = $this->db->fetchRecord($res);
         $version = $rec['version'];
         $old = version_compare($version, '5.6.5') < 0;
