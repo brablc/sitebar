@@ -2031,5 +2031,3 @@ _P;
 $text['Skin designed by'] = <<<_P
 Design par
 _P;
-
-?>

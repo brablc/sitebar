@@ -19,5 +19,3 @@ _P;
 $help['200'] = <<<_P
 Les comandes estan agrupades en diversos grups lògics. Sisplau, selecciona un dels grups per veure l'ajuda de la comanda.
 _P;
-
-?>

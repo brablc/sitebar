@@ -761,5 +761,3 @@ $para['hook::statistics'] = <<<_P
 - Vrijeme: {time_db}/{time_total} sek ({time_pct}%)
 </div>
 _P;
-
-?>

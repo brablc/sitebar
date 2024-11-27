@@ -1,14 +1,10 @@
 <?php
 
-$info = array
-(
+$info = array(
     'language' => 'Espanol',
-    'authors' => array
-    (
+    'authors' => array(
         'Francisco Gómez González' => 'http://www.cursoshomologados.com/',
         'Juan Diego Gutiérrez Gallardo' => null,
         'Jorge Izquierdo' => 'http://www.ateneoinformatico.net/ventanianos',
     ),
 );
-
-?>

@@ -1,4 +1,5 @@
 <?php
+
 /******************************************************************************
  *  SiteBar 3 - The Bookmark Server for Personal and Team Use.                *
  *  Copyright (C) 2006-2008  Ondrej Brablc <http://brablc.com/mailto?o>       *
@@ -24,25 +25,25 @@ require_once('./inc/writer.inc.php');
 
 class SB_Writer_sitebar_plain extends SB_WriterInterface
 {
-    function __construct()
+    public function __construct()
     {
         parent::__construct();
         $this->switches['hits'] = false;
     }
 
-    function getExtension()
+    public function getExtension()
     {
         return ".html";
     }
 
-    function drawContentType()
+    public function drawContentType()
     {
         header('Content-Type: text/html; charset=' . $this->charSet);
     }
 
-    function drawHead()
+    public function drawHead()
     {
-?>
+        ?>
 <html>
 <head>
     <title>SiteBar Bookmarks</title>
@@ -55,50 +56,48 @@ class SB_Writer_sitebar_plain extends SB_WriterInterface
 <body>
 <p>This is a javascript free version of the content available at this <a href="index.php?w=sitebar">SiteBar</a> instance.
 <dl>
-<?php
+        <?php
     }
 
-    function drawFoot()
+    public function drawFoot()
     {
         echo '<p>';
-        $link = '<a href="http://sitebar.org/" '.SB_Page::target().'>%s</a>';
-        echo sprintf($link,'SiteBar ').sprintf($link,'Bookmark Manager');
-?>
+        $link = '<a href="http://sitebar.org/" ' . SB_Page::target() . '>%s</a>';
+        echo sprintf($link, 'SiteBar ') . sprintf($link, 'Bookmark Manager');
+        ?>
 </body>
 </html>
-<?php
+        <?php
     }
 
-    function drawNodeOpen(&$node, $last=false)
+    public function drawNodeOpen(&$node, $last = false)
     {
         $filler = str_repeat("\t", $node->level);
 
-        $added = ($node->added?strtotime($node->added):mktime());
+        $added = ($node->added ? strtotime($node->added) : mktime());
 
         echo $filler . '<dt><h3>' . $node->name . "</h3>\r";
 
-        if ($node->comment)
-        {
-            echo $filler. '<dd>' . $node->comment . "</dd>\r";
+        if ($node->comment) {
+            echo $filler . '<dd>' . $node->comment . "</dd>\r";
         }
         echo $filler . "<dl>\r";
     }
 
-    function drawNodeClose(&$node)
+    public function drawNodeClose(&$node)
     {
         $filler = str_repeat("\t", $node->level);
         echo $filler . "</dl>\r";
     }
 
-    function drawLink(&$node, &$link, $last=false)
+    public function drawLink(&$node, &$link, $last = false)
     {
         $filler = str_repeat("\t", $node->level);
 
         echo $filler . '<dt><a rel="nofollow" href="' . $link->url . '">' . $link->name . "</a>\r";
 
-        if ($link->comment)
-        {
-           echo $filler.'<dd>'.$link->comment."</dd>\r";
+        if ($link->comment) {
+            echo $filler . '<dd>' . $link->comment . "</dd>\r";
         }
     }
 }

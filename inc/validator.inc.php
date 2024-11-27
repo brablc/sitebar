@@ -1,4 +1,5 @@
 <?php
+
 /******************************************************************************
  *  SiteBar 3 - The Bookmark Server for Personal and Team Use.                *
  *  Copyright (C) 2003-2008  Ondrej Brablc <http://brablc.com/mailto?o>       *
@@ -26,83 +27,79 @@ require_once('./inc/faviconcache.inc.php');
 
 class SB_Validator extends SB_ErrorHandler
 {
-    var $discoverMissingFavicons;
-    var $deleteInvalidFavicons;
+    public $discoverMissingFavicons;
+    public $deleteInvalidFavicons;
 
-    var $fields;
-    var $counter = 0;
-    var $linkCount = 0;
+    public $fields;
+    public $counter = 0;
+    public $linkCount = 0;
 
-    var $um;
-    var $tree;
-    var $db;
-    var $fc;
+    public $um;
+    public $tree;
+    public $db;
+    public $fc;
 
-    function __construct()
+    public function __construct()
     {
-        $this->um =& SB_UserManager::staticInstance();
-        $this->tree =& SB_Tree::staticInstance();
-        $this->db =& SB_Database::staticInstance();
-        $this->fc =& SB_FaviconCache::staticInstance();
+        $this->um = & SB_UserManager::staticInstance();
+        $this->tree = & SB_Tree::staticInstance();
+        $this->db = & SB_Database::staticInstance();
+        $this->fc = & SB_FaviconCache::staticInstance();
 
-        if (!$this->um->setupDone || !$this->um->isLogged())
-        {
+        if (!$this->um->setupDone || !$this->um->isLogged()) {
             echo 'Access denied!';
             die;
         }
     }
 
-    function buildValidate(&$base, &$fields,
+    public function buildValidate(
+        &$base,
+        &$fields,
         $discoverMissingFavicons,
-        $deleteInvalidFavicons)
-    {
-        $this->fields =& $fields;
+        $deleteInvalidFavicons
+    ) {
+        $this->fields = & $fields;
 
         $this->discoverMissingFavicons = $discoverMissingFavicons;
         $this->deleteInvalidFavicons = $deleteInvalidFavicons;
-        $this->buildValidateChildren( $base, 0);
+        $this->buildValidateChildren($base, 0);
     }
 
-    function buildValidateChildren(&$base, $level=0)
+    public function buildValidateChildren(&$base, $level = 0)
     {
-        foreach ($base->getChildren() as $child)
-        {
-            if ($child->type_flag=='n')
-            {
-                $this->buildValidateNode($child, $level+1);
-            }
-            else
-            {
-                $this->buildValidateLink($child, $level+1);
+        foreach ($base->getChildren() as $child) {
+            if ($child->type_flag == 'n') {
+                $this->buildValidateNode($child, $level + 1);
+            } else {
+                $this->buildValidateLink($child, $level + 1);
             }
         }
     }
 
-    function buildValidateNode($node, $level)
+    public function buildValidateNode($node, $level)
     {
-        $this->fields['-raw'.$this->counter++.'-'] =
-            '<table><tr><th>'.$node->name.'</th></tr></table>';
+        $this->fields['-raw' . $this->counter++ . '-'] =
+            '<table><tr><th>' . $node->name . '</th></tr></table>';
         $this->buildValidateChildren($node, $level);
     }
 
-    function buildValidateLink($link, $level)
+    public function buildValidateLink($link, $level)
     {
-        if ( substr($link->url,0,4)!='http' || !$link->validate)
-        {
+        if (substr($link->url, 0, 4) != 'http' || !$link->validate) {
             return;
         }
 
         $validationIconSrc = 'validate.php?id=' . $link->id . '&amp;uniq=' . SB_StopWatch::getMicroTime();
 
-        if (strlen($link->favicon)
-        &&  $this->deleteInvalidFavicons
-        &&  !$this->fc->isFaviconCached($link->favicon))
-        {
-            $this->tree->updateLink($link->id, array('favicon'=>''), false);
+        if (
+            strlen($link->favicon)
+            &&  $this->deleteInvalidFavicons
+            &&  !$this->fc->isFaviconCached($link->favicon)
+        ) {
+            $this->tree->updateLink($link->id, array('favicon' => ''), false);
         }
 
-        if ($this->discoverMissingFavicons)
-        {
+        if ($this->discoverMissingFavicons) {
             $validationIconSrc .= '&amp;get_favicon=1';
         }
 
@@ -111,72 +108,59 @@ class SB_Validator extends SB_ErrorHandler
 
         $this->linkCount++;
 
-        $this->fields['-raw'.$this->counter++.'-'] = <<<__LINK
+        $this->fields['-raw' . $this->counter++ . '-'] = <<<__LINK
 <div class="link">
     <img class="favicon" height=16 width=16 src="$validationIconSrc" alt="">
     <a href="$url">$name</a>
 </div>
 __LINK;
-
     }
 
-    function validate($lid, $getFavicon)
+    public function validate($lid, $getFavicon)
     {
-        if (!$this->um->isAuthorized('Validation', false, null, null, $lid))
-        {
+        if (!$this->um->isAuthorized('Validation', false, null, null, $lid)) {
             echo 'Access denied!';
             die;
         }
 
         $link = $this->tree->getLink($lid);
 
-        $deadCount = $link->is_dead+1;
+        $deadCount = $link->is_dead + 1;
 
         // Mark as dead
-        $set = array ('tested'=> array('now'=>''), 'is_dead' => ($deadCount<127?$deadCount:0));
+        $set = array('tested' => array('now' => ''), 'is_dead' => ($deadCount < 127 ? $deadCount : 0));
         $this->tree->updateLink($link->id, $set, false);
 
-        $page = new SB_PageParser( $link->url);
-        $page->getInformation( $getFavicon?array('FAVURL'):null);
+        $page = new SB_PageParser($link->url);
+        $page->getInformation($getFavicon ? array('FAVURL') : null);
 
         // Unmark early if not dead
-        if (!intval($page->isDead))
-        {
+        if (!intval($page->isDead)) {
             $set['is_dead'] = 0;
             $this->tree->updateLink($link->id, $set, false);
         }
 
         $location = SB_Skin::imgsrc('link');
 
-        if ($page->isDead)
-        {
+        if ($page->isDead) {
             $location = SB_Skin::imgsrc('link_wrong_favicon');
-        }
-        else
-        {
+        } else {
             $set = array();
 
-            if (isset($page->info['FAVURL']))
-            {
+            if (isset($page->info['FAVURL'])) {
                 $favicon = $page->info['FAVURL'];
                 $set['favicon'] = $favicon;
 
-                if ($this->um->getParam('config','use_favicon_cache'))
-                {
+                if ($this->um->getParam('config', 'use_favicon_cache')) {
                     $location = 'favicon.php?' . md5($favicon) . '=' . $link->id;
-                }
-                else
-                {
+                } else {
                     $location = $favicon;
                 }
-            }
-            else if ($getFavicon)
-            {
+            } elseif ($getFavicon) {
                 $set['favicon'] = '';
             }
 
-            if (isset($set['favicon']))
-            {
+            if (isset($set['favicon'])) {
                 $this->tree->updateLink($link->id, $set, false);
             }
         }

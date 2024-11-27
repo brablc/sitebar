@@ -1,4 +1,5 @@
 <?php
+
 /******************************************************************************
  *  SiteBar 3 - The Bookmark Server for Personal and Team Use.                *
  *  Copyright (C) 2005-2008  Ondrej Brablc <http://brablc.com/mailto?o>       *
@@ -17,14 +18,14 @@
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.     *
  ******************************************************************************/
 
-    header('Content-Type: application/xml; charset=utf-8');
-    require_once('./inc/localizer.inc.php');
-    require_once('./inc/errorhandler.inc.php');
-    require_once('./inc/page.inc.php');
-    require_once('./inc/usermanager.inc.php');
+header('Content-Type: application/xml; charset=utf-8');
+require_once('./inc/localizer.inc.php');
+require_once('./inc/errorhandler.inc.php');
+require_once('./inc/page.inc.php');
+require_once('./inc/usermanager.inc.php');
 
-    $baseurl = str_replace('skins','',SB_Page::absBaseUrl());
-    $um = SB_UserManager::staticInstance();
+$baseurl = str_replace('skins', '', SB_Page::absBaseUrl());
+$um = SB_UserManager::staticInstance();
 ?>
 <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 <xsl:output
@@ -193,7 +194,7 @@
       <xsl:value-of select="'url'" />
     </xsl:attribute>
     <xsl:attribute name="href">
-      <xsl:value-of select="'<?php echo $baseurl.'index.php'; ?>'" />
+      <xsl:value-of select="'<?php echo $baseurl . 'index.php'; ?>'" />
     </xsl:attribute>
     <xsl:text><?php echo $baseurl; ?></xsl:text>
   </xsl:element>

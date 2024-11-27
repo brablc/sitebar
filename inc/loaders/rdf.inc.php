@@ -1,4 +1,5 @@
 <?php
+
 /******************************************************************************
  *  SiteBar 3 - The Bookmark Server for Personal and Team Use.                *
  *  Copyright (C) 2003-2008  Ondrej Brablc <http://brablc.com/mailto?o>       *
@@ -21,21 +22,18 @@ $SB_loader_title['rdf'] = 'RDF/RSS';
 
 class SB_Loader_rdf extends SB_LoaderInterface
 {
-    function __construct($useEngine=true, $charSet=null)
+    public function __construct($useEngine = true, $charSet = null)
     {
         parent::__construct($useEngine, $charSet);
     }
 
-    function getAttributeMap()
+    public function getAttributeMap()
     {
-        static $map = array
-        (
-            'rdf:Seq' => array
-            (
+        static $map = array(
+            'rdf:Seq' => array(
                 'rss:title' => 'name',
             ),
-            'rss:item' => array
-            (
+            'rss:item' => array(
                 'rss:title' => 'name',
                 'rss:link'  => 'url',
             ),
@@ -44,12 +42,12 @@ class SB_Loader_rdf extends SB_LoaderInterface
         return $map;
     }
 
-    function getNodeTag()
+    public function getNodeTag()
     {
         return 'rdf:Seq';
     }
 
-    function getLinkTag()
+    public function getLinkTag()
     {
         return 'rss:item';
     }

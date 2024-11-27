@@ -1,10 +1,7 @@
 <?php
 
-$info = array
-(
+$info = array(
     'language' => 'English',
     'author' => 'Ondřej Brablc',
     'url' => 'http://brablc.com/'
 );
-
-?>

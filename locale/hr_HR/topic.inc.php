@@ -1,7 +1,6 @@
 <?php
 
-$topic = array
-(
+$topic = array(
 '100' => 'Savjeti za korištenje',
 '101' => 'Drag & Drop',
 '103' => 'Funkcije toolbara',
@@ -19,5 +18,3 @@ $topic = array
 '304' => 'Writers',
 '305' => 'Preseljenje',
 );
-
-?>

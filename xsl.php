@@ -1,4 +1,5 @@
 <?php
+
 /******************************************************************************
  *  SiteBar 3 - The Bookmark Server for Personal and Team Use.                *
  *  Copyright (C) 2005-2008  Ondrej Brablc <http://brablc.com/mailto?o>       *
@@ -21,11 +22,10 @@ require_once('./inc/errorhandler.inc.php');
 require_once('./inc/page.inc.php');
 
 // Handle ; as parameter separator
-$params = explode(';',$_SERVER['QUERY_STRING']);
+$params = explode(';', $_SERVER['QUERY_STRING']);
 
-foreach ($params as $param)
-{
-    list($key, $value) = explode('=',$param);
+foreach ($params as $param) {
+    list($key, $value) = explode('=', $param);
     $_GET[$key] = $value;
 }
 
@@ -34,12 +34,10 @@ $file = $_GET['file'] . '.xsl.php';
 $skin = $_GET['skin'];
 SB_safePath(rawurldecode($skin));
 
-$path = 'skins/'.$skin.'/'.$file;
+$path = 'skins/' . $skin . '/' . $file;
 
-if (!is_file($path))
-{
-    $path = 'skins/'.$file;
+if (!is_file($path)) {
+    $path = 'skins/' . $file;
 }
 
 require_once($path);
-?>

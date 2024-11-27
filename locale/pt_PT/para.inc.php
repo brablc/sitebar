@@ -108,5 +108,3 @@ BD/Tempo total {time_db}/{time_total} seg ({time_pct}%).
 
 
 _P;
-
-?>

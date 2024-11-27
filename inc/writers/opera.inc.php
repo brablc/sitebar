@@ -1,4 +1,5 @@
 <?php
+
 /******************************************************************************
  *  SiteBar 3 - The Bookmark Server for Personal and Team Use.                *
  *  Copyright (C) 2004-2008  Ondrej Brablc <http://brablc.com/mailto?o>       *
@@ -23,56 +24,53 @@ require_once('./inc/writer.inc.php');
 
 class SB_Writer_opera extends SB_WriterInterface
 {
-    function __construct()
+    public function __construct()
     {
         parent::__construct();
     }
 
-    function getExtension()
+    public function getExtension()
     {
         return ".adr";
     }
 
-    function drawHead()
+    public function drawHead()
     {
         echo "Opera Hotlist version 2.0\r";
         echo "Options: encoding = " . $this->charSet . ", version=3\r\r";
     }
 
-    function drawNodeOpen(&$node, $last=false)
+    public function drawNodeOpen(&$node, $last = false)
     {
         echo "#FOLDER\r";
-        echo "\tNAME=".$node->name."\r";
-        if ($node->comment)
-        {
-            echo "\tDESCRIPTION=".$this->quoteComment($node->comment)."\r";
+        echo "\tNAME=" . $node->name . "\r";
+        if ($node->comment) {
+            echo "\tDESCRIPTION=" . $this->quoteComment($node->comment) . "\r";
         }
         echo "\r";
     }
 
-    function drawNodeClose(&$node)
+    public function drawNodeClose(&$node)
     {
         echo "-\r\r";
     }
 
-    function quoteComment(&$comment)
+    public function quoteComment(&$comment)
     {
-        $comment = str_replace("\r\n","\x2", $comment);
-        $comment = str_replace("\n","\x2", $comment);
-        $comment = str_replace("\r","\x2", $comment);
+        $comment = str_replace("\r\n", "\x2", $comment);
+        $comment = str_replace("\n", "\x2", $comment);
+        $comment = str_replace("\r", "\x2", $comment);
         return $comment;
     }
 
-    function drawLink(&$node, &$link, $last=false)
+    public function drawLink(&$node, &$link, $last = false)
     {
         echo "#URL\r";
-        echo "\tNAME=".$link->name."\r";
-        echo "\tURL=".$link->url."\r";
-        if ($link->comment)
-        {
-            echo "\tDESCRIPTION=".$this->quoteComment($link->comment)."\r";
+        echo "\tNAME=" . $link->name . "\r";
+        echo "\tURL=" . $link->url . "\r";
+        if ($link->comment) {
+            echo "\tDESCRIPTION=" . $this->quoteComment($link->comment) . "\r";
         }
         echo "\r";
     }
 }
-?>

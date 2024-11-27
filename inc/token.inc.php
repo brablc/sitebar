@@ -1,4 +1,5 @@
 <?php
+
 /******************************************************************************
  *  SiteBar 3 - The Bookmark Server for Personal and Team Use.                *
  *  Copyright (C) 2005-2008  Ondrej Brablc <http://brablc.com/mailto?o>       *
@@ -24,41 +25,40 @@ require_once('./inc/page.inc.php');
 
 class SB_Token extends SB_ErrorHandler
 {
-    var $db;
-    var $um;
+    public $db;
+    public $um;
 
-    var $username;
-    var $token;
+    public $username;
+    public $token;
 
-    function __construct()
+    public function __construct()
     {
-        $this->db =& SB_Database::staticInstance();
-        $this->um =& SB_UserManager::staticInstance();
+        $this->db = & SB_Database::staticInstance();
+        $this->um = & SB_UserManager::staticInstance();
     }
 
-    static function & staticInstance()
+    public static function & staticInstance()
     {
         static $token;
 
-        if (!$token)
-        {
+        if (!$token) {
             $token = new SB_Token();
         }
 
         return $token;
     }
 
-    function createVerifyToken($uid)
+    public function createVerifyToken($uid)
     {
-        return $this->createToken('verify', $uid, 60*60*24*3);
+        return $this->createToken('verify', $uid, 60 * 60 * 24 * 3);
     }
 
-    function createResetToken($uid)
+    public function createResetToken($uid)
     {
-        return $this->createToken('reset', $uid, 60*60*24);
+        return $this->createToken('reset', $uid, 60 * 60 * 24);
     }
 
-    function createToken($type, $uid, $expires)
+    public function createToken($type, $uid, $expires)
     {
         $user = $this->um->getUser($uid);
         $token = $this->generateTokenCode();
@@ -67,19 +67,18 @@ class SB_Token extends SB_ErrorHandler
         $this->db->delete('sitebar_token', array( 'uid' => $uid ));
 
         // Create the token of the desired type
-        $this->db->insert('sitebar_token', array
-        (
+        $this->db->insert('sitebar_token', array(
             'uid' => $uid,
             'type' => $type,
-            'issued' => array('now'=>null),
-            'expires' => time()+$expires,
+            'issued' => array('now' => null),
+            'expires' => time() + $expires,
             'token' => $token,
         ));
 
-        return SB_Page::absBaseUrl().'token.php?'.$uid.'='.$token;
+        return SB_Page::absBaseUrl() . 'token.php?' . $uid . '=' . $token;
     }
 
-    function generateTokenCode()
+    public function generateTokenCode()
     {
         $size = 8;
 
@@ -88,21 +87,18 @@ class SB_Token extends SB_ErrorHandler
         # themselves.
         $tkchars = '-_@$^*';
 
-        for ($i=0; $i<=9; $i++)
-        {
+        for ($i = 0; $i <= 9; $i++) {
             $tkchars .= $i;
         }
-        for ($i=ord('A'); $i<=ord('Z'); $i++)
-        {
-            $tkchars .= chr($i).strtolower(chr($i));
+        for ($i = ord('A'); $i <= ord('Z'); $i++) {
+            $tkchars .= chr($i) . strtolower(chr($i));
         }
 
         $token = "";
 
-        $tkcharslen = strlen($tkchars)-1;
-        for ($i=0 ; $i<$size ; $i++ )
-        {
-            $token .= $tkchars[rand(0,$tkcharslen)];
+        $tkcharslen = strlen($tkchars) - 1;
+        for ($i = 0; $i < $size; $i++) {
+            $token .= $tkchars[rand(0, $tkcharslen)];
         }
         return $token;
     }
@@ -110,11 +106,10 @@ class SB_Token extends SB_ErrorHandler
     /**
     * If the token is invalid, then all tokens for the given username will be invalidated.
     */
-    function validate($uid, $token, $redirect=false)
+    public function validate($uid, $token, $redirect = false)
     {
         // Select the right token
-        $rset = $this->db->select(null, 'sitebar_token', array
-        (
+        $rset = $this->db->select(null, 'sitebar_token', array(
             'uid' => $uid,
             '^1' => 'AND',
             'token' => $token,
@@ -122,58 +117,52 @@ class SB_Token extends SB_ErrorHandler
         ));
         $tokenRec = $this->db->fetchRecord($rset);
 
-        if ($tokenRec)
-        {
+        if ($tokenRec) {
             $user = $this->um->getUser($uid);
 
-            switch ($tokenRec['type'])
-            {
-            case 'verify':
+            switch ($tokenRec['type']) {
+                case 'verify':
+                    // Delete all existing tokens for this user now
+                    $this->invalidateTokens($uid);
 
-                // Delete all existing tokens for this user now
-                $this->invalidateTokens($uid);
+                    $this->db->update('sitebar_user', array('verified' => 1), array('uid' => $user['uid']));
 
-                $this->db->update('sitebar_user', array('verified'=> 1), array('uid'=>$user['uid']));
+                    if ($this->um->getParam('config', 'users_must_verify_email')) {
+                        $paraName = 'usermanager::signup_info_verified';
+                        $paraAtt = array($user['username'],SB_Page::absBaseUrl());
 
-                if ($this->um->getParam('config', 'users_must_verify_email'))
-                {
-                    $paraName = 'usermanager::signup_info_verified';
-                    $paraAtt = array($user['username'],SB_Page::absBaseUrl());
+                        if ($this->um->getParam('config', 'users_must_be_approved') && !$user['approved']) {
+                            $paraName = 'usermanager::signup_approval_verified';
+                            $paraAtt[] = $this->um->getApproveUserUrl($user['username']);
+                            $paraAtt[] = $this->um->getRejectUserUrl($user['username']);
+                            $paraAtt[] = $this->um->getPendingUsersUrl();
+                        }
 
-                    if ($this->um->getParam('config', 'users_must_be_approved') && !$user['approved'])
-                    {
-                        $paraName = 'usermanager::signup_approval_verified';
-                        $paraAtt[] = $this->um->getApproveUserUrl($user['username']);
-                        $paraAtt[] = $this->um->getRejectUserUrl($user['username']);
-                        $paraAtt[] = $this->um->getPendingUsersUrl();
+                        $this->um->mailToAdmins(
+                            'SiteBar: New SiteBar User Verified E-mail',
+                            $paraName,
+                            $paraAtt
+                        );
                     }
 
-                    $this->um->mailToAdmins(
-                        'SiteBar: New SiteBar User Verified E-mail',
-                        $paraName, $paraAtt);
-                }
+                    if ($redirect) {
+                        // No &amp; - it does not go to HTML, it is HTTP redirect
+                        SB_redirect('command.php?command=Email+Verified&do=yes&uid=' . $uid);
+                    }
+                    break;
 
-                if ($redirect)
-                {
-                    // No &amp; - it does not go to HTML, it is HTTP redirect
-                    SB_redirect('command.php?command=Email+Verified&do=yes&uid='.$uid);
-                }
-                break;
-
-            case 'reset':
-                if ($redirect)
-                {
-                    // No &amp; - it does not go to HTML, it is HTTP redirect
-                    SB_redirect('command.php?command=New+Password&uid='.$uid.'&token='.$token);
-                }
-                break;
+                case 'reset':
+                    if ($redirect) {
+                        // No &amp; - it does not go to HTML, it is HTTP redirect
+                        SB_redirect('command.php?command=New+Password&uid=' . $uid . '&token=' . $token);
+                    }
+                    break;
             }
 
             return true;
         }
 
-        if ($redirect)
-        {
+        if ($redirect) {
             // No &amp; - it does not go to HTML, it is HTTP redirect
             SB_redirect('command.php?command=Invalid+Token&do=yes');
         }
@@ -181,10 +170,9 @@ class SB_Token extends SB_ErrorHandler
         return false;
     }
 
-    function invalidateTokens($uid)
+    public function invalidateTokens($uid)
     {
         // Delete all existing tokens for this user now
         $this->db->delete('sitebar_token', array( 'uid' => $uid ));
     }
 }
-?>

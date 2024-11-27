@@ -166,5 +166,3 @@ Os seguintes browsers permitem apenas acesso de leitura:
     <li>Netscape Navigator 4.78
 </ul>
 _P;
-
-?>

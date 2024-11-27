@@ -378,5 +378,3 @@ The export and import can be done using <a href='http://www.phpmyadmin.net/'>php
 The table sitebar_favicon (to 3.2.6) or sitebar_cache (starting with 3.3) does not need
 to be transferred, its content will be rebuilt.
 _H;
-
-?>

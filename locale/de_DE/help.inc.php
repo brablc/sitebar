@@ -420,5 +420,3 @@ Um eine existierende SiteBar Installation auf einen anderen Server umzuziehen, i
 Der Export und Import kann mit <a href='http://www.phpmyadmin.net/'>phpMyAdmin</a> durchgeführt werden.
 Die Tabelle sitebar_favicon (bis 3.2.6) oder sitebar_cache (ab 3.3) muss nicht übertragen werden. Ihr Inhalt wird erneut erstellt werden.
 _P;
-
-?>

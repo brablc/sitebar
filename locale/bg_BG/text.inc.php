@@ -147,5 +147,3 @@ _P;
 $text['Skin designed by'] = <<<_P
 Дизайн
 _P;
-
-?>

@@ -499,5 +499,3 @@ $para['hook::statistics'] = <<<_P
 SQL 問い合わせ {queries}。
 DB/合計時間 {time_db}/{time_total} 秒 ({time_pct}%)。
 _P;
-
-?>

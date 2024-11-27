@@ -1,13 +1,9 @@
 <?php
 
-$info = array
-(
+$info = array(
     'language' => 'Česky',
-    'authors' => array
-    (
-        'Ondřej Brablc'=> 'http://brablc.com/',
-        'Patrik Zima'=> null,
+    'authors' => array(
+        'Ondřej Brablc' => 'http://brablc.com/',
+        'Patrik Zima' => null,
     ),
 );
-
-?>

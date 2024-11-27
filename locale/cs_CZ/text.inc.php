@@ -1,7 +1,6 @@
 <?php
 
-$text = array
-(
+$text = array(
 'The Bookmark Server for Personal and Team Use' => 'Server záložek pro jednotlivce a pracovní skupiny',
 'SiteBar Homepage' => 'Domovská stránka SiteBar',
 'Your Language' => 'Česky',
@@ -511,5 +510,3 @@ $text = array
 'Skin created by' => 'Autor vzhledu',
 'Skin designed by' => 'Autor návrhu vzhledu',
 );
-
-?>

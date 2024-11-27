@@ -94,15 +94,13 @@ var SB_gToolTipTimer = null;
 function SB_getCookie(name, defaultValue)
 {
     var index = document.cookie.indexOf(name + '=');
-    if (index == -1)
-    {
+    if (index == -1) {
         return defaultValue;
     }
     index = document.cookie.indexOf('=', index) + 1; // first character
     var endstr = document.cookie.indexOf(';', index);
 
-    if (endstr == -1)
-    {
+    if (endstr == -1) {
         endstr = document.cookie.length; // last character
     }
     return unescape(document.cookie.substr(index, endstr));
@@ -114,43 +112,51 @@ SB_gState = SB_getCookie('SB3NODES','!');
 
 function SB_buttonDown(btn, force)
 {
-    if (btn == document.getElementById('btnFilter') && SB_gFilterActive && !force) return;
+    if (btn == document.getElementById('btnFilter') && SB_gFilterActive && !force) {
+        return;
+    }
     btn.className = 'pressed';
 }
 
 function SB_buttonUp(btn, force)
 {
-    if (btn == document.getElementById('btnFilter') && SB_gFilterActive && !force) return;
+    if (btn == document.getElementById('btnFilter') && SB_gFilterActive && !force) {
+        return;
+    }
     btn.className = 'raised';
 }
 
 function SB_buttonOver(btn, force)
 {
-    if (btn == document.getElementById('btnFilter') && SB_gFilterActive && !force) return;
+    if (btn == document.getElementById('btnFilter') && SB_gFilterActive && !force) {
+        return;
+    }
     btn.className = 'raised';
 }
 
 function SB_buttonOut(btn, force)
 {
-    if (btn == document.getElementById('btnFilter') && SB_gFilterActive && !force) return;
+    if (btn == document.getElementById('btnFilter') && SB_gFilterActive && !force) {
+        return;
+    }
     btn.className = '';
 }
 
 function SB_storeSearch()
 {
     var searchText = document.getElementById('fldSearch').value;
-    document.cookie = 'SB3SEARCH='+encodeURIComponent(searchText)+";SameSite=None;Secure";
+    document.cookie = 'SB3SEARCH=' + encodeURIComponent(searchText) + ";SameSite=None;Secure";
 }
 
 function SB_storePosition()
 {
-    document.cookie = 'SB3TOP='+SB_getTop()+";SameSite=None;Secure";
-    document.cookie = 'SB3LEFT='+SB_getLeft()+";SameSite=None;Secure";
+    document.cookie = 'SB3TOP=' + SB_getTop() + ";SameSite=None;Secure";
+    document.cookie = 'SB3LEFT=' + SB_getLeft() + ";SameSite=None;Secure";
 }
 
 function SB_hasClass(obj, className)
 {
-    return obj.className.indexOf(className)!=-1;
+    return obj.className.indexOf(className) != -1;
 }
 
 /**
@@ -160,21 +166,16 @@ function SB_class(obj, className, add)
 {
     var startPos = obj.className.indexOf(className);
 
-    if (add)
-    {
+    if (add) {
         // We already have the class
-        if (startPos != -1)
-        {
+        if (startPos != -1) {
             return;
         }
 
         obj.className += ' ' + className;
-    }
-    else
-    {
+    } else {
         // We do not have it
-        if (startPos == -1)
-        {
+        if (startPos == -1) {
             return;
         }
 
@@ -182,9 +183,8 @@ function SB_class(obj, className, add)
 
         obj.className = obj.className.substr(0,startPos);
 
-        if (obj.className.length>startPos+className.length)
-        {
-            obj.className+=oldClass.substr(startPos+className.length);
+        if (obj.className.length > startPos + className.length) {
+            obj.className += oldClass.substr(startPos + className.length);
         }
     }
 }
@@ -196,8 +196,7 @@ function SB_highlight(linkObj, highlight)
 {
     var className = 'highlight';
 
-    if (!SB_hasClass(linkObj, className) && highlight)
-    {
+    if (!SB_hasClass(linkObj, className) && highlight) {
         SB_gHighlighted[SB_gHighlighted.length] = linkObj;
     }
 
@@ -211,14 +210,14 @@ function SB_filter(icon)
 {
     var btnFilter = document.getElementById('btnFilter');
 
-    if (SB_gFilterActive)
-    {
+    if (SB_gFilterActive) {
         SB_unfilter();
-        if (icon) return;
+        if (icon) {
+            return;
+        }
     }
 
-    for (i=0; i<SB_gHighlighted.length; i++)
-    {
+    for (i = 0; i < SB_gHighlighted.length; i++) {
         SB_highlight(SB_gHighlighted[i], false);
     }
 
@@ -226,7 +225,9 @@ function SB_filter(icon)
 
     var fld  = document.getElementById('fldSearch');
     var text = fld.value;
-    if (text.length==0) return;
+    if (text.length == 0) {
+        return;
+    }
 
     SB_gFilterActive = true;
     SB_buttonDown(btnFilter, true);
@@ -236,16 +237,14 @@ function SB_filter(icon)
 
     // Check search pattern
     var reST = new RegExp("^(url|desc|name|all):(.*)$");
-    if (text.match(reST))
-    {
+    if (text.match(reST)) {
         type = RegExp.$1;
 
         // If we have pattern then use it
         if (type == 'url'
         ||  type == 'desc'
         ||  type == 'name'
-        ||  type == 'all')
-        {
+        ||  type == 'all') {
             text = RegExp.$2;
         }
     }
@@ -253,19 +252,14 @@ function SB_filter(icon)
     var re = new RegExp(text,"i")
 
     var divs = document.getElementsByTagName('div');
-    for (i = 0; i<divs.length; i++)
-    {
-        if (divs[i].className == 'node')
-        {
-            nodeAnchor = document.getElementById('a'+divs[i].id);
-            if (SB_getLinkName(nodeAnchor).search(re)!=-1)
-            {
+    for (i = 0; i < divs.length; i++) {
+        if (divs[i].className == 'node') {
+            nodeAnchor = document.getElementById('a' + divs[i].id);
+            if (SB_getLinkName(nodeAnchor).search(re) != -1) {
                 SB_highlight(nodeAnchor, true);
                 divs[i].style.display = 'block';
                 SB_openParents(divs[i].parentNode.parentNode);
-            }
-            else
-            {
+            } else {
                 divs[i].style.display = 'none';
                 SB_gHidden[SB_gHidden.length] = divs[i];
             }
@@ -273,50 +267,49 @@ function SB_filter(icon)
     }
 
     var links = document.getElementsByTagName('a');
-    for (i = 0; i<links.length; i++)
-    {
+    for (i = 0; i < links.length; i++) {
         var name = SB_getLinkName(links[i]);
         var url = links[i].getAttribute('href');
         var desc = links[i].getAttribute('x_title');
-        if (!desc)
-        {
+        if (!desc) {
             links[i].getAttribute('title');
         }
 
         var parentDIV = links[i].parentNode;
 
         // Ignore everything but links in tree
-        if (parentDIV.className.indexOf('link')==-1) continue;
+        if (parentDIV.className.indexOf('link') == -1) {
+            continue;
+        }
 
         var subject = '';
 
-        if (type=='url'  || type=='all') subject += url;
-        if (type=='name' || type=='all') subject += name;
-        if (type=='desc' || type=='all') subject += desc;
+        if (type == 'url'  || type == 'all') {
+            subject += url;
+        }
+        if (type == 'name' || type == 'all') {
+            subject += name;
+        }
+        if (type == 'desc' || type == 'all') {
+            subject += desc;
+        }
 
-        if (subject.search(re)!=-1)
-        {
+        if (subject.search(re) != -1) {
             SB_openParents(parentDIV.parentNode.parentNode);
             SB_highlight(links[i], true);
         }
     }
 
-    for (i = 0; i<divs.length; i++)
-    {
-        if (divs[i].className == 'node')
-        {
-            nodeAnchor = document.getElementById('a'+divs[i].id);
+    for (i = 0; i < divs.length; i++) {
+        if (divs[i].className == 'node') {
+            nodeAnchor = document.getElementById('a' + divs[i].id);
             // Folder is not matching
-            if (SB_getLinkName(nodeAnchor).search(re)==-1)
-            {
-                var children = document.getElementById('c'+divs[i].id).childNodes;
+            if (SB_getLinkName(nodeAnchor).search(re) == -1) {
+                var children = document.getElementById('c' + divs[i].id).childNodes;
 
-                for (var j = 0; j < children.length; j++)
-                {
-                    if (children[j].className == 'link')
-                    {
-                        if (SB_hasClass(document.getElementById('a'+children[j].id), 'highlight'))
-                        {
+                for (var j = 0; j < children.length; j++) {
+                    if (children[j].className == 'link') {
+                        if (SB_hasClass(document.getElementById('a' + children[j].id), 'highlight')) {
                             continue;
                         }
                         children[j].style.display = 'none';
@@ -333,11 +326,12 @@ function SB_filter(icon)
 
 function SB_unfilter()
 {
-    if (!SB_gFilterActive) return;
+    if (!SB_gFilterActive) {
+        return;
+    }
     SB_gFilterActive = false;
 
-    for (var i=0; i<SB_gHidden.length; i++)
-    {
+    for (var i = 0; i < SB_gHidden.length; i++) {
         SB_gHidden[i].style.display = 'block';
     }
 
@@ -352,17 +346,15 @@ function SB_unfilter()
  */
 function SB_openParents(parentNode)
 {
-    if (SB_gPrevParent == parentNode)
-    {
+    if (SB_gPrevParent == parentNode) {
         return;
     }
 
     SB_gPrevParent = parentNode;
 
     var obj = parentNode;
-    while (obj && obj.getAttribute('x_level')!=null
-        && obj.getAttribute('x_level')!='') // For Opera
-    {
+    while (obj && obj.getAttribute('x_level') != null
+        && obj.getAttribute('x_level') != '') { // For Opera
         obj.style.display = 'block';
         SB_node(false, obj, true);
         obj = obj.parentNode.parentNode;
@@ -374,25 +366,21 @@ function SB_openParents(parentNode)
  */
 function SB_getLinkName(linkTag)
 {
-    if (linkTag.innerHTML.match(/.*>(.*)/))
-    {
+    if (linkTag.innerHTML.match(/.*>(.*)/)) {
         return RegExp.$1;
-    }
-    else
-    {
+    } else {
         return linkTag.innerHTML;
     }
 }
 
 function SB_defaultSearch(target, tool)
 {
-    if (tool == 'filter')
-    {
+    if (tool == 'filter') {
         SB_filter();
         return;
     }
     SB_storeSearch();
-    window.open(SB_getAbsBaseUrl() + 'search.php' + (tool=='web'?'?web=1':''), target);
+    window.open(SB_getAbsBaseUrl() + 'search.php' + (tool == 'web' ? '?web=1' : ''), target);
 }
 
 /**
@@ -403,23 +391,27 @@ function SB_reloadPageWorker(cancelled, all)
     var url = location.href.replace(/\?.*/,'') + '?';
     var sParam = location.search;
 
-    if (sParam && sParam.length && sParam.split)
-    {
+    if (sParam && sParam.length && sParam.split) {
         var aParam = sParam.substr(1).split('&');
 
-        for (var i=0; i<aParam.length; i++)
-        {
+        for (var i = 0; i < aParam.length; i++) {
             var aPair = aParam[i].split('=');
-            if (aPair[0] == 'reload') continue;
-            if (aPair[0] == 'command') continue;
-            if (aPair[0] == 'uniq') continue;
+            if (aPair[0] == 'reload') {
+                continue;
+            }
+            if (aPair[0] == 'command') {
+                continue;
+            }
+            if (aPair[0] == 'uniq') {
+                continue;
+            }
 
             url += aParam[i] + '&';
         }
     }
 
-    location.href = url + 'reload=' + (all?'all':'yes') +
-              (!cancelled?'&uniq=' + (new Date()).valueOf():'');
+    location.href = url + 'reload=' + (all ? 'all' : 'yes') +
+              (!cancelled ? '&uniq=' + (new Date()).valueOf() : '');
 }
 
 function SB_reloadPage()
@@ -430,11 +422,11 @@ function SB_reloadPage()
 
 function SB_reloadPageWithReferer(ref)
 {
-  if (ref && ref.length) {
-    location.href = ref;
-  } else {
-    SB_reloadPage();
-  }
+    if (ref && ref.length) {
+        location.href = ref;
+    } else {
+        SB_reloadPage();
+    }
 }
 
 /**
@@ -451,8 +443,7 @@ function SB_reloadAll()
  */
 function SB_collapseAll()
 {
-    if (SB_gState.length==0 || SB_gState=='!')
-    {
+    if (SB_gState.length == 0 || SB_gState == '!') {
         SB_expandAll();
         return;
     }
@@ -461,13 +452,11 @@ function SB_collapseAll()
     var level;
     var div;
 
-    for (var i=0; i<divs.length; i++)
-    {
+    for (var i = 0; i < divs.length; i++) {
         div = divs[i];
         level = div.getAttribute('x_level');
 
-        if (level!=null && level!='') // '' for Opera
-        {
+        if (level != null && level != '') { // '' for Opera
             SB_node(null, div, false, true);
         }
     }
@@ -486,13 +475,11 @@ function SB_expandAll()
     var level;
     var div;
 
-    for (var i=0; i<divs.length; i++)
-    {
+    for (var i = 0; i < divs.length; i++) {
         div = divs[i];
         level = div.getAttribute('x_level');
 
-        if (level!=null && level!='') // '' for Opera
-        {
+        if (level != null && level != '') { // '' for Opera
             SB_node(null, div, true);
         }
     }
@@ -505,24 +492,18 @@ function SB_changeCSS(myclass,element,value)
 {
     var CSSRules;
 
-    if (document.all)
-    {
+    if (document.all) {
         CSSRules = 'rules'
-    }
-    else if (document.getElementById)
-    {
+    } else if (document.getElementById) {
         CSSRules = 'cssRules'
     }
 
-    for (var i = 0; i < document.styleSheets[0][CSSRules].length; i++)
-    {
+    for (var i = 0; i < document.styleSheets[0][CSSRules].length; i++) {
         var rule = document.styleSheets[0][CSSRules][i];
 
-        if (rule.selectorText && rule.selectorText.toUpperCase() == myclass.toUpperCase())
-        {
+        if (rule.selectorText && rule.selectorText.toUpperCase() == myclass.toUpperCase()) {
             var oldValue = rule.style[element];
-            if (value)
-            {
+            if (value) {
                 rule.style[element] = value;
             }
             return oldValue;
@@ -539,8 +520,7 @@ function SB_changeStyleForDragging(dragging)
 {
     var style = '.siteBar div.tree a:hover';
 
-    if (dragging)
-    {
+    if (dragging) {
         // Get colors and change cursor for dragging
         var bg = SB_changeCSS(style + ' .selected', 'background');
         var fg = SB_changeCSS(style + ' .selected', 'color');
@@ -550,9 +530,7 @@ function SB_changeStyleForDragging(dragging)
         SB_gDraggingStyleBG = SB_changeCSS(style, 'background', bg);
         SB_gDraggingStyleFG = SB_changeCSS(style, 'color', fg);
         SB_gDraggingStyleCR = SB_changeCSS(style, 'cursor', cr);
-    }
-    else
-    {
+    } else {
         SB_changeCSS(style, 'background', SB_gDraggingStyleBG);
         SB_changeCSS(style, 'color', SB_gDraggingStyleFG);
         SB_changeCSS(style, 'cursor', SB_gDraggingStyleCR);
@@ -561,8 +539,7 @@ function SB_changeStyleForDragging(dragging)
 
 function SB_nodeDrag(event, id)
 {
-    if (event.button == 2 || SB_gDraggedID != null)
-    {
+    if (event.button == 2 || SB_gDraggedID != null) {
         return false;
     }
 
@@ -581,8 +558,7 @@ function SB_go(alink,id)
 
 function SB_linkDrag(event, id)
 {
-    if (event.button == 2 || SB_gDraggedID != null)
-    {
+    if (event.button == 2 || SB_gDraggedID != null) {
         return false;
     }
 
@@ -594,8 +570,7 @@ function SB_linkDrag(event, id)
 
 function SB_cancelDragging()
 {
-    if (SB_gDraggedID!=null)
-    {
+    if (SB_gDraggedID != null) {
         SB_changeStyleForDragging(false);
         SB_gDraggedID = null;
     }
@@ -604,8 +579,7 @@ function SB_cancelDragging()
 function SB_getJSData(label)
 {
     var obj = document.getElementById(label);
-    if (!obj)
-    {
+    if (!obj) {
         alert('Javascript data for ' + label + ' not found!');
         return null;
     }
@@ -614,13 +588,11 @@ function SB_getJSData(label)
 
 function SB_nodeDrop(event, obj, id, linkID)
 {
-    if (id == SB_gDraggedID || (!SB_gSourceTypeIsNode && linkID && linkID == SB_gDraggedID))
-    {
+    if (id == SB_gDraggedID || (!SB_gSourceTypeIsNode && linkID && linkID == SB_gDraggedID)) {
         return true;
     }
 
-    if (event.button == 2 || SB_gDraggedID == null)
-    {
+    if (event.button == 2 || SB_gDraggedID == null) {
         return false;
     }
 
@@ -637,13 +609,14 @@ function SBCFF_dragOver(event)
     // event.preventDefault() will cause a drop accept from drags that got initiated from other parts of Firefox
     var types = event.dataTransfer.types;
     var supportedTypes = ["application/x-bookmark", "application/x-moz-url", "text/uri-list", "text/plain"];
-    
+
     for (var i = 0; i < supportedTypes.length; i++) {
-    
-        if ( !(types.contains(supportedTypes[i])) ) continue;
+        if ( !(types.contains(supportedTypes[i])) ) {
+            continue;
+        }
         event.preventDefault();
         break;
-    }    
+    }
 }
 
 
@@ -653,13 +626,14 @@ function SBCFF_nodeDrop(event, obj, id, linkID)
     // the existing ones, it is up to Ondrej what happens to them.
     var types = event.dataTransfer.types;
     var supportedTypes = ["application/x-bookmark", "application/x-moz-url", "text/uri-list", "text/plain"];
-    
-    types = supportedTypes.filter(function (value) { types.contains(value); } );
+
+    types = supportedTypes.filter(function (value) {
+        types.contains(value); });
     if (types.length) {
         var url = event.dataTransfer.getData(types[0]);
         SB_commandWindow('Add Link' + '&url=' + url, id);
     }
-    
+
     event.preventDefault();
 }
 
@@ -673,8 +647,7 @@ function SBCFF_nodeDrop(event, obj, id, linkID)
 
 function SB_imgPath(basename)
 {
-    if (SB_gSkinDir==null)
-    {
+    if (SB_gSkinDir == null) {
         SB_gSkinDir = SB_getJSData('sb_skinDir');
     }
     return SB_gSkinDir + basename + '.png';
@@ -682,8 +655,7 @@ function SB_imgPath(basename)
 
 function SB_preloadImages()
 {
-    var images = Array
-    (
+    var images = Array(
         'collapse',
         'connect',
         'empty',
@@ -710,8 +682,7 @@ function SB_preloadImages()
     /**
      * This is called when the script is loaded automatically.
      */
-    for (var i=0; i<images.length; i++)
-    {
+    for (var i = 0; i < images.length; i++) {
         // Save references in an array, to avoid their releasing
         var path = SB_imgPath(images[i]);
         images[i] = new Image(); // We change the type
@@ -725,22 +696,20 @@ function SB_preloadImages()
  */
 function SB_WFI(imgObj)
 {
-    imgObj.src=SB_imgPath('link_wrong_favicon');
+    imgObj.src = SB_imgPath('link_wrong_favicon');
 }
 
 /*** Commander functions ******************************************************/
 
 function SB_initCommander()
 {
-    document.cookie = 'SB3COOKIE=1'+";SameSite=None;Secure";
+    document.cookie = 'SB3COOKIE=1' + ";SameSite=None;Secure";
 
-    if (document.getElementById('focused'))
-    {
+    if (document.getElementById('focused')) {
         setTimeout('document.getElementById("focused").focus();',10);
     }
 
-    if (window && !window.closed)
-    {
+    if (window && !window.closed) {
         window.focus();
     }
 }
@@ -756,8 +725,7 @@ function SB_isOpera()
 function SB_initPage(inPlaceCommands)
 {
     SB_gInPlaceCommands = inPlaceCommands;
-    if (!SB_isOpera())
-    {
+    if (!SB_isOpera()) {
         setTimeout('SB_restorePosition();',10);
     }
 
@@ -774,21 +742,18 @@ function SB_onScroll()
 {
     var toolbar = document.getElementById('toolbar');
 
-    if (toolbar)
-    {
+    if (toolbar) {
         var logo = document.getElementById('logo');
         var toolbarPlace = document.getElementById('toolbarPlace');
 
         var top = SB_getTop();
 
-        if (logo && logo.offsetTop+logo.offsetHeight>top)
-        {
-            top = logo.offsetTop+logo.offsetHeight;
+        if (logo && logo.offsetTop + logo.offsetHeight > top) {
+            top = logo.offsetTop + logo.offsetHeight;
         }
 
-        if (toolbar.offsetTop != top)
-        {
-            toolbar.style.top = top+'px';
+        if (toolbar.offsetTop != top) {
+            toolbar.style.top = top + 'px';
             toolbar.style.left = '1px';
             toolbar.style.position = 'absolute';
             toolbarPlace.style.display = 'block';
@@ -798,8 +763,7 @@ function SB_onScroll()
 
 function SB_getAbsBaseUrl()
 {
-    if (SB_gAbsBaseUrl == null)
-    {
+    if (SB_gAbsBaseUrl == null) {
         SB_gAbsBaseUrl = SB_getJSData('sb_absBaseUrl');
     }
 
@@ -808,8 +772,7 @@ function SB_getAbsBaseUrl()
 
 function SB_onLoad()
 {
-    if (SB_isOpera())
-    {
+    if (SB_isOpera()) {
         SB_restorePosition();
     }
 
@@ -821,8 +784,7 @@ function SB_restorePosition()
     var iTop = parseInt(SB_getCookie('SB3TOP',-1),10);
     var iLeft = parseInt(SB_getCookie('SB3LEFT',-1),10);
 
-    if (iTop!=-1)
-    {
+    if (iTop != -1) {
         window.scroll(iLeft,iTop);
     }
 }
@@ -839,10 +801,14 @@ function SB_stopIt(event)
 {
     // If event not filled then user initiated action which should
     // not be stopped.
-    if (!event) return false;
+    if (!event) {
+        return false;
+    }
 
     SB_gIgnore++;
-    if (SB_gIgnore>1) return true;
+    if (SB_gIgnore > 1) {
+        return true;
+    }
 
     setTimeout('SB_gIgnore=0;',10);
     return false;
@@ -853,7 +819,7 @@ function SB_stopIt(event)
  */
 function SB_renewIt(event)
 {
-    SB_gIgnore=0;
+    SB_gIgnore = 0;
 }
 
 /**
@@ -862,7 +828,7 @@ function SB_renewIt(event)
  */
 function SB_hasTargetWindow(name)
 {
-    return name=='_content' && window.sidebar && window.sidebar.addPanel;
+    return name == '_content' && window.sidebar && window.sidebar.addPanel;
 }
 
 /**
@@ -870,7 +836,7 @@ function SB_hasTargetWindow(name)
  */
 function SB_saveState(id, state)
 {
-    SB_gState = (state?'Y':'N')+id.substr(1)+':'+SB_gState;
+    SB_gState = (state ? 'Y' : 'N') + id.substr(1) + ':' + SB_gState;
     SB_saveCookie(SB_gState);
 }
 
@@ -879,8 +845,8 @@ function SB_saveState(id, state)
  */
 function SB_saveCookie(value)
 {
-    var expires = new Date(new Date().getTime()+1000*60*60*24*7).toGMTString();
-    document.cookie = 'SB3NODES='+value+'; expires=' + expires+";SameSite=None;Secure";
+    var expires = new Date(new Date().getTime() + 1000 * 60 * 60 * 24 * 7).toGMTString();
+    document.cookie = 'SB3NODES=' + value + '; expires=' + expires + ";SameSite=None;Secure";
 }
 
 /**
@@ -888,26 +854,22 @@ function SB_saveCookie(value)
  */
 function SB_toggleDiv( div, show )
 {
-    if (show!=null)
-    {
-        div.style.display = (show?'block':'none');
+    if (show != null) {
+        div.style.display = (show ? 'block' : 'none');
         return show;
     }
 
-    if (div.style.display=='')
-    {
-        if (SB_hasClass(div,'Expanded'))
-        {
+    if (div.style.display == '') {
+        if (SB_hasClass(div,'Expanded')) {
             div.style.display = 'block';
         }
-        if (SB_hasClass(div,'Collapsed'))
-        {
+        if (SB_hasClass(div,'Collapsed')) {
             div.style.display = 'none';
         }
     }
 
-    div.style.display = (div.style.display=='block'?'none':'block');
-    return (div.style.display=='block');
+    div.style.display = (div.style.display == 'block' ? 'none' : 'block');
+    return (div.style.display == 'block');
 }
 
 /**
@@ -916,15 +878,15 @@ function SB_toggleDiv( div, show )
  */
 function SB_node(event, obj, show, noSaveState)
 {
-    if (SB_stopIt(event)) return false;
+    if (SB_stopIt(event)) {
+        return false;
+    }
 
     SB_menuOff();
     SB_cancelDragging();
 
-    if (event)
-    {
-        if (event.ctrlKey)
-        {
+    if (event) {
+        if (event.ctrlKey) {
             SB_renewIt(event);
             SB_menuOn(event, obj);
             return false;
@@ -935,25 +897,21 @@ function SB_node(event, obj, show, noSaveState)
     var nimg = document.getElementById('in' + obj.id);
     var children = document.getElementById('c' + obj.id);
 
-    var root = obj.getAttribute('x_level')=='1';
+    var root = obj.getAttribute('x_level') == '1';
     var opened = SB_toggleDiv(children, show);
 
-    if (!noSaveState)
-    {
+    if (!noSaveState) {
         SB_saveState(obj.id, opened);
     }
 
-    if (root)
-    {
-        var deleted = obj.getAttribute('x_acl').indexOf('*')==-1;
+    if (root) {
+        var deleted = obj.getAttribute('x_acl').indexOf('*') == -1;
         var links = children.getElementsByTagName('a');
-        nimg.src = SB_imgPath( (opened||!links.length?'root'+(deleted?'_deleted':''):'root_plus'));
-    }
-    else if (simg)
-    {
-        var last = (simg.src.indexOf("_last.png")>-1);
-        simg.src = SB_imgPath( (opened?'minus':'plus') + (last?'_last':""));
-        nimg.src = SB_imgPath( 'node' + (opened?'_open':""));
+        nimg.src = SB_imgPath((opened || !links.length ? 'root' + (deleted ? '_deleted' : '') : 'root_plus'));
+    } else if (simg) {
+        var last = (simg.src.indexOf("_last.png") > -1);
+        simg.src = SB_imgPath((opened ? 'minus' : 'plus') + (last ? '_last' : ""));
+        nimg.src = SB_imgPath('node' + (opened ? '_open' : ""));
     }
 
 
@@ -964,19 +922,13 @@ function SB_xmlHttpGet()
 {
     var http = false;
 
-    if (window.ActiveXObject)
-    {
-        try
-        {
+    if (window.ActiveXObject) {
+        try {
             http = new ActiveXObject('Msxml2.XMLHTTP');
-        }
-        catch(e)
-        {
+        } catch (e) {
             http = new ActiveXObject('Microsoft.XMLHTTP');
         }
-    }
-    else
-    {
+    } else {
         http = new XMLHttpRequest();
     }
 
@@ -992,58 +944,49 @@ function SB_xmlHttpSend(http, url)
 {
     http.open('GET', url, true);
 
-    if (window.XMLHttpRequest)
-    {
-        http.send(null?null:'');
+    if (window.XMLHttpRequest) {
+        http.send(null ? null : '');
     }
     // branch for IE/Windows ActiveX version
-    else if (window.ActiveXObject)
-    {
+    else if (window.ActiveXObject) {
         http.send();
     }
 }
 
 function SB_nodeReload(event, obj)
 {
-    if (SB_node(event, obj))
-    {
+    if (SB_node(event, obj)) {
         var children = document.getElementById('c' + obj.id);
 
         // If we have opened it now, but there are no children
         if (children.style.display == 'block'
-        &&  children.className == 'childrenCollapsed')
-        {
+        &&  children.className == 'childrenCollapsed') {
             var http = SB_xmlHttpGet();
 
             // We have old browser
-            if (!http)
-            {
+            if (!http) {
                 SB_storePosition();
                 setTimeout('SB_reloadPageWorker();',10);
                 return;
             }
 
             var level = obj.getAttribute('x_level');
-            if (!level)
-            {
+            if (!level) {
                 level = 1;
             }
 
             children.className  = 'childrenExpanded';
             children.innerHTML  = '<div>';
 
-            for (var i=0; i<level; i++)
-            {
+            for (var i = 0; i < level; i++) {
                 children.innerHTML += '&nbsp;&nbsp;&nbsp;&nbsp;';
             }
 
             children.innerHTML += SB_getJSData('sb_label_loading') + '</div>';
 
             // Yes, this is an AJAX style of doing things
-            http.onreadystatechange = function()
-            {
-                if (SB_xmlHttpReady(http))
-                {
+            http.onreadystatechange = function () {
+                if (SB_xmlHttpReady(http)) {
                     var hdrIdx = http.responseText.indexOf("\r");
                     nid = http.responseText.substr(0,hdrIdx);
 
@@ -1068,11 +1011,11 @@ function SB_nodeReload(event, obj)
             }
 
             var acl = obj.getAttribute('x_acl');
-            var url = location.pathname + '?w=sitebar_ajax'+
-                           '&call=loadfolder'+
-                           '&nid='+obj.id.substr(1)+
-                           '&level='+level+
-                           '&acl='+acl +
+            var url = location.pathname + '?w=sitebar_ajax' +
+                           '&call=loadfolder' +
+                           '&nid=' + obj.id.substr(1) +
+                           '&level=' + level +
+                           '&acl=' + acl +
                            SB_appendPersistentParams();
 
             SB_xmlHttpSend(http, url);
@@ -1087,13 +1030,10 @@ function SB_lnk(event,obj)
 {
     SB_cancelDragging();
 
-    if (event.ctrlKey && SB_isOpera())
-    {
+    if (event.ctrlKey && SB_isOpera()) {
         SB_menuOn(event, obj);
         return false;
-    }
-    else
-    {
+    } else {
         SB_stopIt(event);
         return true;
     }
@@ -1107,38 +1047,29 @@ function SB_getCoordTop(event)
     var ycoord;
     SB_gCoordUnit = '';
 
-    if (!e)
-    {
+    if (!e) {
         e = window.event;
     }
 
-    if (!e || ( typeof( e.pageY ) != 'number' && typeof( e.clientY ) != 'number' ) )
-    {
+    if (!e || ( typeof( e.pageY ) != 'number' && typeof( e.clientY ) != 'number' ) ) {
         return[0];
     }
 
-    if (typeof( e.pageY ) == 'number' )
-    {
+    if (typeof( e.pageY ) == 'number' ) {
         SB_gCoordUnit = 'px';
         ycoord = e.pageY;
-    }
-    else
-    {
+    } else {
         ycoord = e.clientY;
-        if (!( ( window.navigator.userAgent.indexOf( 'Opera' ) + 1 ) || ( window.ScriptEngine && ScriptEngine().indexOf( 'InScript' ) + 1 ) || window.navigator.vendor == 'KDE' ) )
-        {
-            if (document.documentElement && document.documentElement.scrollTop)
-            {
+        if (!( ( window.navigator.userAgent.indexOf('Opera') + 1 ) || ( window.ScriptEngine && ScriptEngine().indexOf('InScript') + 1 ) || window.navigator.vendor == 'KDE' ) ) {
+            if (document.documentElement && document.documentElement.scrollTop) {
                 ycoord += document.documentElement.scrollTop;
-            }
-            else if (document.body && document.body.scrollTop)
-            {
+            } else if (document.body && document.body.scrollTop) {
                 ycoord += document.body.scrollTop;
             }
         }
     }
 
-    return ycoord-1;
+    return ycoord - 1;
 }
 
 function SB_getCoordLeft(event)
@@ -1147,45 +1078,35 @@ function SB_getCoordLeft(event)
     var xcoord;
     SB_gCoordUnit = '';
 
-    if (!e )
-    {
+    if (!e ) {
         e = window.event;
     }
 
-    if (!e || ( typeof( e.pageX ) != 'number' && typeof( e.clientX ) != 'number' ) )
-    {
+    if (!e || ( typeof( e.pageX ) != 'number' && typeof( e.clientX ) != 'number' ) ) {
         return[0];
     }
 
-    if (typeof( e.pageX ) == 'number' )
-    {
+    if (typeof( e.pageX ) == 'number' ) {
         SB_gCoordUnit = 'px';
         xcoord = e.pageX;
-    }
-    else
-    {
+    } else {
         xcoord = e.clientX;
-        if (!( ( window.navigator.userAgent.indexOf( 'Opera' ) + 1 ) || ( window.ScriptEngine && ScriptEngine().indexOf( 'InScript' ) + 1 ) || window.navigator.vendor == 'KDE' ) )
-        {
-            if (document.documentElement && document.documentElement.scrollLeft)
-            {
+        if (!( ( window.navigator.userAgent.indexOf('Opera') + 1 ) || ( window.ScriptEngine && ScriptEngine().indexOf('InScript') + 1 ) || window.navigator.vendor == 'KDE' ) ) {
+            if (document.documentElement && document.documentElement.scrollLeft) {
                 xcoord += document.documentElement.scrollLeft;
-            }
-            else if (document.body && document.body.scrollLeft)
-            {
+            } else if (document.body && document.body.scrollLeft) {
                 xcoord += document.body.scrollLeft;
             }
         }
     }
 
-    return xcoord-1;
+    return xcoord - 1;
 }
 
 function SB_getTop()
 {
     var topOffset = document.documentElement.scrollTop;
-    if (!topOffset)
-    {
+    if (!topOffset) {
         topOffset = document.body.scrollTop;
     }
     return topOffset;
@@ -1194,8 +1115,7 @@ function SB_getTop()
 function SB_getLeft()
 {
     var leftOffset = document.documentElement.scrollLeft;
-    if (!leftOffset)
-    {
+    if (!leftOffset) {
         leftOffset = document.body.scrollLeft;
     }
     return leftOffset;
@@ -1207,24 +1127,24 @@ function SB_getLeft()
 function SB_menuOn(event, obj)
 {
     var e = event;
-    if (!e)
-    {
+    if (!e) {
         e = window.event;
     }
 
-    if (SB_stopIt(e)) return false;
+    if (SB_stopIt(e)) {
+        return false;
+    }
     SB_cancelDragging();
     SB_stopMenuHider();
 
     // Store reference in the global variable
     SB_gTargetID = obj;
 
-    var menuDIV = (obj.id.charAt(0)=='n'?'node':'link');
-    SB_gCtxMenu = document.getElementById(menuDIV+'CtxMenu');
+    var menuDIV = (obj.id.charAt(0) == 'n' ? 'node' : 'link');
+    SB_gCtxMenu = document.getElementById(menuDIV + 'CtxMenu');
 
-    if (menuDIV=='node')
-    {
-        document.cookie = 'SB3CTXROOT='+obj.id.substr(1)+";SameSite=None;Secure";
+    if (menuDIV == 'node') {
+        document.cookie = 'SB3CTXROOT=' + obj.id.substr(1) + ";SameSite=None;Secure";
     }
 
     // Mark folder as opened
@@ -1242,21 +1162,20 @@ function SB_menuOn(event, obj)
     var nodeACL = obj.getAttribute('x_acl');
 
     // Set initial state of all items in the context menu
-    for (var i=0;;i++)
-    {
-        var menuItem = document.getElementById(menuDIV+'menuItem'+i);
-        if (!menuItem) break;
+    for (var i = 0;; i++) {
+        var menuItem = document.getElementById(menuDIV + 'menuItem' + i);
+        if (!menuItem) {
+            break;
+        }
 
         // If not separator then set off or disable
-        if (SB_hasClass(menuItem,'separator'))
-        {
+        if (SB_hasClass(menuItem,'separator')) {
             continue;
         }
 
         var commandACL = menuItem.getAttribute('x_acl');
 
-        if (!commandACL)
-        {
+        if (!commandACL) {
             continue;
         }
 
@@ -1265,8 +1184,7 @@ function SB_menuOn(event, obj)
         var arr = commandACL.split('_');
         var disabled = false;
 
-        if (arr.length>1)
-        {
+        if (arr.length > 1) {
             commandACL = arr[0];
             commandSPEC = arr[1];
         }
@@ -1274,19 +1192,15 @@ function SB_menuOn(event, obj)
         // Each command might require some rights, for each letter
         // in the command ACL there must be a letter in the node
         // otherwise the command is disabled
-        for (var j=0; j<commandACL.length; j++)
-        {
-            if (nodeACL.indexOf(commandACL.charAt(j))==-1)
-            {
+        for (var j = 0; j < commandACL.length; j++) {
+            if (nodeACL.indexOf(commandACL.charAt(j)) == -1) {
                 disabled = true;
                 break;
             }
         }
 
-        if (!disabled && commandSPEC)
-        {
-            switch (commandSPEC)
-            {
+        if (!disabled && commandSPEC) {
+            switch (commandSPEC) {
                 case 'c':
                     disabled = !(SB_gSourceID);
                     break;
@@ -1303,23 +1217,22 @@ function SB_menuOn(event, obj)
 function SB_showOptional(menuDIV, decorator)
 {
     // Set initial state of all items in the context menu
-    for (var i=0;;i++)
-    {
-        var menuItem = document.getElementById(menuDIV+'menuItem'+i);
-        if (!menuItem) break;
+    for (var i = 0;; i++) {
+        var menuItem = document.getElementById(menuDIV + 'menuItem' + i);
+        if (!menuItem) {
+            break;
+        }
         menuItem.style.display = 'block';
     }
 
-    if (decorator)
-    {
+    if (decorator) {
         decorator.style.display = 'none';
     }
 }
 
 function SB_stopMenuHider()
 {
-    if (SB_gHideTimer)
-    {
+    if (SB_gHideTimer) {
         clearTimeout(SB_gHideTimer);
         SB_gHideTimer = null;
     }
@@ -1343,11 +1256,9 @@ function SB_hideMenus(ignore)
     var menus = Array('node','link');
     var menu;
 
-    for (var i=0; i<menus.length; i++)
-    {
-        menu = document.getElementById(menus[i]+'CtxMenu');
-        if (menu != ignore)
-        {
+    for (var i = 0; i < menus.length; i++) {
+        menu = document.getElementById(menus[i] + 'CtxMenu');
+        if (menu != ignore) {
             menu.style.display = 'none';
         }
     }
@@ -1382,23 +1293,17 @@ function SB_itemOff(menuItem)
  */
 function SB_toggleItem(menuItem, show)
 {
-    if (SB_hasClass(menuItem,'disabled'))
-    {
+    if (SB_hasClass(menuItem,'disabled')) {
         return false;
     }
 
-    if (show)
-    {
-        if (SB_hasClass(menuItem,'optional'))
-        {
+    if (show) {
+        if (SB_hasClass(menuItem,'optional')) {
             SB_class(menuItem,'optional', false);
             SB_class(menuItem,'actopt', true);
         }
-    }
-    else
-    {
-        if (SB_hasClass(menuItem,'actopt'))
-        {
+    } else {
+        if (SB_hasClass(menuItem,'actopt')) {
             SB_class(menuItem,'actopt', false);
             SB_class(menuItem,'optional', true);
         }
@@ -1413,8 +1318,7 @@ function SB_toggleItem(menuItem, show)
  */
 function SB_itemDo(menuItem, func)
 {
-    if (menuItem.className.indexOf('active')==-1)
-    {
+    if (menuItem.className.indexOf('active') == -1) {
         return;
     }
 
@@ -1423,26 +1327,19 @@ function SB_itemDo(menuItem, func)
     var lid = null;
     var id  = null;
 
-    if (SB_gTargetID)
-    {
+    if (SB_gTargetID) {
         id = SB_gTargetID.id.substr(1);
-        if (SB_gTargetID.id.charAt(0)=='n')
-        {
+        if (SB_gTargetID.id.charAt(0) == 'n') {
             nid = id;
-        }
-        else
-        {
+        } else {
             lid = id;
         }
         SB_gTargetID = null;
     }
 
-    if (func)
-    {
-        eval(func+'(id)');
-    }
-    else
-    {
+    if (func) {
+        eval(func + '(id)');
+    } else {
         SB_commandWindow(menuItem.getAttribute('x_cmd'), nid, lid);
     }
 }
@@ -1456,26 +1353,19 @@ function SB_itemDoAlt(elementId, func)
     var lid = null;
     var id  = null;
 
-    if (SB_gTargetID)
-    {
+    if (SB_gTargetID) {
         id = SB_gTargetID.id.substr(1);
-        if (SB_gTargetID.id.charAt(0)=='n')
-        {
+        if (SB_gTargetID.id.charAt(0) == 'n') {
             nid = id;
-        }
-        else
-        {
+        } else {
             lid = id;
         }
         SB_gTargetID = null;
     }
 
-    if (func)
-    {
-        eval(func+'(id)');
-    }
-    else
-    {
+    if (func) {
+        eval(func + '(id)');
+    } else {
         SB_commandWindow(menuItem.getAttribute('x_cmd'), nid, lid);
     }
 }
@@ -1490,80 +1380,65 @@ function SB_toolTip(source, event)
 
 function SB_toolTipHide()
 {
-    if (SB_gToolTipTimer)
-    {
+    if (SB_gToolTipTimer) {
         clearTimeout(SB_gToolTipTimer);
         SB_gToolTipTimer = null;
     }
     SB_gToolTipObj = null;
     var toolTipObj = document.getElementById('toolTip');
-    if (toolTipObj)
-    {
+    if (toolTipObj) {
         toolTipObj.style.display = 'none';
     }
 }
 
 function SB_toolTipShow()
 {
-    if (SB_gCtxMenu)
-    {
+    if (SB_gCtxMenu) {
         SB_toolTipHide();
         return;
     }
 
-    if (SB_gToolTipObj)
-    {
+    if (SB_gToolTipObj) {
         var toolTipObj = document.getElementById('toolTip');
 
-        if (!toolTipObj || toolTipObj.style.display == 'block')
-        {
+        if (!toolTipObj || toolTipObj.style.display == 'block') {
             return;
         }
         var text = SB_gToolTipObj.getAttribute('x_title');
 
-        if (!text || !text.length)
-        {
+        if (!text || !text.length) {
             return;
         }
 
         var maxLen = 20;
         var curLen = 0;
 
-        if (text.indexOf(' ')==-1)
-        {
+        if (text.indexOf(' ') == -1) {
             maxLen = text.length;
-        }
-        else
-        {
-            for (var i=0; i<text.length; i++)
-            {
+        } else {
+            for (var i = 0; i < text.length; i++) {
                 curLen = text.indexOf(' ',i);
-                if ((curLen-i)>maxLen)
-                {
-                    maxLen = (curLen-i);
+                if ((curLen - i) > maxLen) {
+                    maxLen = (curLen - i);
                 }
             }
         }
 
-        var width = maxLen*7; // Magic number
+        var width = maxLen * 7; // Magic number
 
         var iTop = 0;
         var iLeft = 0;
 
-        if (0 && SB_gToolTipObj.className=='raised')
-        {
-            iTop = SB_gToolTipTop+15;
-            iLeft = SB_gToolTipLeft-width;
+        if (0 && SB_gToolTipObj.className == 'raised') {
+            iTop = SB_gToolTipTop + 15;
+            iLeft = SB_gToolTipLeft - width;
 
-            if (iLetf<0)
-            {
+            if (iLetf < 0) {
                 iLeft = 0;
             }
-        }
-        else
-        {
-            iTop = SB_gToolTipTop+22;
-            iLeft = Math.floor(SB_gToolTipLeft/10);
+        } else {
+            iTop = SB_gToolTipTop + 22;
+            iLeft = Math.floor(SB_gToolTipLeft / 10);
         }
 
         toolTipObj.style.top = iTop + SB_gCoordUnit;
@@ -1573,25 +1448,21 @@ function SB_toolTipShow()
         var image = new Array('dot','brace_left','brace_right','colon','semicolon','hash');
         var save  = '';
 
-        for (var i=0; i<text.length; i++)
-        {
+        for (var i = 0; i < text.length; i++) {
             var skip = false;
-            for (var j=0; j<punct.length && !skip; j++)
-            {
-                if (text.charAt(i) == punct[j])
-                {
-                    save += '<img class="char" src="skins/punct_'+image[j]+'.png" alt="">';
+            for (var j = 0; j < punct.length && !skip; j++) {
+                if (text.charAt(i) == punct[j]) {
+                    save += '<img class="char" src="skins/punct_' + image[j] + '.png" alt="">';
                     skip = true;
                 }
             }
-            if (!skip)
-            {
+            if (!skip) {
                 save += text.charAt(i);
             }
         }
         toolTipObj.innerHTML = save;
         toolTipObj.style.display = 'block';
-        toolTipObj.style.width = width+'px';
+        toolTipObj.style.width = width + 'px';
     }
 }
 
@@ -1603,8 +1474,7 @@ function SB_markDefault(nid)
     var http = SB_xmlHttpGet();
 
     // We have old browser
-    if (!http)
-    {
+    if (!http) {
         alert('Sorry, your browser does not support AJAX!');
         return;
     }
@@ -1627,7 +1497,7 @@ function SB_nodeCopy(nid)
  */
 function SB_nodeHide(nid)
 {
-    var nodeObj = document.getElementById('n'+nid);
+    var nodeObj = document.getElementById('n' + nid);
     nodeObj.style.display = 'none';
     SB_commandWindow('Hide Folder', nid, null);
 }
@@ -1646,20 +1516,16 @@ function SB_appendPersistentParams()
     var url = '';
 
     var sParam = location.search;
-    var aPersistentParams = new Array( 'target', 'w', 'mode', 'user' );
+    var aPersistentParams = new Array('target', 'w', 'mode', 'user');
 
-    if (sParam && sParam.length && sParam.split)
-    {
+    if (sParam && sParam.length && sParam.split) {
         var aParam = sParam.substr(1).split('&');
 
-        for (var i=0; i<aParam.length; i++)
-        {
+        for (var i = 0; i < aParam.length; i++) {
             var aPair = aParam[i].split('=');
 
-            for (var j=0; j<aPersistentParams.length; j++)
-            {
-                if (aPersistentParams[j] == aPair[0])
-                {
+            for (var j = 0; j < aPersistentParams.length; j++) {
+                if (aPersistentParams[j] == aPair[0]) {
                     url += '&' + aParam[i];
                 }
             }
@@ -1675,32 +1541,29 @@ function SB_appendPersistentParams()
 function SB_commandWindow(command, nid, lid)
 {
     var url = SB_getAbsBaseUrl() + 'command.php?command=' + command +
-        (nid?'&nid_acl='+nid:'') +
-        (lid?'&lid_acl='+lid:'') +
-        (SB_gSourceID?'&sid='+SB_gSourceID+'&stype='+(SB_gSourceTypeIsNode?'1':'0'):'');
+        (nid ? '&nid_acl=' + nid : '') +
+        (lid ? '&lid_acl=' + lid : '') +
+        (SB_gSourceID ? '&sid=' + SB_gSourceID + '&stype=' + (SB_gSourceTypeIsNode ? '1' : '0') : '');
 
     url += SB_appendPersistentParams();
 
     var inPlaceCommand = false;
-    for (i=0; i<SB_gInPlaceCommands.length; i++)
-    {
-        if (command == SB_gInPlaceCommands[i])
-        {
+    for (i = 0; i < SB_gInPlaceCommands.length; i++) {
+        if (command == SB_gInPlaceCommands[i]) {
             inPlaceCommand = true;
             break;
         }
     }
 
-    if (SB_getJSData('sb_externCommander')=='0' && !inPlaceCommand)
-    {
-        if (SB_gCmdWin && !SB_gCmdWin.closed) SB_gCmdWin.focus();
+    if (SB_getJSData('sb_externCommander') == '0' && !inPlaceCommand) {
+        if (SB_gCmdWin && !SB_gCmdWin.closed) {
+            SB_gCmdWin.focus();
+        }
         SB_gCmdWin = window.open(url, 'sitebar_gCmdWin', SB_gWinPrefs);
         SB_gCmdWin.focus();
         SB_gSourceID = null;
-    }
-    else
-    {
-        location.href=url;
+    } else {
+        location.href = url;
     }
 }
 
@@ -1713,19 +1576,17 @@ function SB_openHelp(url)
 
 function SB_toggleMore(hide)
 {
-    document.getElementById('showMore').style.display=hide?"none":"block";
-    document.getElementById('showLess').style.display=hide?"block":"none";
-    document.getElementById('optionalFields').style.display=hide?"block":"none";
+    document.getElementById('showMore').style.display = hide ? "none" : "block";
+    document.getElementById('showLess').style.display = hide ? "block" : "none";
+    document.getElementById('optionalFields').style.display = hide ? "block" : "none";
 }
 
 function SB_showShareGroup(gid)
 {
-    for (var i=0; i<2; i++)
-    {
-        var ch = i==0?'a':'b';
-        var el = document.getElementById('group'+gid+ch);
-        if (el)
-        {
+    for (var i = 0; i < 2; i++) {
+        var ch = i == 0 ? 'a' : 'b';
+        var el = document.getElementById('group' + gid + ch);
+        if (el) {
             el.style.visibility = 'visible';
         }
     }
@@ -1733,18 +1594,17 @@ function SB_showShareGroup(gid)
 
 function SB_memberSelector(id, show)
 {
-    document.getElementById(id+"_l").style.display=show?"none":"block";
-    document.getElementById(id+"_s").style.display=!show?"none":"block";
+    document.getElementById(id + "_l").style.display = show ? "none" : "block";
+    document.getElementById(id + "_s").style.display = !show ? "none" : "block";
 
-    if (show)
-    {
-        document.getElementById(id+"_v").focus();
+    if (show) {
+        document.getElementById(id + "_v").focus();
     }
 }
 
 function SB_onMemberSelectorChange(id)
 {
-    document.getElementById(id+"_r").className=document.getElementById(id+"_v").value;
+    document.getElementById(id + "_r").className = document.getElementById(id + "_v").value;
 }
 
 function SB_onMemberSelectorBlur(id)

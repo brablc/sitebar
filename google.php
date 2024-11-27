@@ -1,4 +1,5 @@
 <?php
+
 /******************************************************************************
  *  SiteBar 3 - The Bookmark Server for Personal and Team Use.                *
  *  Copyright (C) 2006-2008  Ondrej Brablc <http://brablc.com/mailto?o>       *
@@ -18,7 +19,7 @@
  ******************************************************************************/
 
 header("Content-type: text/xml");
-echo '<?xml version="1.0" encoding="UTF-8" ?>'."\n";
+echo '<?xml version="1.0" encoding="UTF-8" ?>' . "\n";
 ?>
 <Module>
   <ModulePrefs
@@ -35,28 +36,23 @@ echo '<?xml version="1.0" encoding="UTF-8" ?>'."\n";
   <![CDATA[
 <?php
     $height = "400px";
-    if (isset($_GET['height']))
-    {
-        if (preg_match('/^(\d+)(.*)?$/',$_GET['height'],$reg))
-        {
-            $height = $reg[1];
-            if ($reg[2] == '%')
-            {
-                $height .= '%';
-            }
-            else
-            {
-                $height .= 'px';
-            }
+if (isset($_GET['height'])) {
+    if (preg_match('/^(\d+)(.*)?$/', $_GET['height'], $reg)) {
+        $height = $reg[1];
+        if ($reg[2] == '%') {
+            $height .= '%';
+        } else {
+            $height .= 'px';
         }
     }
+}
 
-    require_once('./inc/errorhandler.inc.php');
-    require_once('./inc/page.inc.php');
-    require_once('./inc/usermanager.inc.php');
+require_once('./inc/errorhandler.inc.php');
+require_once('./inc/page.inc.php');
+require_once('./inc/usermanager.inc.php');
 
-    $um = SB_UserManager::staticInstance();
-    $url = SB_Page::absBaseUrl();
+$um = SB_UserManager::staticInstance();
+$url = SB_Page::absBaseUrl();
 ?>
     <iframe style="border: none; width:100%;height:<?php echo $height;?>"
         src="<?php echo $url;?>?target=_top" />

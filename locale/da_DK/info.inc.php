@@ -1,10 +1,7 @@
 <?php
 
-$info = array
-(
+$info = array(
     'language' => 'Dansk',
     'author' => 'Bent Jensen',
     'url' => null,
 );
-
-?>

@@ -1,7 +1,6 @@
 <?php
 
-$text = array
-(
+$text = array(
 'The Bookmark Server for Personal and Team Use' => 'Máy chủ chứa bookmark phục vụ cá nhân và nhóm sử dụng',
 'SiteBar Homepage' => 'Trang chủ SiteBar',
 'Your Language' => 'Tiếng Việt',
@@ -224,5 +223,3 @@ $text = array
 'Skin created by' => 'Giao diện tạo bởi',
 'Skin designed by' => 'Giao diện thiết kế bởi',
 );
-
-?>

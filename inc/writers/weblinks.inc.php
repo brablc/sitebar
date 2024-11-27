@@ -1,4 +1,5 @@
 <?php
+
 /******************************************************************************
  *  SiteBar 3 - The Bookmark Server for Personal and Team Use.                *
  *  Copyright (C) 2003-2008  Ondrej Brablc <http://brablc.com/mailto?o>       *
@@ -27,48 +28,45 @@ require_once('./inc/writer.inc.php');
 
 class SB_Writer_weblinks extends SB_WriterInterface
 {
-    var $path = '';
+    public $path = '';
 
-    function __construct()
+    public function __construct()
     {
         parent::__construct();
     }
 
-    function fatal($msg, $arg=null)
+    public function fatal($msg, $arg = null)
     {
         die("**05" . parent::fatal($msg, $arg) . "\r");
     }
 
-    function drawHead()
+    public function drawHead()
     {
         echo "++00Sucess\r";
     }
 
-    function drawNodeOpen(&$node, $last=false)
+    public function drawNodeOpen(&$node, $last = false)
     {
         $this->path = implode('/', $this->nodes);
 
-        $this->write(array
-        (
+        $this->write(array(
             $this->path,
             'flags',
             $node->name,
         ));
     }
 
-    function drawLink(&$node, &$link, $last=false)
+    public function drawLink(&$node, &$link, $last = false)
     {
         $this->path = implode('/', $this->nodes);
         $url = $link->url;
 
-        if (!($url[0]=='j' && strpos($url,'javascript:')!==false))
-        {
-            $url = SB_Page::absBaseUrl().'go.php?id='.$link->id.'&url='.$link->url;
+        if (!($url[0] == 'j' && strpos($url, 'javascript:') !== false)) {
+            $url = SB_Page::absBaseUrl() . 'go.php?id=' . $link->id . '&url=' . $link->url;
         }
 
-        $this->write(array
-        (
-            $this->path.'/'.$link->id,
+        $this->write(array(
+            $this->path . '/' . $link->id,
             'flags',
             $link->name,
             '',
@@ -76,11 +74,9 @@ class SB_Writer_weblinks extends SB_WriterInterface
         ));
     }
 
-    function write($arr)
+    public function write($arr)
     {
         $str = implode('|', $arr);
         echo html_entity_decode($str) . "\r";
     }
 }
-
-?>

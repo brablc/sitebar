@@ -1,4 +1,5 @@
 <?php
+
 /******************************************************************************
  *  SiteBar 3 - The Bookmark Server for Personal and Team Use.                *
  *  Copyright (C) 2004-2008  Ondrej Brablc <http://brablc.com/mailto?o>       *
@@ -28,15 +29,14 @@ require_once('./inc/writers/opml_link.inc.php');
 
 class SB_Writer_opml_rss extends SB_Writer_opml_link
 {
-    function __construct()
+    public function __construct()
     {
         parent::__construct();
     }
 
-    function getNodeAtt(&$node)
+    public function getNodeAtt(&$node)
     {
-        $att = array
-        (
+        $att = array(
             'type' => 'rss',
             'text' => $this->quoteAtt($node->name),
             'title' => $this->quoteAtt($node->name),
@@ -45,10 +45,9 @@ class SB_Writer_opml_rss extends SB_Writer_opml_link
         return $att;
     }
 
-    function getLinkAtt(&$node, &$link)
+    public function getLinkAtt(&$node, &$link)
     {
-        $att = array
-        (
+        $att = array(
             'type' => 'rss',
             'text' => $this->quoteAtt($link->name),
             'title' => $this->quoteAtt($link->name),
@@ -59,9 +58,9 @@ class SB_Writer_opml_rss extends SB_Writer_opml_link
         return $att;
     }
 
-    function drawDOCTYPE()
+    public function drawDOCTYPE()
     {
-?>
+        ?>
 <!DOCTYPE opml [
     <!ENTITY % opml_plain SYSTEM "http://static.userland.com/gems/radiodiscuss/opmlDtd.txt">
     <!ENTITY % OtherAttributes  "
@@ -71,7 +70,7 @@ class SB_Writer_opml_rss extends SB_Writer_opml_link
     ">
     %opml_plain;
 ]>
-<?php
+        <?php
     }
 }
 ?>

@@ -1,7 +1,6 @@
 <?php
 
-$text = array
-(
+$text = array(
 'SiteBar Homepage' => 'SiteBar puslapis',
 'Any Browser' => 'Bet kokia naršyklė',
 'Your Language' => 'Lietuviškai',
@@ -48,5 +47,3 @@ $text = array
 'Maintain Users' => 'Tvarkyti vartotojus',
 'Maintain Trees' => 'Tvarkyti medžius',
 );
-
-?>

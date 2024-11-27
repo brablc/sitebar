@@ -1,7 +1,6 @@
 <?php
 
-$text = array
-(
+$text = array(
     'The Bookmark Server for Personal and Team Use' => 'Integrator window',
     'SiteBar Homepage' => '',
 
@@ -10,7 +9,7 @@ $text = array
     'Add Link to SiteBar' => '',
     'Add Page to SiteBar' => '',
 
-    'SiteBar Integrator'=> 'Integrator page',
+    'SiteBar Integrator' => 'Integrator page',
     'Bookmarklet' => '',
     'Bookmarks' => '',
     'Homepage' => '',
@@ -360,7 +359,7 @@ $text = array
     'Waiting for Visit' => '',
 
     'Message' => 'Mailing',
-    'SiteBar Server'=>'',
+    'SiteBar Server' => '',
     '%s - ok.' => '',
     '%s - error!' => '',
 
@@ -551,5 +550,3 @@ $text = array
     'Skin created by' => '',
     'Skin designed by' => '',
 );
-
-?>

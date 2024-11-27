@@ -46,5 +46,3 @@ $para['hook::statistics'] = <<<_P
 {queries} SQL lekérdezés.
 Adabázis/Összes idő {time_db}/{time_total} mp ({time_pct}%).
 _P;
-
-?>

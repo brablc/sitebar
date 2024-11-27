@@ -1,7 +1,6 @@
 <?php
 
-$topic = array
-(
+$topic = array(
     100 => 'Vinkkej&auml; k&auml;ytt&ouml;&ouml;n',
         101 => 'Ved&auml; &amp; pudota',
         102 => 'Linkkien lis&auml;ys',
@@ -21,5 +20,3 @@ $topic = array
         302 => 'Suojausmekaniikka',
         303 => 'Tyylit',
 );
-
-?>

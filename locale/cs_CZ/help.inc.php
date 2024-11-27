@@ -368,5 +368,3 @@ Pokud hodláte přestěhovat SiteBar na jiný server tak musíte:
 <p>
 Export a import databáze může být proveden pomocí <a href='http://www.phpmyadmin.net/'>phpMyAdmin</a> softwaru. Tabulka sitebar_favicon (do verze 3.2.6) nebo sitebar_cache (od verze 3.3) nemusí být přenesena - její obsah bude obnoven.
 _P;
-
-?>

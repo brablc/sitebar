@@ -664,5 +664,3 @@ _P;
 $para['groupname::Public'] = <<<_P
 Herkes
 _P;
-
-?>

@@ -1,4 +1,5 @@
 <?php
+
 /******************************************************************************
  *  SiteBar 3 - The Bookmark Server for Personal and Team Use.                *
  *  Copyright (C) 2004-2008  Ondrej Brablc <http://brablc.com/mailto?o>       *
@@ -21,29 +22,27 @@ $SB_loader_title['rss'] = 'RSS 2.0';
 
 class SB_Loader_rss extends SB_LoaderInterface
 {
-    function __construct($useEngine=true, $charSet=null)
+    public function __construct($useEngine = true, $charSet = null)
     {
         parent::__construct($useEngine, $charSet);
     }
 
-    function getNodeTag()
+    public function getNodeTag()
     {
         return 'channel';
     }
 
-    function getLinkTag()
+    public function getLinkTag()
     {
         return 'item';
     }
 
-    function createNode($xmlTag)
+    public function createNode($xmlTag)
     {
         $attributes = array();
 
-        foreach ($xmlTag['children'] as $index => $value)
-        {
-            switch ($value['tag'])
-            {
+        foreach ($xmlTag['children'] as $index => $value) {
+            switch ($value['tag']) {
                 case 'title':
                     $attributes['name'] = $value['value'];
                     break;
@@ -53,14 +52,12 @@ class SB_Loader_rss extends SB_LoaderInterface
         return new SB_Tree_Node($attributes);
     }
 
-    function createLink($xmlTag)
+    public function createLink($xmlTag)
     {
         $attributes = array();
 
-        foreach ($xmlTag['children'] as $index => $value)
-        {
-            switch ($value['tag'])
-            {
+        foreach ($xmlTag['children'] as $index => $value) {
+            switch ($value['tag']) {
                 case 'title':
                     $attributes['name'] = $value['value'];
                     break;

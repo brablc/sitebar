@@ -1,7 +1,6 @@
 <?php
 
-$text = array
-(
+$text = array(
 'The Bookmark Server for Personal and Team Use' => 'O Servidor de Bookmark para Uso Pessoal e Equipa',
 'SiteBar Homepage' => 'SiteBar - Página Pessoal',
 'SiteBar Installation & Launcher' => 'SiteBar - Instalação & Lançamento',
@@ -378,5 +377,3 @@ $text = array
 'Netscape/Mozilla' => 'Netscape/Mozilla',
 'MS Internet Explorer' => 'MS Internet Explorer',
 );
-
-?>

@@ -1,7 +1,6 @@
 <?php
 
-$topic = array
-(
+$topic = array(
 '100' => 'Kullanım İpuçları',
 '101' => 'Sürükle ve Bırak',
 '103' => 'Araç Çubuğu İşlevleri',
@@ -19,5 +18,3 @@ $topic = array
 '304' => 'Yazarlar',
 '305' => 'Taşıma',
 );
-
-?>

@@ -63,5 +63,3 @@ _P;
 $topic['305'] = <<<_P
 Traslado
 _P;
-
-?>

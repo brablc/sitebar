@@ -1,4 +1,5 @@
 <?php
+
 /******************************************************************************
  *  SiteBar 3 - The Bookmark Server for Personal and Team Use.                *
  *  Copyright (C) 2003-2008  Ondrej Brablc <http://brablc.com/mailto?o>       *
@@ -23,35 +24,31 @@ $SB_loader_title['netscape'] = 'Netscape Bookmark File';
 
 class SB_Loader_netscape extends SB_LoaderInterface
 {
-    var $lines;
+    public $lines;
 
-    function __construct($useEngine=true, $charSet=null)
+    public function __construct($useEngine = true, $charSet = null)
     {
         parent::__construct($useEngine, $charSet);
     }
 
-    function load(&$lines, &$root)
+    public function load(&$lines, &$root)
     {
-        $this->lines =& $lines;
+        $this->lines = & $lines;
         return $this->loadNetscape($root);
     }
 
-    function loadNetscape(&$parent)
+    public function loadNetscape(&$parent)
     {
-        while (($line = array_shift($this->lines))!==null)
-        {
-            if (preg_match('/<meta\s+http-equiv=["\']Content-Type["\']\s+'.
-                'content=["\'].*?\bcharset=(.*?)["\']\s*>/i', $line, $reg))
-            {
-                if (strcasecmp($reg[1],$this->charSet))
-                {
-                    if ($this->useEngine && $this->getEngine()!=SB_CHARSET_IGNORE)
-                    {
+        while (($line = array_shift($this->lines)) !== null) {
+            if (
+                preg_match('/<meta\s+http-equiv=["\']Content-Type["\']\s+' .
+                'content=["\'].*?\bcharset=(.*?)["\']\s*>/i', $line, $reg)
+            ) {
+                if (strcasecmp($reg[1], $this->charSet)) {
+                    if ($this->useEngine && $this->getEngine() != SB_CHARSET_IGNORE) {
                         $this->setCharSet($reg[1]);
                         $this->warn('Character set overriden from document to %s!', array($reg[1]));
-                    }
-                    else
-                    {
+                    } else {
                         $this->warn('There is no conversion engine available to convert from %s character set!', array($reg[1]));
                     }
                 }
@@ -60,15 +57,13 @@ class SB_Loader_netscape extends SB_LoaderInterface
             $line = $this->toUTF8($line);
 
             // Open node
-            if (preg_match('/<DT.*><H3([^>]*)>([^<]*)<\/H3>/i', $line, $reg ))
-            {
+            if (preg_match('/<DT.*><H3([^>]*)>([^<]*)<\/H3>/i', $line, $reg)) {
                 $rec = array();
                 $params = $reg[1];
                 $rec['name'] = $reg[2];
 
-                if (strlen($rec['name'])==0)
-                {
-                  $rec['name'] = '?';
+                if (strlen($rec['name']) == 0) {
+                    $rec['name'] = '?';
                 }
 
                 $this->_loadNetscapeComment($rec);
@@ -83,34 +78,27 @@ class SB_Loader_netscape extends SB_LoaderInterface
             }
 
             // Add link to current node
-            if (preg_match('/<DT.*><A HREF="([^"]+)"([^>]*)>([^<]*)<\/A>/i',$line, $reg ))
-            {
+            if (preg_match('/<DT.*><A HREF="([^"]+)"([^>]*)>([^<]*)<\/A>/i', $line, $reg)) {
                 $rec = array();
                 $rec['url'] = $reg[1];
                 $params = $reg[2];
                 $rec['name'] = $reg[3];
 
-                if (strlen($rec['name'])==0)
-                {
-                  $rec['name'] = $rec['url'];
+                if (strlen($rec['name']) == 0) {
+                    $rec['name'] = $rec['url'];
                 }
 
                 // Take live feeds URL if exists instead of site url
-                if (preg_match('/FEEDURL="([^"]+)"/i', $params, $reg))
-                {
+                if (preg_match('/FEEDURL="([^"]+)"/i', $params, $reg)) {
                     $rec['url'] = $reg[1];
                 }
-                if (preg_match('/ICON="([^"]+)"/i', $params, $reg))
-                {
+                if (preg_match('/ICON="([^"]+)"/i', $params, $reg)) {
                     $rawdata = $reg[1];
 
-                    if (preg_match("/^data:image\/(.*?);base64,(.*)$/", $rawdata, $reg2))
-                    {
+                    if (preg_match("/^data:image\/(.*?);base64,(.*)$/", $rawdata, $reg2)) {
                         $fc = & SB_FaviconCache::staticInstance();
                         $rec['favicon'] = $fc->saveFaviconBase64($reg2[2]);
-                    }
-                    else if (substr($rawdata,0,7) == "http://")
-                    {
+                    } elseif (substr($rawdata, 0, 7) == "http://") {
                         $rec['favicon'] = $rawdata;
                     }
                 }
@@ -121,32 +109,28 @@ class SB_Loader_netscape extends SB_LoaderInterface
             }
 
             // Close node - break recursion
-            if (stristr($line, "</DL>"))
-            {
+            if (stristr($line, "</DL>")) {
                 return true;
             }
         }
         return true;
     }
 
-    function _loadNetscapeComment(&$rec)
+    public function _loadNetscapeComment(&$rec)
     {
         $line = array_shift($this->lines);
-        if (preg_match('/<DD>(.*)/i', $line, $reg ))
-        {
+        if (preg_match('/<DD>(.*)/i', $line, $reg)) {
             $comment = $this->toUTF8($reg[1]);
 
             $line = array_shift($this->lines);
-            while (count($this->lines) && !preg_match('/<\/?D[LT]>/i', $line ))
-            {
-                $comment .= "\r".$this->toUTF8($line);
+            while (count($this->lines) && !preg_match('/<\/?D[LT]>/i', $line)) {
+                $comment .= "\r" . $this->toUTF8($line);
                 $line = array_shift($this->lines);
             }
 
             $rec['comment'] = $comment;
         }
         // Put it back, either it is not comment or it is next line
-        array_unshift($this->lines,$line);
+        array_unshift($this->lines, $line);
     }
 }
-?>

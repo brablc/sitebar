@@ -1,13 +1,9 @@
 <?php
 
-$info = array
-(
+$info = array(
     'language' => 'Galego',
-    'authors' => array
-    (
-	'KesarNet' => 'http://www.kesarnet.org/',
+    'authors' => array(
+    'KesarNet' => 'http://www.kesarnet.org/',
     ),
     'aliases' => array('gl_ES'),
 );
-
-?>

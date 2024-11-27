@@ -1,12 +1,8 @@
 <?php
 
-$info = array
-(
+$info = array(
     'language' => 'Български',
-    'authors' => array
-    (
+    'authors' => array(
     'Yul Yordanov' => null,
     ),
 );
-
-?>

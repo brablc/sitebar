@@ -1,4 +1,5 @@
 <?php
+
 /******************************************************************************
  *  SiteBar 3 - The Bookmark Server for Personal and Team Use.                *
  *  Copyright (C) 2005-2008  Ondrej Brablc <http://brablc.com/mailto?o>       *
@@ -28,41 +29,39 @@ require_once('./inc/writer.inc.php');
 
 class SB_Writer_blogroll extends SB_WriterInterface
 {
-
-    function __construct()
+    public function __construct()
     {
         parent::__construct();
         $this->switches['flat'] = true;
     }
 
-    function getExtension()
+    public function getExtension()
     {
         return ".html";
     }
 
-    function drawContentType()
+    public function drawContentType()
     {
         header('Content-Type: text/html; charset=' . $this->charSet);
     }
 
-    function js($value)
+    public function js($value)
     {
-        return "document.writeln('" . str_replace("'","\\'",$value) . "');\r";
+        return "document.writeln('" . str_replace("'", "\\'", $value) . "');\r";
     }
 
-    function drawHead()
+    public function drawHead()
     {
         echo $this->js('<ul>');
     }
 
-    function drawLink(&$node, &$link, $last=false)
+    public function drawLink(&$node, &$link, $last = false)
     {
         echo $this->js('<li><a href=\"' . $this->quoteAtt($link->url) . '\">' . $this->quoteAtt($link->name) . '<\/a><\/li>');
     }
 
-    function drawFoot()
+    public function drawFoot()
     {
         echo $this->js('<\/ul>');
     }
 }
-?>

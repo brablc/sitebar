@@ -382,5 +382,3 @@ L'exportation et l'importation peuvent être réalisés en utilisant <a href='ht
 La table sitebar_favicon (jusqu'à la version 3.2.6) ou sitebar_cache (à partir de la version 3.3) ne doit pas
 obligatoirement être transférée, son contenu sera reconstruit.
 _P;
-
-?>

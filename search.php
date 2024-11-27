@@ -1,4 +1,5 @@
 <?php
+
 /******************************************************************************
  *  SiteBar 3 - The Bookmark Server for Personal and Team Use.                *
  *  Copyright (C) 2004-2008  Ondrej Brablc <http://brablc.com/mailto?o>       *
@@ -19,5 +20,3 @@
 
 $_REQUEST['w'] = 'search';
 include('index.php');
-
-?>

@@ -1,1 +1,3 @@
-<?php $para = array(); ?>
+<?php
+
+$para = array();

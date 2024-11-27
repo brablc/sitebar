@@ -52,5 +52,3 @@ W celu zmigrowania istniejącej instalacji SiteBar na inny serwer potrzebne jest
 Eksport i import może być wykonany przy użyciu <a href='http://www.phpmyadmin.net/'>phpMyAdmin</a>.
 Tabela sitebar_favicon (do 3.2.6) lub sitebar_cache (zaczynając z 3.3) nie musi być przetransferowana, jej zawartość będzie odbudowana.
 _P;
-
-?>

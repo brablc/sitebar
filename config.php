@@ -1,4 +1,5 @@
 <?php
+
 /******************************************************************************
  *  SiteBar 3 - The Bookmark Server for Personal and Team Use.                *
  *  Copyright (C) 2003-2008  Ondrej Brablc <http://brablc.com/mailto?o>       *
@@ -22,7 +23,7 @@
 * importing bookmarks or other security related problems or your server
 * runs PHP in a 'safe mode' :
 */
-define( 'SB_FORM_ACTION_EXECUTOR', 'config.php');
+define('SB_FORM_ACTION_EXECUTOR', 'config.php');
 /*
 * Example of config.cgi (create manually, save as "config.cgi" and
 * upload to the same directory as this file is :
@@ -37,37 +38,35 @@ require_once('./inc/database.inc.php');
 
 class Configuration extends SB_ErrorHandler
 {
-    var $file;
-    var $base = 'config.inc.php';
-    var $config;
-    var $command = '';
-    var $message;
-    var $db;
+    public $file;
+    public $base = 'config.inc.php';
+    public $config;
+    public $command = '';
+    public $message;
+    public $db;
 
-    var $host = 'localhost';
-    var $name = 'sitebar';
-    var $user = 'root';
-    var $pass;
-    var $pass2;
+    public $host = 'localhost';
+    public $name = 'sitebar';
+    public $user = 'root';
+    public $pass;
+    public $pass2;
 
-    function __construct()
+    public function __construct()
     {
-        $this->file = './adm/'.$this->base;
+        $this->file = './adm/' . $this->base;
 
-        if (file_exists($this->file))
-        {
+        if (file_exists($this->file)) {
             $this->checkStructure();
             return;
         }
 
-        if (isset($_REQUEST['command']))
-        {
+        if (isset($_REQUEST['command'])) {
             $this->command = $_REQUEST['command'];
-            $this->host = SB_safeVal($_REQUEST,'host');
-            $this->name = SB_safeVal($_REQUEST,'name');
-            $this->user = SB_safeVal($_REQUEST,'username');
-            $this->pass = SB_safeVal($_REQUEST,'password');
-            $this->pass2 = SB_safeVal($_REQUEST,'repeat');
+            $this->host = SB_safeVal($_REQUEST, 'host');
+            $this->name = SB_safeVal($_REQUEST, 'name');
+            $this->user = SB_safeVal($_REQUEST, 'username');
+            $this->pass = SB_safeVal($_REQUEST, 'password');
+            $this->pass2 = SB_safeVal($_REQUEST, 'repeat');
 
             $config = <<<__END
 \$SITEBAR = array
@@ -87,11 +86,9 @@ __END;
             $this->config = '<' . "?php\n" . $config . "\n?" . ">\n";
         }
 
-        if ($this->command)
-        {
-            if ($this->checkParams() && $this->command!='Check Settings')
-            {
-                $shortname = str_replace(' ','',$this->command);
+        if ($this->command) {
+            if ($this->checkParams() && $this->command != 'Check Settings') {
+                $shortname = str_replace(' ', '', $this->command);
                 $execute = 'command' . $shortname;
                 $this->$execute();
             }
@@ -100,33 +97,26 @@ __END;
         $this->writeConfig();
     }
 
-    function checkParams()
+    public function checkParams()
     {
-        if ($this->pass && $this->pass !== $this->pass2)
-        {
+        if ($this->pass && $this->pass !== $this->pass2) {
             $this->error('Password incorrectly retyped!');
             return false;
         }
 
-        $this->db =& SB_Database::staticInstance();
+        $this->db = & SB_Database::staticInstance();
         // Assign the connection with the database
         $this->db->connection = $this->db->connect($this->host, $this->user, $this->pass);
 
-        if (!$this->db->connection)
-        {
+        if (!$this->db->connection) {
             $this->error($this->db->getErrorText());
             return false;
-        }
-        else if (!$this->db->hasDB($this->name))
-        {
-            if ($this->command!='Create Database')
-            {
+        } elseif (!$this->db->hasDB($this->name)) {
+            if ($this->command != 'Create Database') {
                 $this->error($this->db->getErrorText());
                 return false;
             }
-        }
-        else if ($this->command=='Create Database')
-        {
+        } elseif ($this->command == 'Create Database') {
             $this->error('Database already exists!');
             return false;
         }
@@ -134,28 +124,24 @@ __END;
         return true;
     }
 
-    function commandCreateDatabase()
+    public function commandCreateDatabase()
     {
-        $this->db =& SB_Database::staticInstance();
+        $this->db = & SB_Database::staticInstance();
 
-        if (!$this->db->createDB($this->name))
-        {
+        if (!$this->db->createDB($this->name)) {
             $this->error($this->db->getErrorText());
-        }
-        else
-        {
+        } else {
             $this->message = 'Database created.';
         }
     }
 
-    function commandWriteToFile()
+    public function commandWriteToFile()
     {
         $this->useHandler(false);
-        $fp = @fopen($this->file,'wb');
+        $fp = @fopen($this->file, 'wb');
         $this->useHandler(true);
 
-        if (!$fp)
-        {
+        if (!$fp) {
             $this->error('Cannot open file %s. Does your HTTP server have write access to adm directory?', array($this->file));
             return;
         }
@@ -164,17 +150,17 @@ __END;
         header('Location: config.php');
     }
 
-    function commandDownloadSettings()
+    public function commandDownloadSettings()
     {
         header('Content-Type: application/octet-stream');
-        header('Content-Disposition: attachment; filename="'.$this->base.'"');
+        header('Content-Disposition: attachment; filename="' . $this->base . '"');
         header('Content-Transfer-Encoding: binary');
         header('Content-Length: ' . strlen($this->config));
         echo $this->config;
         exit;
     }
 
-    function commandPreviewSettings()
+    public function commandPreviewSettings()
     {
         header('Content-Type: text/plain');
         header('Content-Length: ' . strlen($this->config));
@@ -182,10 +168,10 @@ __END;
         exit;
     }
 
-    function writePage()
+    public function writePage()
     {
         SB_Page::head('DB Configuration', 'siteBarConfig');
-?>
+        ?>
 <h2>DB Configuration</h2>
 
 <p>
@@ -193,39 +179,34 @@ __END;
 <br>
 &nbsp;<a href="doc/troubleshooting.txt">Troubleshooting</a>
 
-<?php
-        if (!$this->hasErrors())
-        {
-            if ($this->command=='Check Settings')
-            {
+        <?php
+        if (!$this->hasErrors()) {
+            if ($this->command == 'Check Settings') {
                 $this->message = 'Connection parameters are OK!';
             }
-            if ($this->message)
-            {
-?>
+            if ($this->message) {
+                ?>
 <div class="message">
-    <?php echo $this->message?>
+                <?php echo $this->message?>
 </div>
-<?php
+                <?php
             }
-        }
-        else
-        {
-?>
+        } else {
+            ?>
 <div class="error">
-<?php
-            $this->writeErrors(false);
-?>
+            <?php
+                        $this->writeErrors(false);
+            ?>
 </div>
-<?php
+            <?php
         }
     }
 
-    function writeConfig()
+    public function writeConfig()
     {
         $this->writePage();
 
-?>
+        ?>
 <form action="<?php echo SB_FORM_ACTION_EXECUTOR ?>" method="POST">
 <table>
 <tr><th>DB Host Name</th></tr>
@@ -254,45 +235,46 @@ it to the <strong>adm</strong> manually!
 <input type="submit" name="command" value="Preview Settings">
 </form>
 
-<?php
-        SB_Page::foot();
+        <?php
+                SB_Page::foot();
     }
 
-    function getDBRelease()
+    public function getDBRelease()
     {
         $release = "";
 
-        if ($this->db->hasTable('sitebar_config'))
-        {
+        if ($this->db->hasTable('sitebar_config')) {
             $rset = $this->db->select(null, 'sitebar_config');
             $config = $this->db->fetchRecord($rset);
             $release = $config['release'];
 
             // Small fix for CVS releases
-            if ($release == "3.0pre")  $release = "3.0pre1";
-            if ($release == "3.0pre2") $release = "3.0pre1";
-            if ($release == "3.0b")    $release = "3.0pre1";
+            if ($release == "3.0pre") {
+                $release = "3.0pre1";
+            }
+            if ($release == "3.0pre2") {
+                $release = "3.0pre1";
+            }
+            if ($release == "3.0b") {
+                $release = "3.0pre1";
+            }
         }
 
         return $release;
     }
 
-    function checkStructure()
+    public function checkStructure()
     {
         $this->db = SB_Database::staticInstance();
-        if ($this->db->connection)
-        {
+        if ($this->db->connection) {
             $release = $this->getDBRelease();
 
-            if ($this->db->currentRelease() != $release)
-            {
-                if (isset($_REQUEST['command']))
-                {
+            if ($this->db->currentRelease() != $release) {
+                if (isset($_REQUEST['command'])) {
                     $this->command = $_REQUEST['command'];
                 }
 
-                switch ($this->command)
-                {
+                switch ($this->command) {
                     case 'Upgrade':
                         $this->conversion($release, true);
                         exit;
@@ -306,163 +288,146 @@ it to the <strong>adm</strong> manually!
                         exit;
                 }
 
-                if ($release)
-                {
+                if ($release) {
                     $dbrel = $this->db->currentRelease();
 
                     $this->message = <<<MSG
 Your software version $dbrel differs from the database version $release.
 MSG;
                     $this->writePage();
-?>
+                    ?>
 <p>
 <form action="<?php echo SB_FORM_ACTION_EXECUTOR ?>" method="POST">
-<?php if (file_exists($this->getScriptName($release,true))) : ?>
+                    <?php if (file_exists($this->getScriptName($release, true))) : ?>
 <input type="submit" name="command" value="Upgrade">
-<?php
-      endif;
-      if (file_exists($this->getScriptName($release,false))) :
-?>
+                        <?php
+                    endif;
+                    if (file_exists($this->getScriptName($release, false))) :
+                        ?>
 <input type="submit" name="command" value="Downgrade">
-<?php endif; ?>
+                    <?php endif; ?>
 <input type="submit" name="command" value="Reload">
 </form>
-<?php
-                }
-                else
-                {
+                    <?php
+                } else {
                     $this->message = 'Your database does not contain SiteBar tables.';
                     $this->writePage();
-?>
+                    ?>
 <p>
 <form action="<?php echo SB_FORM_ACTION_EXECUTOR ?>" method="POST">
 <input type="submit" name="command" value="Install">
 <input type="submit" name="command" value="Reload">
 </form>
-<?php
+                    <?php
                 }
-            }
-            else
-            {
+            } else {
                 header('Location: index.php');
             }
-        }
-        else
-        {
+        } else {
             $this->error('Cannot connect to database!');
 
             $this->writePage();
-?>
+            ?>
 <p>
 <form action="<?php echo SB_FORM_ACTION_EXECUTOR ?>" method="POST">
 <input type="submit" name="command" value="Check Settings">
 </form>
-<?php
+            <?php
         }
-
     }
 
-    function getScriptName($from, $upgrade=true)
+    public function getScriptName($from, $upgrade = true)
     {
-        return strtolower(sprintf('sql/%s_%s.sql',
-            ($upgrade?'upgrade':'downgrade'), str_replace(' ', '', $from)));
+        return strtolower(sprintf(
+            'sql/%s_%s.sql',
+            ($upgrade ? 'upgrade' : 'downgrade'),
+            str_replace(' ', '', $from)
+        ));
     }
 
-    function conversion($from, $upgrade=true)
+    public function conversion($from, $upgrade = true)
     {
-        do
-        {
+        do {
             $this->loadSQL($this->getScriptName($from, $upgrade));
             $from = $this->getDBRelease();
-        }
-        while ($upgrade
-        &&     $from!=$this->db->currentRelease()
-        &&     file_exists($this->getScriptName($from,$upgrade)));
+        } while (
+            $upgrade
+            &&     $from != $this->db->currentRelease()
+            &&     file_exists($this->getScriptName($from, $upgrade))
+        );
     }
 
-    function install()
+    public function install()
     {
         $this->loadSQL('./sql/install.sql');
 
-        if (!$this->hasErrors())
-        {
+        if (!$this->hasErrors()) {
             require_once('./inc/loader.inc.php');
             require_once('./inc/tree.inc.php');
 
             $bm = new SB_Loader(false);
             $bm->loadFile('./sql/bookmarks_sitebar.xbel', 'xbel');
 
-            if ($bm->success)
-            {
-                $tree =& SB_Tree::staticInstance();
+            if ($bm->success) {
+                $tree = & SB_Tree::staticInstance();
                 $tree->importTree(2, $bm->root, false, 'SB_cleanUpLink');
             }
 
             $bm = new SB_Loader(false);
             $bm->loadFile('./sql/bookmarks_websearch.xbel', 'xbel');
 
-            if ($bm->success)
-            {
-                $tree =& SB_Tree::staticInstance();
+            if ($bm->success) {
+                $tree = & SB_Tree::staticInstance();
                 $tree->importTree(2, $bm->root, false, 'SB_cleanUpLink');
             }
         }
     }
 
-    function loadSQL($filename)
+    public function loadSQL($filename)
     {
         $res = $this->db->raw('select @@innodb_version version');
         $rec = $this->db->fetchRecord($res);
         $version = $rec['version'];
-        $old = version_compare($version,'5.6.5') < 0;
+        $old = version_compare($version, '5.6.5') < 0;
 
-        if (!($fp=fopen($filename,'r')))
-        {
-            $this->error('Cannot open file '.$filename.'!');
+        if (!($fp = fopen($filename, 'r'))) {
+            $this->error('Cannot open file ' . $filename . '!');
             return;
         }
 
         $sql = '';
 
-        while (!feof($fp))
-        {
-            $line = rtrim(fgets($fp,4096));
+        while (!feof($fp)) {
+            $line = rtrim(fgets($fp, 4096));
             $size = strlen($line);
 
-            if ($size>0 && $line[$size-1] ==';')
-            {
-                $line = substr($line,0,$size-1);
+            if ($size > 0 && $line[$size - 1] == ';') {
+                $line = substr($line, 0, $size - 1);
                 $sql .= ' ' . $line;
 
                 if ($old) {
                     $sql = str_replace("datetime NOT NULL DEFAULT CURRENT_TIMESTAMP", "datetime NOT NULL DEFAULT '0000-00-00 00:00:00'", $sql);
-                }   
-        
-                if (!$this->db->raw($sql))
-                {
-                    $this->error($this->db->getErrorText().' ['.$sql.']');
+                }
+
+                if (!$this->db->raw($sql)) {
+                    $this->error($this->db->getErrorText() . ' [' . $sql . ']');
                 }
                 $sql = '';
-            }
-            else
-            {
+            } else {
                 $sql .= ' ' . $line;
             }
         }
-        fclose( $fp);
+        fclose($fp);
 
-        if ($this->hasErrors())
-        {
+        if ($this->hasErrors()) {
             $this->writePage();
-?>
+            ?>
 <p>
 <form action="<?php echo SB_FORM_ACTION_EXECUTOR ?>" method="POST">
 <input type="submit" name="command" value="Reload">
 </form>
-<?php
-        }
-        else
-        {
+            <?php
+        } else {
             header('Location: index.php');
         }
     }

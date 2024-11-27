@@ -1,13 +1,9 @@
 <?php
 
-$info = array
-(
+$info = array(
     'language' => 'Norsk (bokmål)',
-    'authors' => array
-    (
+    'authors' => array(
         'Torkill Bruland' => 'http://dataord.com/',
     ),
     'aliases' => array('no_NO')
 );
-
-?>

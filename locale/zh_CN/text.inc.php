@@ -1,7 +1,6 @@
 <?php
 
-$text = array
-(
+$text = array(
 'The Bookmark Server for Personal and Team Use' => '个人及团队使用的书签（收藏夹）服务器',
 'SiteBar Homepage' => 'SiteBar主页',
 'SiteBar Installation & Launcher' => 'SiteBar安装和运行',
@@ -227,5 +226,3 @@ $text = array
 'Link found' => '已找到链接',
 'Find next?' => '搜寻下一个？',
 );
-
-?>

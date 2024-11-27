@@ -781,5 +781,3 @@ _P;
 $para['groupname::Public'] = <<<_P
 Public
 _P;
-
-?>

@@ -1,4 +1,5 @@
 <?php
+
 /******************************************************************************
  *  SiteBar 3 - The Bookmark Server for Personal and Team Use.                *
  *  Copyright (C) 2005-2008  Ondrej Brablc <http://brablc.com/mailto?o>       *
@@ -20,10 +21,8 @@
 require_once('./inc/errorhandler.inc.php');
 require_once('./inc/page.inc.php');
 
-$pluginDir = SB_reqVal('name',true);
+$pluginDir = SB_reqVal('name', true);
 
 SB_safePath($pluginDir);
 
-require('./plugins/'.$pluginDir.'/index.inc.php');
-
-?>
+require('./plugins/' . $pluginDir . '/index.inc.php');

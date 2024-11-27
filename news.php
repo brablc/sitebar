@@ -1,4 +1,5 @@
 <?php
+
 /******************************************************************************
  *  SiteBar 3 - The Bookmark Server for Personal and Team Use.                *
  *  Copyright (C) 2004-2008  Ondrej Brablc <http://brablc.com/mailto?o>       *
@@ -28,5 +29,3 @@ require_once('./inc/writers/xbel.inc.php');
 require_once('./inc/writers/dir.inc.php');
 require_once('./inc/writers/news.inc.php');
 include('index.php');
-
-?>

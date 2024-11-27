@@ -2,11 +2,8 @@
 
 // Force commit
 
-$info = array
-(
+$info = array(
     'language' => 'Polski',
     'author' => 'Maciek Sujkowski',
     'url' => null,
 );
-
-?>

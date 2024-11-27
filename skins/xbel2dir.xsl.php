@@ -1,4 +1,5 @@
 <?php
+
 /******************************************************************************
  *  SiteBar 3 - The Bookmark Server for Personal and Team Use.                *
  *  Copyright (C) 2004-2008  Ondrej Brablc <http://brablc.com/mailto?o>       *
@@ -17,15 +18,15 @@
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.     *
  ******************************************************************************/
 
-    header('Content-Type: application/xml; charset=utf-8');
-    require_once('./inc/localizer.inc.php');
-    require_once('./inc/errorhandler.inc.php');
-    require_once('./inc/page.inc.php');
-    require_once('./inc/usermanager.inc.php');
+header('Content-Type: application/xml; charset=utf-8');
+require_once('./inc/localizer.inc.php');
+require_once('./inc/errorhandler.inc.php');
+require_once('./inc/page.inc.php');
+require_once('./inc/usermanager.inc.php');
 
-    $baseurl = str_replace('skins','',SB_Page::absBaseUrl());
-    $um = SB_UserManager::staticInstance();
-    $dirurl = $baseurl.($um->getParam('config','use_nice_url')?"dir/":"index.php?w=dir&amp;root=");
+$baseurl = str_replace('skins', '', SB_Page::absBaseUrl());
+$um = SB_UserManager::staticInstance();
+$dirurl = $baseurl . ($um->getParam('config', 'use_nice_url') ? "dir/" : "index.php?w=dir&amp;root=");
 
 ?>
 <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
@@ -53,7 +54,7 @@
     </xsl:element>
     <xsl:element name="script">
       <xsl:attribute name="type">text/javascript</xsl:attribute>
-      <xsl:attribute name="src"><?php echo SB_Page::absBaseUrl()."skins/sitebar.js?version=".STATIC_VERSION ?></xsl:attribute>
+      <xsl:attribute name="src"><?php echo SB_Page::absBaseUrl() . "skins/sitebar.js?version=" . STATIC_VERSION ?></xsl:attribute>
     </xsl:element>
     </head>
 

@@ -2033,5 +2033,3 @@ _SBHD;
 $text['Skin designed by'] = <<<_SBHD
 Opmaak ontworpen door
 _SBHD;
-
-?>

@@ -2007,5 +2007,3 @@ _P;
 $text['Skin designed by'] = <<<_P
 Skin dissenyada per
 _P;
-
-?>

@@ -1,7 +1,6 @@
 <?php
 
-$text = array
-(
+$text = array(
 'The Bookmark Server for Personal and Team Use' => 'Bokmärkesserver för personlig användning och teamanvändning',
 'SiteBar Homepage' => 'SiteBar Hemsida',
 'Your Language' => 'Svenska',
@@ -511,5 +510,3 @@ $text = array
 'Skin created by' => 'Utseende skapat av',
 'Skin designed by' => 'Utseende formgivet av',
 );
-
-?>

@@ -6,7 +6,7 @@
 
 class SB_Hook extends SB_HookInterface
 {
-    function designedBy()
+    public function designedBy()
     {
         echo SB_T("Skin designed by")?> <a href='http://www.alexisisaac.net/' <?php echo SB_Page::target()?>>Alexis Isaac</a><?php
     }

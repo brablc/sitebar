@@ -1,4 +1,5 @@
 <?php
+
 /******************************************************************************
  *  SiteBar 3 - The Bookmark Server for Personal and Team Use.                *
  *  Copyright (C) 2003-2008  Ondrej Brablc <http://brablc.com/mailto?o>       *
@@ -21,5 +22,3 @@ require_once('./inc/validator.inc.php');
 
 $validator = new SB_Validator();
 $validator->validate($_GET['id'], isset($_GET['get_favicon']));
-
-?>

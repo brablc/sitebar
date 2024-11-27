@@ -27,5 +27,3 @@ Az egérgomb elengedésére a hivatkozást az aktuálisan kiemelt célmappába h
 Az áthúzással történő áthelyezés (Drag & Drop) Opera böngészőre nincs megvalósítva.
 Ebben az esetben a Másolás és Beillesztés funkciókat kell használni.
 _P;
-
-?>

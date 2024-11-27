@@ -1,10 +1,7 @@
-<?php 
+<?php
 
-$info = array
-(
+$info = array(
     'language' => 'Русский',
     'author' => 'Andrew Baranow',
     'url' => 'http://xhtml.ru/'
 );
-
-?>

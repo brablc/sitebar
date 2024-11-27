@@ -101,5 +101,3 @@ $help['305'] = <<<_P
 <li>SiteBarソフトウェアを移動するか、新しいSiteBarのインストールをする。（アップグレード、ダウングレードは自動的に行われます。）
 <li>もしデータベース接続情報が変更されている場合はinc/config.inc.phpファイルを削除するか、更新してください。</ul><p>エクスポートとインポートは<a href='http://www.phpmyadmin.net/'>phpMyAdmin</a>を使うとより簡単に行えます。sitebar_favicon (3.2.6まで) 及び sitebar_cache (3.3以上)は転送する必要なありません。ソフトウェアにより再構築されます。
 _P;
-
-?>

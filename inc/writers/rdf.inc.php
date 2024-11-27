@@ -1,4 +1,5 @@
 <?php
+
 /******************************************************************************
  *  SiteBar 3 - The Bookmark Server for Personal and Team Use.                *
  *  Copyright (C) 2004-2008  Ondrej Brablc <http://brablc.com/mailto?o>       *
@@ -34,33 +35,31 @@ require_once('./inc/writer.inc.php');
 
 class SB_Writer_rdf extends SB_WriterInterfaceXML
 {
-    function __construct()
+    public function __construct()
     {
         parent::__construct();
     }
 
-    function getExtension()
+    public function getExtension()
     {
         return ".rdf";
     }
 
-    function drawContentType()
+    public function drawContentType()
     {
         header('Content-Type: application/xml');
     }
 
-    function drawHead()
+    public function drawHead()
     {
         $this->drawXMLPI();
-        $this->drawTagOpen('rdf:RDF', array
-        (
+        $this->drawTagOpen('rdf:RDF', array(
             'xmlns:rdf' => 'http://www.w3.org/1999/02/22-rdf-syntax-ns#',
             'xmlns:rss' => 'http://purl.org/rss/1.0/',
             'xmlns:dc' => 'http://purl.org/dc/elements/1.1/',
         ));
 
-        $this->drawTagOpen('rdf:Description', array
-        (
+        $this->drawTagOpen('rdf:Description', array(
             'rdf:about' => $this->settingsValue('feed_link'),
         ));
 
@@ -68,50 +67,44 @@ class SB_Writer_rdf extends SB_WriterInterfaceXML
 
         $this->drawTagClose('rdf:Description');
 
-        if (!$this->switches['root'])
-        {
-            $this->drawTagOpen('rdf:Seq', array
-            (
+        if (!$this->switches['root']) {
+            $this->drawTagOpen('rdf:Seq', array(
                 'ID' => 'n0',
                 'rss:title' => $this->quoteAtt($this->getTitle()),
             ));
         }
     }
 
-    function drawNodeOpen(&$node, $last=false)
+    public function drawNodeOpen(&$node, $last = false)
     {
         $this->drawTagOpen('rdf:li');
-        $this->drawTagOpen('rdf:Seq', array
-        (
-            'ID' => 'n'.$node->id,
+        $this->drawTagOpen('rdf:Seq', array(
+            'ID' => 'n' . $node->id,
             'rss:title' => $this->quoteAtt($node->name),
         ));
     }
 
-    function drawNodeClose(&$node)
+    public function drawNodeClose(&$node)
     {
         $this->drawTagClose('rdf:Seq');
         $this->drawTagClose('rdf:li');
     }
 
-    function drawLink(&$node, &$link, $last=false)
+    public function drawLink(&$node, &$link, $last = false)
     {
         $this->drawTagOpen('rdf:li');
-        $this->drawTag('rss:item', array
-        (
+        $this->drawTag('rss:item', array(
             'rss:title' => $this->quoteAtt($link->name),
             'rss:link' => $this->quoteAtt($link->url),
         ));
         $this->drawTagClose('rdf:li');
     }
 
-    function drawFoot()
+    public function drawFoot()
     {
-        if (!$this->switches['root'])
-        {
+        if (!$this->switches['root']) {
             $this->drawTagClose('rdf:Seq');
         }
         $this->drawTagClose('rdf:RDF');
     }
 }
-?>

@@ -1,4 +1,5 @@
 <?php
+
 /******************************************************************************
  *  SiteBar 3 - The Bookmark Server for Personal and Team Use.                *
  *  Copyright (C) 2004-2008  Ondrej Brablc <http://brablc.com/mailto?o>       *
@@ -28,24 +29,22 @@ require_once('./inc/writer.inc.php');
 
 class SB_Writer_opml_link extends SB_WriterInterfaceXML
 {
-    function __construct()
+    public function __construct()
     {
         parent::__construct();
     }
 
-    function getNodeAtt(&$node)
+    public function getNodeAtt(&$node)
     {
-        $att = array
-        (
+        $att = array(
             'text' => $this->quoteAtt($node->name),
         );
         return $att;
     }
 
-    function getLinkAtt(&$node, &$link)
+    public function getLinkAtt(&$node, &$link)
     {
-        $att = array
-        (
+        $att = array(
             'type' => 'link',
             'text' => $this->quoteAtt($link->name),
             'url'  => $this->quoteAtt($link->url),
@@ -54,62 +53,60 @@ class SB_Writer_opml_link extends SB_WriterInterfaceXML
         return $att;
     }
 
-    function drawDOCTYPE()
+    public function drawDOCTYPE()
     {
-?>
+        ?>
 <!DOCTYPE opml [
     <!ENTITY % opml_plain SYSTEM "http://static.userland.com/gems/radiodiscuss/opmlDtd.txt">
     <!ENTITY % OtherAttributes  "url CDATA #IMPLIED">
     %opml_plain;
 ]>
-<?php
+        <?php
     }
 
     /* Common functions for OPML */
 
-    function getExtension()
+    public function getExtension()
     {
         return ".opml";
     }
 
-    function drawHead()
+    public function drawHead()
     {
         $this->drawXMLPI();
         $this->drawDOCTYPE();
-        $this->drawTagOpen('opml',array('version'=>'1.0'));
+        $this->drawTagOpen('opml', array('version' => '1.0'));
 
         $this->drawTagOpen('head');
         $this->drawTag('title', null, $this->quoteText($this->getTitle()));
 
-        if ($this->settingsValue('feed_owner_name'))
-        {
+        if ($this->settingsValue('feed_owner_name')) {
             $this->drawTag('ownerName', null, $this->quoteText($this->settingsValue('feed_owner_name')));
         }
 
-        if ($this->settingsValue('feed_owner_email'))
-        {
+        if ($this->settingsValue('feed_owner_email')) {
             $this->drawTag('ownerEmail', null, $this->quoteText($this->settingsValue('feed_owner_email')));
         }
         $this->drawTagClose('head');
         $this->drawTagOpen('body');
     }
 
-    function drawNodeOpen(&$node, $last=false)
+    public function drawNodeOpen(&$node, $last = false)
     {
         $this->drawTagOpen('outline', $this->getNodeAtt($node));
     }
 
-    function drawNodeClose(&$node)
+    public function drawNodeClose(&$node)
     {
         $this->drawTagClose('outline');
     }
 
-    function drawLink(&$node, &$link, $last=false)
+    public function drawLink(&$node, &$link, $last = false)
     {
         $this->drawTag('outline', $this->getLinkAtt($node, $link));
     }
 
-    function drawFoot()
+    public function drawFoot()
     {
         $this->drawTagClose('body');
         $this->drawTagClose('opml');

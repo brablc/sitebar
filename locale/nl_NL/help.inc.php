@@ -476,5 +476,3 @@ Het exporteren en importeren kan worden uitgevoerd met <a href="http://www.phpmy
 De tabel sitebar_favicon (tot 3.2.6) of sitebar_cache (vanaf 3.3) hoeft niet
 te worden overgezet, omdat zijn inhoud opnieuw zal worden opgebouwd.
 _P;
-
-?>

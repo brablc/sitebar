@@ -1,4 +1,5 @@
 <?php
+
 /******************************************************************************
  *  SiteBar 3 - The Bookmark Server for Personal and Team Use.                *
  *  Copyright (C) 2004-2008  Ondrej Brablc <http://brablc.com/mailto?o>       *
@@ -21,82 +22,76 @@ $SB_loader_title['xbel'] = 'XBEL';
 
 class SB_Loader_xbel extends SB_LoaderInterface
 {
-    var $bookmarksToolbarFolder;
-    var $unfiledBookmarksFolder;
+    public $bookmarksToolbarFolder;
+    public $unfiledBookmarksFolder;
 
-    function __construct($useEngine=true, $charSet=null)
+    public function __construct($useEngine = true, $charSet = null)
     {
         parent::__construct($useEngine, $charSet);
     }
 
-    function getNodeTag()
+    public function getNodeTag()
     {
         return 'folder';
     }
 
-    function getLinkTag()
+    public function getLinkTag()
     {
         return 'bookmark';
     }
 
-    function createNode($xmlTag)
+    public function createNode($xmlTag)
     {
         $special = array();
 
-        $id = SB_safeVal($xmlTag['attributes'],'id',null);
-        if ($id == $this->bookmarksToolbarFolder)
+        $id = SB_safeVal($xmlTag['attributes'], 'id', null);
+        if ($id == $this->bookmarksToolbarFolder) {
             $special['is_toolbar'] = 1;
-        if ($id == $this->unfiledBookmarksFolder)
+        }
+        if ($id == $this->unfiledBookmarksFolder) {
             $special['is_unfiled'] = 1;
+        }
 
-        foreach ($xmlTag['children'] as $index => $value)
-        {
-            if ($value['tag'] == 'title')
+        foreach ($xmlTag['children'] as $index => $value) {
+            if ($value['tag'] == 'title') {
                 $xmlTag['attributes']['name'] = $value['value'];
-            if ($value['tag'] == 'desc')
+            }
+            if ($value['tag'] == 'desc') {
                 $xmlTag['attributes']['comment'] = $value['value'];
+            }
         }
 
         return new SB_Tree_Node($xmlTag['attributes'], $special);
     }
 
-    function createLink($xmlTag)
+    public function createLink($xmlTag)
     {
         $xmlTag['attributes']['url'] = $xmlTag['attributes']['href'];
 
-        foreach ($xmlTag['children'] as $index => $value)
-        {
-            if ($value['tag'] == 'title')
+        foreach ($xmlTag['children'] as $index => $value) {
+            if ($value['tag'] == 'title') {
                 $xmlTag['attributes']['name'] = $value['value'];
+            }
 
-            if ($value['tag'] == 'desc')
+            if ($value['tag'] == 'desc') {
                 $xmlTag['attributes']['comment'] = $value['value'];
+            }
 
-            if ($value['tag'] == 'info')
-            {
-                foreach ($value['children'] as $index2 => $value2)
-                {
-                    if ($value2['tag'] == 'metadata')
-                    {
-                        if (isset($value2['attributes']['owner']) == "Mozilla")
-                        {
-                            if (isset($value2['attributes']['WebPanel']))
-                            {
+            if ($value['tag'] == 'info') {
+                foreach ($value['children'] as $index2 => $value2) {
+                    if ($value2['tag'] == 'metadata') {
+                        if (isset($value2['attributes']['owner']) == "Mozilla") {
+                            if (isset($value2['attributes']['WebPanel'])) {
                                 $xmlTag['attributes']['is_sidebar'] = $value2['attributes']['WebPanel'];
                             }
-                            if (isset($value2['attributes']['FeedURL']))
-                            {
+                            if (isset($value2['attributes']['FeedURL'])) {
                                 $xmlTag['attributes']['url'] = $value2['attributes']['FeedURL'];
                                 $xmlTag['attributes']['is_feed'] = 1;
                             }
-                            if (isset($value2['attributes']['IconURI']))
-                            {
+                            if (isset($value2['attributes']['IconURI'])) {
                                 $xmlTag['attributes']['favicon'] = $value2['attributes']['IconURI'];
-                            }
-                            else if (isset($value2['attributes']['Icon']))
-                            {
-                                if (preg_match("/^data:image\/(.*?);base64,(.*)$/", $value2['attributes']['Icon'], $reg))
-                                {
+                            } elseif (isset($value2['attributes']['Icon'])) {
+                                if (preg_match("/^data:image\/(.*?);base64,(.*)$/", $value2['attributes']['Icon'], $reg)) {
                                     $fc = & SB_FaviconCache::staticInstance();
                                     $xmlTag['attributes']['favicon'] = $fc->saveFaviconBase64($reg[2]);
                                 }
@@ -108,22 +103,22 @@ class SB_Loader_xbel extends SB_LoaderInterface
             }
         }
 
-        $xmlTag['attributes']['changed'] = SB_safeVal($xmlTag['attributes'],'modified');
+        $xmlTag['attributes']['changed'] = SB_safeVal($xmlTag['attributes'], 'modified');
 
         return new SB_Tree_Link($xmlTag['attributes']);
     }
 
-    function handleUnknownTag($xmlTag)
+    public function handleUnknownTag($xmlTag)
     {
-        if ($xmlTag['tag'] == "metadata"
-        && isset($xmlTag['attributes'])
-        && isset($xmlTag['attributes']['SyncPlaces']))
-        {
+        if (
+            $xmlTag['tag'] == "metadata"
+            && isset($xmlTag['attributes'])
+            && isset($xmlTag['attributes']['SyncPlaces'])
+        ) {
             $attr = $xmlTag['attributes'];
-            $this->bookmarksToolbarFolder = SB_safeVal($attr,'BookmarksToolbarFolder');
-            $this->unfiledBookmarksFolder = SB_safeVal($attr,'UnfiledBookmarksFolder');
+            $this->bookmarksToolbarFolder = SB_safeVal($attr, 'BookmarksToolbarFolder');
+            $this->unfiledBookmarksFolder = SB_safeVal($attr, 'UnfiledBookmarksFolder');
         }
         return;
     }
-
 }

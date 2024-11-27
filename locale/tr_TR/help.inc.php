@@ -216,5 +216,3 @@ Tabloları alma ve verme işi <a href='http://www.phpmyadmin.net/'>phpMyAdmin</a
 sitebar_favicon tablosunun (3.2.6'e kadar) ve sitebar_cache'in (3.3'den başlayarak) taşınmasına gerek yoktur, bunların içeriği yeniden oluşturulacaktır.
 
 _P;
-
-?>

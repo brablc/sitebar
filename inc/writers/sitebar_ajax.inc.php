@@ -1,4 +1,5 @@
 <?php
+
 /******************************************************************************
  *  SiteBar 3 - The Bookmark Server for Personal and Team Use.                *
  *  Copyright (C) 2005-2008  Ondrej Brablc <http://brablc.com/mailto?o>       *
@@ -24,58 +25,55 @@ require_once('./inc/writers/sitebar.inc.php');
 
 class SB_Writer_sitebar_ajax extends SB_Writer_sitebar
 {
-    var $arrFilled = false;
-    var $level = 0;
+    public $arrFilled = false;
+    public $level = 0;
 
-    function __construct()
+    public function __construct()
     {
         parent::__construct();
         $this->switches['root'] = SB_reqVal('nid');
         $this->switches['exr'] = true;
-        $this->level = intval(SB_reqVal('level'))-1;
+        $this->level = intval(SB_reqVal('level')) - 1;
     }
 
-    function fillArray(&$node)
+    public function fillArray(&$node)
     {
         $this->arrFilled = true;
 
-        for ($i=0; $i<$this->level; $i++)
-        {
+        for ($i = 0; $i < $this->level; $i++) {
             array_push($this->treearr, $this->iempty);
         }
-	if(!is_null($node->root))
-	{
+        if (!is_null($node->root)) {
             $node->root->isRoot = false;
-	}
+        }
     }
 
-/* Opera 8.5 does not support responseXML
-    function drawContentType()
-    {
-        header('Content-Type: text/xml; charset=utf-8');
-    }
-*/
+    /* Opera 8.5 does not support responseXML
+        function drawContentType()
+        {
+            header('Content-Type: text/xml; charset=utf-8');
+        }
+    */
 
-    function drawHead()
+    public function drawHead()
     {
         /* Opera 8.5 does not support responseXML
         $this->drawXMLPI();
         echo '<response><root>'.$this->switches['root'].'</root><data><![CDATA[';
         */
-        echo $this->switches['root']."\r";
+        echo $this->switches['root'] . "\r";
     }
 
-    function drawFoot()
+    public function drawFoot()
     {
         /* Opera 8.5 does not support responseXML
         echo ']]></data></response>'."\r";
         */
     }
 
-    function drawNodeOpen(&$node, $last=false)
+    public function drawNodeOpen(&$node, $last = false)
     {
-        if (!$this->arrFilled)
-        {
+        if (!$this->arrFilled) {
             $this->fillArray($node);
             $node->aclstr = SB_reqVal('acl');
         }
@@ -84,22 +82,20 @@ class SB_Writer_sitebar_ajax extends SB_Writer_sitebar
         parent::drawNodeOpen($node, $last);
     }
 
-    function drawNodeClose(&$node)
+    public function drawNodeClose(&$node)
     {
         parent::drawNodeClose($node);
     }
 
-    function drawLink(&$node, &$link, $last=false)
+    public function drawLink(&$node, &$link, $last = false)
     {
         static $aclstrSet = false;
 
-        if (!$this->arrFilled)
-        {
+        if (!$this->arrFilled) {
             $this->fillArray($node);
         }
 
-        if (!$aclstrSet)
-        {
+        if (!$aclstrSet) {
             $node->aclstr = SB_reqVal('acl');
             $aclstrSet = true;
         }
@@ -107,4 +103,3 @@ class SB_Writer_sitebar_ajax extends SB_Writer_sitebar
         parent::drawLink($node, $link, $last);
     }
 }
-?>

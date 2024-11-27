@@ -1,4 +1,5 @@
 <?php
+
 /******************************************************************************
  *  SiteBar 3 - The Bookmark Server for Personal and Team Use.                *
  *  Copyright (C) 2003-2008  Ondrej Brablc <http://brablc.com/mailto?o>       *
@@ -29,13 +30,13 @@
 <?php
 
 require_once('./inc/usermanager.inc.php');
-$um =& SB_UserManager::staticInstance();
+$um = & SB_UserManager::staticInstance();
 $popupParams = $um->getParamB64('user', 'popup_params');
 
 echo "    var params='$popupParams';\n";
 
 if ($_GET['add'] == 'page') :
-?>
+    ?>
     var tit='';
 
     if (external.menuArguments.document)
@@ -44,15 +45,14 @@ if ($_GET['add'] == 'page') :
     }
 
     var url = external.menuArguments.location.href;
-<?php
+    <?php
 else :
-?>
+    ?>
     var obj = external.menuArguments.event.srcElement;
     var tit = obj.innerHTML;
     var url = obj.getAttribute('href');
 
-<?php
-
+    <?php
 endif;
 ?>
     var cp  = external.menuArguments.document.charset;

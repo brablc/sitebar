@@ -1,4 +1,5 @@
 <?php
+
 /******************************************************************************
  *  SiteBar 3 - The Bookmark Server for Personal and Team Use.                *
  *  Copyright (C) 2005-2008  Ondrej Brablc <http://brablc.com/mailto?o>       *
@@ -30,103 +31,89 @@ require_once('./inc/writers/sitebar.inc.php');
 
 class SB_Writer_mobile extends SB_Writer_sitebar
 {
-    function __construct()
+    public function __construct()
     {
         parent::__construct();
     }
 
-    function writeMenuItem($id, &$itemArray)
+    public function writeMenuItem($id, &$itemArray)
     {
         static $expertMode = null;
 
-        if ($expertMode===null)
-        {
-            $expertMode = $this->um->getParam('user','expert_mode');
+        if ($expertMode === null) {
+            $expertMode = $this->um->getParam('user', 'expert_mode');
         }
 
-        $command = SB_safeVal($itemArray,'name');
-        $link = SB_safeVal($itemArray,'href');
-        $callback = SB_safeVal($itemArray,'callback');
-        $acl = SB_safeVal($itemArray,'acl');
-        $optional = SB_safeVal($itemArray,'optional',false);
-        $more = SB_safeVal($itemArray,'more',false);
+        $command = SB_safeVal($itemArray, 'name');
+        $link = SB_safeVal($itemArray, 'href');
+        $callback = SB_safeVal($itemArray, 'callback');
+        $acl = SB_safeVal($itemArray, 'acl');
+        $optional = SB_safeVal($itemArray, 'optional', false);
+        $more = SB_safeVal($itemArray, 'more', false);
 
         $class = 'item';
-        if (!$command)
-        {
-            $class.= ' separator';
-        }
-        else if ($optional&&!$expertMode)
-        {
+        if (!$command) {
+            $class .= ' separator';
+        } elseif ($optional && !$expertMode) {
             $class .= ' optional';
         }
 
-        $div = "\t".'<div id="'.$id.'" class="'.$class.'"';
+        $div = "\t" . '<div id="' . $id . '" class="' . $class . '"';
 
-        if ($command)
-        {
-            $div .= ' onmouseover="SB_itemOn(this);"'.
+        if ($command) {
+            $div .= ' onmouseover="SB_itemOn(this);"' .
                     ' onmouseout="SB_itemOff(this);"';
         }
 
-        if ($command && !$link)
-        {
+        if ($command && !$link) {
             $div .=
-                ' x_acl="'.$acl.'"'.
-                ' x_cmd="'.$command.'"';
+                ' x_acl="' . $acl . '"' .
+                ' x_cmd="' . $command . '"';
         }
         echo $div . '>';
 
-        if ($link)
-        {
+        if ($link) {
             static $target;
-            if ($target==null)
-            {
+            if ($target == null) {
                 $target = SB_Page::target();
             }
 
-            if (strstr($link,'http')!==0)
-            {
-                $link= SB_Page::absBaseUrl().$link;
+            if (strstr($link, 'http') !== 0) {
+                $link = SB_Page::absBaseUrl() . $link;
             }
 
-            echo '<a class="menuLink" href="'. $link .'"'. $target .'>';
-        }
-        else
-        {
-            echo '<a href="javascript:SB_itemDoAlt(\'' . $id . '\'' . ($callback?',\''.$callback.'\'':''). ')">';
+            echo '<a class="menuLink" href="' . $link . '"' . $target . '>';
+        } else {
+            echo '<a href="javascript:SB_itemDoAlt(\'' . $id . '\'' . ($callback ? ',\'' . $callback . '\'' : '') . ')">';
         }
 
         echo SB_T($command);
 
-        if ($command=='Log Out')
-        {
-            echo ' ('.$this->um->username.')';
+        if ($command == 'Log Out') {
+            echo ' (' . $this->um->username . ')';
         }
 
-        if ($link)
-        {
+        if ($link) {
             echo '</a>';
         }
 
         echo "</div>\r";
     }
 
-    function run()
+    public function run()
     {
         $this->loadOpenNodesOnly = false;
-        $this->um->setParam('user','menu_icon', true);
+        $this->um->setParam('user', 'menu_icon', true);
         parent::run();
     }
 
-    function showChildren(&$node)
+    public function showChildren(&$node)
     {
         return true;
     }
 
-    function wantLoadChildren(&$node)
+    public function wantLoadChildren(&$node)
     {
         return true;
     }
 }
-?>

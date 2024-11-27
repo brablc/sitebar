@@ -1,7 +1,6 @@
 <?php
 
-$topic = array
-(
+$topic = array(
 '100' => 'Consells d&#39;ús',
 '101' => 'Drag & Drop',
 '103' => 'Funcions de la barra d&#39;eines',
@@ -19,5 +18,3 @@ $topic = array
 '304' => 'Escriptors',
 '305' => 'Migració',
 );
-
-?>

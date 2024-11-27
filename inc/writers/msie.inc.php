@@ -1,4 +1,5 @@
 <?php
+
 /******************************************************************************
  *  SiteBar 3 - The Bookmark Server for Personal and Team Use.                *
  *  Copyright (C) 2004-2008  Ondrej Brablc <http://brablc.com/mailto?o>       *
@@ -23,9 +24,8 @@ require_once('./inc/writers/netscape.inc.php');
 
 class SB_Writer_msie extends SB_Writer_netscape
 {
-    function __construct()
+    public function __construct()
     {
         parent::__construct();
     }
 }
-?>

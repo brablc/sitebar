@@ -83,5 +83,3 @@ _SBHD;
 $para['groupname::Public'] = <<<_SBHD
 Julkinen
 _SBHD;
-
-?>

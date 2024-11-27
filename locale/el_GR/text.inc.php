@@ -125,5 +125,3 @@ _SBHD;
 $text['Skin designed by'] = <<<_SBHD
 Το Skin σχεδιάστηκε από 
 _SBHD;
-
-?>

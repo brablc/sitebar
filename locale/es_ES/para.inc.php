@@ -131,5 +131,3 @@ Grupos {groups}.
 Consultas SQL {queries}.
 BD/Tiempo total {time_db}/{time_total} segundos ({time_pct}%).
 _P;
-
-?>

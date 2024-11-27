@@ -124,5 +124,3 @@ $para['hook::statistics'] = <<<_P
 SQL 질의 {queries}.
 DB/총 시간 {time_db}/{time_total} 초 ({time_pct}%).
 _P;
-
-?>

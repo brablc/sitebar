@@ -1,4 +1,5 @@
 <?php
+
 /******************************************************************************
  *  SiteBar 3 - The Bookmark Server for Personal and Team Use.                *
  *  Copyright (C) 2004-2008  Ondrej Brablc <http://brablc.com/mailto?o>       *
@@ -29,34 +30,32 @@ require_once('./inc/writer.inc.php');
 
 class SB_Writer_atom extends SB_WriterInterfaceXML
 {
-    function __construct()
+    public function __construct()
     {
         parent::__construct();
         $this->switches['flat'] = true;
     }
 
-    function getExtension()
+    public function getExtension()
     {
         return ".atom";
     }
 
-    function drawContentType()
+    public function drawContentType()
     {
         header('Content-Type: application/xml');
     }
 
-    function drawHead()
+    public function drawHead()
     {
         $this->drawXMLPI();
-        $this->drawTagOpen('feed', array
-        (
+        $this->drawTagOpen('feed', array(
             'version' => '0.3',
             'xmlns' => 'http://purl.org/atom/ns#',
-            'xml:lang' => str_replace('_','-',$this->um->getParam('user','lang')),
+            'xml:lang' => str_replace('_', '-', $this->um->getParam('user', 'lang')),
         ));
         $this->drawTag('title', null, $this->quoteText($this->getTitle()));
-        $this->drawTag('link', array
-        (
+        $this->drawTag('link', array(
             'rel' => 'alternate',
             'type' => 'text/html',
             'href' => $this->settingsValue('feed_link'),
@@ -70,12 +69,11 @@ class SB_Writer_atom extends SB_WriterInterfaceXML
         $this->drawTag('modified', null, $this->getGMDateISO8601($this->root->changed));
     }
 
-    function drawLink(&$node, &$link, $last=false)
+    public function drawLink(&$node, &$link, $last = false)
     {
         $this->drawTagOpen('entry');
         $this->drawTag('title', null, $this->quoteText($link->name));
-        $this->drawTag('link', array
-        (
+        $this->drawTag('link', array(
             'rel' => 'alternate',
             'type' => 'text/html',
             'href' => $this->quoteAtt($link->url),
@@ -87,9 +85,8 @@ class SB_Writer_atom extends SB_WriterInterfaceXML
         $this->drawTagClose('entry');
     }
 
-    function drawFoot()
+    public function drawFoot()
     {
         $this->drawTagClose('feed');
     }
 }
-?>

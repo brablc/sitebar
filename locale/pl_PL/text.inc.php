@@ -1579,5 +1579,3 @@ _P;
 $text['Skin designed by'] = <<<_P
 Skórka zaprojektowana przez
 _P;
-
-?>

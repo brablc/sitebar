@@ -1737,5 +1737,3 @@ _SBHD;
 $text['Skin designed by'] = <<<_SBHD
 Tyylin on suunnitellut
 _SBHD;
-
-?>

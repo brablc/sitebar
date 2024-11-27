@@ -1931,5 +1931,3 @@ _P;
 $text['Skin designed by'] = <<<_P
 Tema diseñado por
 _P;
-
-?>

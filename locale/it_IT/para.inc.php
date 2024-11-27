@@ -101,5 +101,3 @@ Gruppi {groups}.
 Query SQL {queries}.
 Tempo DB/Totale {time_db}/{time_total} sec ({time_pct}%).
 _P;
-
-?>

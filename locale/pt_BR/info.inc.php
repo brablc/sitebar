@@ -1,13 +1,9 @@
 <?php
 
-$info = array
-(
+$info = array(
     'language' => 'Português Brasileiro',
-    'authors' => array
-    (
+    'authors' => array(
         'Carlos Felicio' => null,
         'Albert E. Souza' => null
     ),
 );
-
-?>

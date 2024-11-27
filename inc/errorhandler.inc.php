@@ -1,4 +1,5 @@
 <?php
+
 /******************************************************************************
  *  SiteBar 3 - The Bookmark Server for Personal and Team Use.                *
  *  Copyright (C) 2003-2008  Ondrej Brablc <http://brablc.com/mailto?o>       *
@@ -32,9 +33,7 @@ define('SB_LOG_SQL', SB_DEBUGGING && true);
 require_once './lib/vendor/tracy/tracy/src/tracy.php';
 use Tracy\Debugger;
 
-
-if (SB_SHOW_PHP_ERRORS)
-{
+if (SB_SHOW_PHP_ERRORS) {
     error_reporting(E_ALL | E_STRICT); // We want to see all errors, regardless of php.ini
     Debugger::enable(Debugger::DEVELOPMENT);
 }
@@ -49,8 +48,7 @@ $SB_errorHandler__ignoreWarnings = 0;
 
 function SB_safeVal(&$ascArr, $field, $default = null)
 {
-    if (isset($ascArr[$field]))
-    {
+    if (isset($ascArr[$field])) {
         return $ascArr[$field];
     }
     return $default;
@@ -58,8 +56,7 @@ function SB_safeVal(&$ascArr, $field, $default = null)
 
 function SB_errorHandler_handler($errno, $errstr, $errfile, $errline)
 {
-    if (!SB_SHOW_PHP_ERRORS)
-    {
+    if (!SB_SHOW_PHP_ERRORS) {
         return;
     }
 
@@ -70,15 +67,14 @@ function SB_errorHandler_handler($errno, $errstr, $errfile, $errline)
     $pathParts = pathinfo($errfile);
     $location = $pathParts['basename'] . ' line ' . $errline;
 
-    switch ($errno)
-    {
+    switch ($errno) {
         case E_ERROR:
             $errHandler->error("%s [%s]", array($errstr, $location));
             break;
 
-        // E_STRICT - PHP 5.0 wants access modifiers instead of var
-        // We will wait and switch to the new way only when PHP 4.0
-        // is no more used (never?).
+            // E_STRICT - PHP 5.0 wants access modifiers instead of var
+            // We will wait and switch to the new way only when PHP 4.0
+            // is no more used (never?).
         case 2048:
             break;
 
@@ -93,77 +89,69 @@ require_once('./inc/localizer.inc.php');
 
 class SB_StopWatch
 {
-    var $started = 0;
-    var $elapsed = 0;
+    public $started = 0;
+    public $elapsed = 0;
 
-    function __construct()
+    public function __construct()
     {
         $this->start();
     }
 
-    function start()
+    public function start()
     {
         $this->elapsed = 0;
         $this->cont();
     }
 
-    function cont()
+    public function cont()
     {
         $this->started = $this->getMicroTime();
     }
 
-    function pause()
+    public function pause()
     {
         $this->elapsed += $this->getMicroTime() - $this->started;
         return $this->elapsed;
     }
 
-    function stop()
+    public function stop()
     {
         return $this->pause();
     }
 
     public static function getMicroTime()
     {
-        list($usec, $sec) = explode(' ',microtime());
+        list($usec, $sec) = explode(' ', microtime());
         return ((float)$usec + (float)$sec);
     }
 }
 
 class SB_ErrorHandler
 {
-    function useHandler($sbHandler = true)
+    public function useHandler($sbHandler = true)
     {
         global $SB_errorHandler__phpHandlerSet;
 
-        if ($sbHandler)
-        {
-            if (!$SB_errorHandler__phpHandlerSet)
-            {
+        if ($sbHandler) {
+            if (!$SB_errorHandler__phpHandlerSet) {
                 set_error_handler('SB_errorHandler_handler');
             }
             $SB_errorHandler__phpHandlerSet++;
-        }
-        else
-        {
-            if ($SB_errorHandler__phpHandlerSet)
-            {
+        } else {
+            if ($SB_errorHandler__phpHandlerSet) {
                 restore_error_handler();
             }
             $SB_errorHandler__phpHandlerSet--;
         }
     }
 
-    function ignoreWarnings($ignore=true)
+    public function ignoreWarnings($ignore = true)
     {
         global $SB_errorHandler__ignoreWarnings;
 
-        if ($ignore)
-        {
+        if ($ignore) {
             $SB_errorHandler__ignoreWarnings++;
-        }
-        else
-        {
+        } else {
             $SB_errorHandler__ignoreWarnings--;
         }
     }
@@ -171,53 +159,49 @@ class SB_ErrorHandler
     /**
     * Issue error
     */
-    function error($msg, $arr=null)
+    public function error($msg, $arr = null)
     {
         global $SB_errorHandler__errorCount;
         $SB_errorHandler__errorCount++;
-        $errors =& SB_ErrorHandler::getErrors();
+        $errors = & SB_ErrorHandler::getErrors();
         $errors[] = array(E_ERROR,SB_ErrorHandler::formatError($msg ?? "Unknown error", $arr));
     }
 
     /**
     * Issue warning
     */
-    function warn($msg, $arr=null)
+    public function warn($msg, $arr = null)
     {
         global $SB_errorHandler__ignoreWarnings;
 
-        if ($SB_errorHandler__ignoreWarnings)
-        {
+        if ($SB_errorHandler__ignoreWarnings) {
             return;
         }
 
         global $SB_errorHandler__warnCount;
         $SB_errorHandler__warnCount++;
-        $errors =& SB_ErrorHandler::getErrors();
+        $errors = & SB_ErrorHandler::getErrors();
         $errors[] = array(E_WARNING,SB_ErrorHandler::formatError($msg, $arr));
     }
 
     /**
     * Fatal error
     */
-    function fatal($msg, $arr=null)
+    public function fatal($msg, $arr = null)
     {
         SB_ErrorHandler::error($msg, $arr);
         SB_ErrorHandler::writeErrors();
         die();
     }
 
-    function formatError($msg, $arr=null)
+    public function formatError($msg, $arr = null)
     {
         $txt = '';
 
-        if (!$msg) // No formatting
-        {
+        if (!$msg) { // No formatting
             $txt = $arr;
-        }
-        else
-        {
-            $txt = SB_T($msg,$arr);
+        } else {
+            $txt = SB_T($msg, $arr);
         }
 
         return $this->log("\nE:", $txt);
@@ -226,7 +210,7 @@ class SB_ErrorHandler
     /**
     * Returns any possible errors
     */
-    function & getErrors()
+    public function & getErrors()
     {
         global $SB_errorHandler__messages;
         return $SB_errorHandler__messages;
@@ -235,7 +219,7 @@ class SB_ErrorHandler
     /**
     * Tells wheter there were php errors handled
     */
-    function hasHandledErrors()
+    public function hasHandledErrors()
     {
         global $SB_errorHandler__phpHandlerUsed;
         return $SB_errorHandler__phpHandlerUsed;
@@ -244,12 +228,11 @@ class SB_ErrorHandler
     /**
     * Tells whether there are errors to be reported
     */
-    function hasErrors($type=null)
+    public function hasErrors($type = null)
     {
         global $SB_errorHandler__errorCount, $SB_errorHandler__warnCount;
 
-        switch ($type)
-        {
+        switch ($type) {
             case E_ERROR:
                 return $SB_errorHandler__errorCount;
 
@@ -264,18 +247,15 @@ class SB_ErrorHandler
     /**
     * Write errors as UL
     */
-    function writeErrors($fulldetails = true)
+    public function writeErrors($fulldetails = true)
     {
-        if (SB_ErrorHandler::hasHandledErrors())
-        {
+        if (SB_ErrorHandler::hasHandledErrors()) {
             $fulldetails = true;
         }
 
-        foreach (SB_ErrorHandler::getErrors() as $err)
-        {
+        foreach (SB_ErrorHandler::getErrors() as $err) {
             $el = "";
-            switch($err[0])
-            {
+            switch ($err[0]) {
                 case E_ERROR:
                     $el = SB_T('Error');
                     break;
@@ -289,30 +269,28 @@ class SB_ErrorHandler
             }
 
             echo "<p>";
-            if ($fulldetails)
-            {
+            if ($fulldetails) {
                 echo $el . ": ";
             }
             echo $err[1];
         }
     }
 
-    function log($prefix, $data=null)
+    public function log($prefix, $data = null)
     {
-        if (SB_DEBUGGING)
-        {
+        if (SB_DEBUGGING) {
             $this->useHandler(false);
-            Debugger::fireLog($prefix.": ".$data);
+            Debugger::fireLog($prefix . ": " . $data);
             $this->useHandler();
         }
         return $data;
     }
 
-    function dump($expr,$inscript=0)
+    public function dump($expr, $inscript = 0)
     {
         Debugger::fireDump($expr);
     }
 }
 
-$SB_ErrorHandler_obj = new SB_ErrorHandler;
+$SB_ErrorHandler_obj = new SB_ErrorHandler();
 $SB_ErrorHandler_obj->useHandler();

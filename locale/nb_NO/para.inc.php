@@ -780,5 +780,3 @@ _P;
 $para['groupname::Public'] = <<<_P
 Offentlig
 _P;
-
-?>

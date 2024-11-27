@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<ruleset name="Custom Standard">
+    <description>Custom coding standard</description>
+
+    <!-- Use PSR-12 as a base -->
+    <rule ref="PSR12"/>
+    
+    <!-- Exclude problematic rules -->
+    <rule ref="PEAR.Commenting.FileComment.MissingAuthorTag">
+        <severity>0</severity>
+    </rule>
+    <rule ref="PEAR.Commenting.FileComment.MissingCategoryTag">
+        <severity>0</severity>
+    </rule>
+    <rule ref="PEAR.Commenting.FileComment.MissingLicenseTag">
+        <severity>0</severity>
+    </rule>
+    <rule ref="PEAR.Commenting.FileComment.MissingLinkTag">
+        <severity>0</severity>
+    </rule>
+    <rule ref="PEAR.Commenting.FileComment.MissingPackageTag">
+        <severity>0</severity>
+    </rule>
+    <rule ref="Generic.Commenting.DocComment.Empty">
+        <severity>0</severity>
+    </rule>
+    <rule ref="PEAR.Files.IncludingFile.BracketsNotRequired">
+        <severity>0</severity>
+    </rule>
+</ruleset>

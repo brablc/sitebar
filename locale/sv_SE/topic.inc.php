@@ -1,7 +1,6 @@
 <?php
 
-$topic = array
-(
+$topic = array(
 '100' => 'Användartips',
 '101' => 'Drag & Släpp',
 '103' => 'Verktygsfunktioner',
@@ -19,5 +18,3 @@ $topic = array
 '304' => 'Skärmskrivare',
 '305' => 'Överföring',
 );
-
-?>

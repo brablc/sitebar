@@ -1,4 +1,5 @@
 <?php
+
 /******************************************************************************
  *  SiteBar 3 - The Bookmark Server for Personal and Team Use.                *
  *  Copyright (C) 2004-2008  Ondrej Brablc <http://brablc.com/mailto?o>       *
@@ -32,28 +33,27 @@ require_once('./inc/writer.inc.php');
 
 class SB_Writer_rss extends SB_WriterInterfaceXML
 {
-    function __construct()
+    public function __construct()
     {
         parent::__construct();
     }
 
-    function run()
+    public function run()
     {
         $this->switches['flat'] = true;
         SB_WriterInterfaceXML::run();
     }
 
-    function getExtension()
+    public function getExtension()
     {
         return ".rss";
     }
 
-    function drawHead()
+    public function drawHead()
     {
         $this->drawXMLPI();
 
-        $this->drawTagOpen('rss', array
-        (
+        $this->drawTagOpen('rss', array(
             'version' => '2.0',
             'xmlns:rss' => 'http://purl.org/rss/2.0/',
             //'xmlns:dc' => 'http://purl.org/dc/elements/1.1/',
@@ -62,7 +62,7 @@ class SB_Writer_rss extends SB_WriterInterfaceXML
         $this->drawTagOpen('channel');
         $this->drawTag('title', null, $this->quoteText($this->getTitle()));
 
-        $desc = $this->settingsValue('feed_desc').' '.SB_Page::absBaseUrl();
+        $desc = $this->settingsValue('feed_desc') . ' ' . SB_Page::absBaseUrl();
         $this->drawTag('description', null, $this->quoteText($desc));
         $this->drawTagOpen('image');
         $this->drawTag('title', null, $this->quoteText($this->getTitle()));
@@ -74,20 +74,19 @@ class SB_Writer_rss extends SB_WriterInterfaceXML
         $this->drawTag('managingEditor', null, $this->quoteText($this->settingsValue('feed_managing_editor')));
         $this->drawTag('webMaster', null, $this->quoteText($this->settingsValue('feed_webmaster')));
         $this->drawTag('copyright', null, $this->quoteText($this->settingsValue('feed_copyright')));
-        $this->drawTag('language', null, str_replace('_','-',$this->um->getParam('user','lang')));
+        $this->drawTag('language', null, str_replace('_', '-', $this->um->getParam('user', 'lang')));
         $this->drawTag('generator', null, 'SiteBar ' . SB_CURRENT_RELEASE . ' (Bookmark Server; http://sitebar.org/)');
 
         // Time to live in minutes
         $this->drawTag('ttl', null, '60');
     }
 
-    function drawLink(&$node, &$link, $last=false)
+    public function drawLink(&$node, &$link, $last = false)
     {
         $this->drawTagOpen('item');
 
         // Show number of hits in name - we want this info!
-        if ($this->tree->sortMode == 'hits')
-        {
+        if ($this->tree->sortMode == 'hits') {
             $link->name = sprintf('%05d - %s', $link->hits, $link->name);
         }
 
@@ -95,15 +94,13 @@ class SB_Writer_rss extends SB_WriterInterfaceXML
         // $this->drawTag('author', null, null);
         $this->drawTag('link', null, $this->quoteText($link->url));
 
-        if (strlen($link->comment))
-        {
+        if (strlen($link->comment)) {
             $this->drawTag('description', null, $this->quoteText($link->comment));
         }
 
         $date = '';
         $append = '';
-        switch ($this->tree->sortMode)
-        {
+        switch ($this->tree->sortMode) {
             case 'changed':
                 $date = $link->changed;
                 $append = '#' . $date;
@@ -124,7 +121,7 @@ class SB_Writer_rss extends SB_WriterInterfaceXML
                 $date = $link->added;
                 break;
             default:
-                $date = ($link->added>$link->changed?$link->added:$link->changed);
+                $date = ($link->added > $link->changed ? $link->added : $link->changed);
         }
 
         $this->drawTag('pubDate', null, $this->getDateRFC822($date));
@@ -132,10 +129,9 @@ class SB_Writer_rss extends SB_WriterInterfaceXML
         $this->drawTagClose('item');
     }
 
-    function drawFoot()
+    public function drawFoot()
     {
         $this->drawTagClose('channel');
         $this->drawTagClose('rss');
     }
 }
-?>

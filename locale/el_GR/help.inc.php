@@ -1,1 +1,3 @@
-<?php $help = array(); ?>
+<?php
+
+$help = array();

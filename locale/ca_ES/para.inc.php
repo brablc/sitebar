@@ -113,5 +113,3 @@ Grups {groups}.
 Queris SQL {queries}.
 Base de dades/Temps total {time_db}/{time total} sec ({time_pct}%).
 _P;
-
-?>

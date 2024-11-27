@@ -1,4 +1,5 @@
 <?php
+
 /******************************************************************************
  *  SiteBar 3 - The Bookmark Server for Personal and Team Use.                *
  *  Copyright (C) 2004-2008  Ondrej Brablc <http://brablc.com/mailto?o>       *
@@ -29,23 +30,21 @@ require_once('./inc/writers/xbel.inc.php');
 
 class SB_Writer_xbel_mozilla extends SB_Writer_xbel
 {
-    var $metaAttr;
+    public $metaAttr;
 
-    function __construct()
+    public function __construct()
     {
         parent::__construct();
         $this->metaAttr = array('owner' => 'Mozilla');
 
-        $db =& SB_Database::staticInstance();
+        $db = & SB_Database::staticInstance();
 
-        $special = array
-        (
+        $special = array(
             'is_toolbar' => 'BookmarksToolbarFolder',
             'is_unfiled' => 'UnfiledBookmarksFolder'
         );
 
-        foreach ( $special as $attr => $label)
-        {
+        foreach ($special as $attr => $label) {
             $id = $db->getUserData('special', $this->um->uid, $attr);
             if ($id) {
                 $this->metaAttr[$label] = 'n' . $id;
@@ -53,31 +52,30 @@ class SB_Writer_xbel_mozilla extends SB_Writer_xbel
         }
     }
 
-    function drawDOCTYPE()
+    public function drawDOCTYPE()
     {
-?>
+        ?>
 <!DOCTYPE xbel PUBLIC
     "+//IDN python.org//DTD XML Bookmark Exchange Language 1.0//EN//XML"
     "http://pyxml.sourceforge.net/topics/dtds/xbel-1.0.dtd">
-<?php
+        <?php
     }
 
-    function getMetaDataAtt()
+    public function getMetaDataAtt()
     {
         return $this->metaAttr;
     }
 
-    function getNodeAttMap(&$nodeAtt, &$node)
+    public function getNodeAttMap(&$nodeAtt, &$node)
     {
         $nodeAtt['id'] = 'n' . $node->id;
 
-        if ($node->added)
-        {
+        if ($node->added) {
             $nodeAtt['added'] = $this->getDateISO8601($node->added);
         }
     }
 
-    function getLinkAttMap(&$bmkAtt, &$node, &$link)
+    public function getLinkAttMap(&$bmkAtt, &$node, &$link)
     {
         // Append absolute URL to relative urls
         if (!preg_match('/^\w+:/', $link->url)) {
@@ -88,39 +86,35 @@ class SB_Writer_xbel_mozilla extends SB_Writer_xbel
         $bmkAtt['visited'] = $this->getDateISO8601($link->visited);
     }
 
-    function drawLink(&$node, &$link, $last=false)
+    public function drawLink(&$node, &$link, $last = false)
     {
         $bmkAtt = array();
         $this->getLinkAttMap($bmkAtt, $node, $link);
 
         $this->drawTagOpen('bookmark', $bmkAtt);
 
-        $this->drawTag('title',null,$this->quoteText($link->name));
+        $this->drawTag('title', null, $this->quoteText($link->name));
 
-        $mdAtt = array('owner'=>'Mozilla');
+        $mdAtt = array('owner' => 'Mozilla');
 
-        if ($link->is_feed)
-        {
+        if ($link->is_feed) {
             $mdAtt['FeedURL'] = $this->quoteAtt($link->url);
         }
 
-        if ($link->is_sidebar)
-        {
+        if ($link->is_sidebar) {
             $mdAtt['WebPanel'] = 'true';
         }
 
         // Icon management missing
 
-        if (count($mdAtt)>1)
-        {
+        if (count($mdAtt) > 1) {
             $this->drawTagOpen('info');
-            $this->drawTag('metadata',$mdAtt);
+            $this->drawTag('metadata', $mdAtt);
             $this->drawTagClose('info');
         }
 
-        if ($link->comment)
-        {
-            $this->drawTag('desc',null,$this->quoteText($link->comment));
+        if ($link->comment) {
+            $this->drawTag('desc', null, $this->quoteText($link->comment));
         }
 
         $this->drawTagClose('bookmark');

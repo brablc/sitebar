@@ -110,5 +110,3 @@ SiteBar 已经在以下浏览器中成功测试过：
     <li>Netscape Navigator 4.78
 </ul>
 _P;
-
-?>

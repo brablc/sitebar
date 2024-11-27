@@ -1,12 +1,8 @@
 <?php
 
-$info = array
-(
+$info = array(
     'language' => 'Srpski',
-    'authors' => array
-    (
+    'authors' => array(
     'Ozzii' => null,
     ),
 );
-
-?>

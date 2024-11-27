@@ -1,7 +1,6 @@
 <?php
 
-$text = array
-(
+$text = array(
 'SiteBar Homepage' => 'साइटबार का पहला पन्ना ',
 'Your Language' => 'आपकी भाषा',
 'SiteBar Integrator' => 'साइटबार ',
@@ -103,5 +102,3 @@ $text = array
 'Skin created by' => 'आकर्षणात्मक ढाल ( स्किन ) के शिल्पीकार ( नि्र्माता )',
 'Skin designed by' => 'आकर्षणात्मक ढाल ( स्किन ) के वास्तुकार ( डिजाइनर )',
 );
-
-?>

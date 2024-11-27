@@ -1,4 +1,5 @@
 <?php
+
 /******************************************************************************
  *  SiteBar 3 - The Bookmark Server for Personal and Team Use.                *
  *  Copyright (C) 2003,2004  Ondrej Brablc <http://brablc.com/mailto?o>       *
@@ -19,5 +20,3 @@
  ******************************************************************************/
 
 header("Location: ../translator.php");
-
-?>

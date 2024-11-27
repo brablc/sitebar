@@ -2,8 +2,7 @@
 
 // Force commit
 
-$topic = array
-(
+$topic = array(
 '100' => 'Informacje o użytkowaniu',
 '101' => 'Przeciągnij i upuść',
 '103' => 'Funkcje paska narzędzi',
@@ -21,5 +20,3 @@ $topic = array
 '304' => 'Twórcy',
 '305' => 'Migracja',
 );
-
-?>

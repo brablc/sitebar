@@ -1,4 +1,5 @@
 <?php
+
 /******************************************************************************
  *  SiteBar 3 - The Bookmark Server for Personal and Team Use.                *
  *  Copyright (C) 2005-2006  Ondrej Brablc <http://brablc.com/mailto?o>       *
@@ -18,52 +19,42 @@
  *  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA *
  ******************************************************************************/
 
-    die;
+die;
 
-    // Put here identifiers whose text has been changed
-    // other languages will be marked as changed.
-    $changes = array
-    (
-        'integrator::hint_install',
-    );
+// Put here identifiers whose text has been changed
+// other languages will be marked as changed.
+$changes = array(
+    'integrator::hint_install',
+);
 
-    if ($dh = opendir('.'))
-    {
-        while (($dir = readdir($dh)) !== false)
-        {
-            $file = $dir.'/para.inc.php';
+if ($dh = opendir('.')) {
+    while (($dir = readdir($dh)) !== false) {
+        $file = $dir . '/para.inc.php';
 
-            if (is_dir($dir) && is_file($file) && $dir != 'en_US')
-            {
-                print 'Processing language: '.$dir.' ';
+        if (is_dir($dir) && is_file($file) && $dir != 'en_US') {
+            print 'Processing language: ' . $dir . ' ';
 
-                $rows = file($file);
-                $changed = 0;
+            $rows = file($file);
+            $changed = 0;
 
-                for ($i = 0; $i< count($rows); $i++)
-                {
-                    foreach ($changes as $change)
-                    {
-                        if (strstr($rows[$i], $change) && substr($rows[$i+1],0,3)!='<@>')
-                        {
-                            $rows[$i+1] = '<@>' . $rows[$i+1];
-                            print "#";
-                            $changed++;
-                        }
+            for ($i = 0; $i < count($rows); $i++) {
+                foreach ($changes as $change) {
+                    if (strstr($rows[$i], $change) && substr($rows[$i + 1], 0, 3) != '<@>') {
+                        $rows[$i + 1] = '<@>' . $rows[$i + 1];
+                        print "#";
+                        $changed++;
                     }
                 }
-
-                if ($changed)
-                {
-                    $out = fopen($file, "w");
-                    fwrite($out, implode('', $rows));
-                    fclose($out);
-                }
-
-                print "\n";
             }
-        }
-        closedir($dh);
-    }
 
-?>
+            if ($changed) {
+                $out = fopen($file, "w");
+                fwrite($out, implode('', $rows));
+                fclose($out);
+            }
+
+            print "\n";
+        }
+    }
+    closedir($dh);
+}

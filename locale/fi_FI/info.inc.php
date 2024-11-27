@@ -1,13 +1,9 @@
 <?php
 
-$info = array
-(
+$info = array(
     'language' => 'Suomi',
-    'authors' => array
-    (
+    'authors' => array(
         'Miika Havo' => 'http://www.bittituki.com/',
-	'Oskari Jääskeläinen' => null,
+    'Oskari Jääskeläinen' => null,
     ),
 );
-
-?>

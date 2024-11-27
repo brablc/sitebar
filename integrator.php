@@ -1,4 +1,5 @@
 <?php
+
 /******************************************************************************
  *  SiteBar 3 - The Bookmark Server for Personal and Team Use.                *
  *  Copyright (C) 2003-2008  Ondrej Brablc <http://brablc.com/mailto?o>       *
@@ -24,16 +25,15 @@ require_once('./inc/usermanager.inc.php');
 $um = SB_UserManager::staticInstance();
 
 // If we are called the first time, without params and without cookies
-if (!isset($_GET['url']) && !isset($_GET['lang']))
-{
-    SB_Skin::set($um->getParam('user','skin'));
+if (!isset($_GET['url']) && !isset($_GET['lang'])) {
+    SB_Skin::set($um->getParam('user', 'skin'));
 
-    $url = $um->getParamB64('config','integrator_url');
-    $url .= '?lang=' . $um->getParam('user','lang');
+    $url = $um->getParamB64('config', 'integrator_url');
+    $url .= '?lang=' . $um->getParam('user', 'lang');
     $url .= '&skin=' . SB_Skin::get();
-    $url .= '&version='. SB_CURRENT_RELEASE;
-    $url .= '&url='. SB_Page::absBaseUrl();
-    $url .= '&popup_params='. $um->getParam('user','popup_params');
+    $url .= '&version=' . SB_CURRENT_RELEASE;
+    $url .= '&url=' . SB_Page::absBaseUrl();
+    $url .= '&popup_params=' . $um->getParam('user', 'popup_params');
 
     // Redirect to the central URL, or to the own URL with the information
     header('Location: ' . $url);
@@ -42,11 +42,9 @@ if (!isset($_GET['url']) && !isset($_GET['lang']))
 
 // Now we have the information, we are on the right page and we will use cookies
 // We will redirect using META tag later on to support all browsers
-if (isset($_GET['url']))
-{
-    foreach (array('skin','version','url','popup_params') as $key)
-    {
-        $cookieName = 'sbi_'.$key;
+if (isset($_GET['url'])) {
+    foreach (array('skin','version','url','popup_params') as $key) {
+        $cookieName = 'sbi_' . $key;
         $_COOKIE[$cookieName] = $_REQUEST[$key];
         setcookie($cookieName, $_REQUEST[$key]);
     }
@@ -54,231 +52,204 @@ if (isset($_GET['url']))
 
 SB_Page::absBaseUrl($_COOKIE['sbi_url']);
 SB_Skin::set($_COOKIE['sbi_skin']);
-if (preg_match('/^\w+/', $_GET['lang']))
-{
+if (preg_match('/^\w+/', $_GET['lang'])) {
     SB_SetLanguage($_GET['lang']);
 }
 // $um->setParam('user',$_COOKIE['popup_params']);
 
-if (isset($_REQUEST['install']))
-{
+if (isset($_REQUEST['install'])) {
     IEInstall();
     exit;
 }
 
-if (isset($_REQUEST['search_engine']))
-{
+if (isset($_REQUEST['search_engine'])) {
     SearchEngine();
     exit;
 }
 
 // Redirect and keep cookies
 $meta = null;
-if (isset($_GET['url']))
-{
-    $meta = '<meta http-equiv="refresh" content="0;url=integrator.php?lang='.SB_GetLanguage().'">';
+if (isset($_GET['url'])) {
+    $meta = '<meta http-equiv="refresh" content="0;url=integrator.php?lang=' . SB_GetLanguage() . '">';
 }
 
 SB_Page::head('Integrator', 'siteBarIndex', null, null, $meta);
 
-if (isset($_GET['url']))
-{
+if (isset($_GET['url'])) {
     exit;
 }
 
 // Include skin hook file
-include_once(SB_Skin::path().'/hook.inc.php');
+include_once(SB_Skin::path() . '/hook.inc.php');
 $hook = new SB_Hook();
 
 $sponsor = new SB_SponsorInterface($hook);
 $file = './inc/sponsor.inc.php';
-if (is_file($file))
-{
+if (is_file($file)) {
     include_once($file);
     $sponsor = new SB_Sponsor($hook);
 }
 
 $browser = SB_reqVal('browser');
 
-$browsers = array
-(
-    'firefox' => array
-    (
-        'label'    =>'Mozilla Firefox',
-        'homepage' =>'http://www.mozilla.org/products/firefox/',
-        'platforms'=>'9.0/All',
+$browsers = array(
+    'firefox' => array(
+        'label'    => 'Mozilla Firefox',
+        'homepage' => 'http://www.mozilla.org/products/firefox/',
+        'platforms' => '9.0/All',
         'usage' => '',
-        'exclude'  =>array(),
-        'extra'  =>array('sitebar_client','sitebar','hotlist','livebookmarks','search_engine','iframe','google'),
+        'exclude'  => array(),
+        'extra'  => array('sitebar_client','sitebar','hotlist','livebookmarks','search_engine','iframe','google'),
     ),
-    'konqueror' => array
-    (
-        'label'    =>'Konqueror',
-        'homepage' =>'http://www.konqueror.org/',
-        'platforms'=>'3.x/Linux',
+    'konqueror' => array(
+        'label'    => 'Konqueror',
+        'homepage' => 'http://www.konqueror.org/',
+        'platforms' => '3.x/Linux',
         'usage' => '',
-        'exclude'  =>array(),
-        'extra'  =>array('sidebar_konqueror','iframe','google'),
+        'exclude'  => array(),
+        'extra'  => array('sidebar_konqueror','iframe','google'),
     ),
-    'opera' => array
-    (
-        'label'    =>'Opera Web Browser',
-        'homepage' =>'http://www.opera.com/',
-        'platforms'=>'9.5/WinXP',
+    'opera' => array(
+        'label'    => 'Opera Web Browser',
+        'homepage' => 'http://www.opera.com/',
+        'platforms' => '9.5/WinXP',
         'usage' => SB_P('integrator::usage_opera'),
-        'exclude'  =>array('dir'),
-        'extra'  =>array('hotlist','iframe','google'),
+        'exclude'  => array('dir'),
+        'extra'  => array('hotlist','iframe','google'),
     ),
-    'msie' => array
-    (
-        'label'    =>'Microsoft Internet Explorer',
-        'homepage' =>'http://www.microsoft.com/windows/ie/default.mspx',
-        'platforms'=>'8.0/Windows',
+    'msie' => array(
+        'label'    => 'Microsoft Internet Explorer',
+        'homepage' => 'http://www.microsoft.com/windows/ie/default.mspx',
+        'platforms' => '8.0/Windows',
         'usage' => '',
-        'exclude'  =>array(),
-        'extra'  =>array('install', 'uninstall', 'searchbar','iframe','google'),
+        'exclude'  => array(),
+        'extra'  => array('install', 'uninstall', 'searchbar','iframe','google'),
     ),
-    'maxthon' => array
-    (
-        'label'    =>'Maxthon Tabbed Browser',
-        'homepage' =>'http://www.maxthon.com/',
-        'platforms'=>'1.1.120/WinXP',
+    'maxthon' => array(
+        'label'    => 'Maxthon Tabbed Browser',
+        'homepage' => 'http://www.maxthon.com/',
+        'platforms' => '1.1.120/WinXP',
         'usage' => '',
-        'exclude'  =>array(),
-        'extra'  =>array('maxthon_sidebar','maxthon_toolbar','iframe','google'),
+        'exclude'  => array(),
+        'extra'  => array('maxthon_sidebar','maxthon_toolbar','iframe','google'),
     ),
-    'other' => array
-    (
-        'label'    =>'Linux Distro/Other Tools',
-        'homepage' =>'',
-        'platforms'=>'Gentoo,Debian/PHP Layers Menu',
+    'other' => array(
+        'label'    => 'Linux Distro/Other Tools',
+        'homepage' => '',
+        'platforms' => 'Gentoo,Debian/PHP Layers Menu',
         'usage' => '',
-        'exclude'  =>array('dir','window','popup','addpage'),
-        'extra'  =>array('gentoo','debian','phplm'),
+        'exclude'  => array('dir','window','popup','addpage'),
+        'extra'  => array('gentoo','debian','phplm'),
     ),
 );
 
-$bookmarklet = "javascript:var w=window;var d=w.document;var cp=d.characterSet?d.characterSet:d.charset;".
-    "w.open('" . SB_Page::absBaseUrl() . "command.php?command=Add%20Bookmark".
-    "&amp;url='+escape(w.location.href)+'".
-    "&amp;name='+escape(d.title)+".
-    "(cp?'&amp;cp='+cp:''),'sbBmkWin','".
-    $um->getParamB64('user','popup_params')."');void(0)";
+$bookmarklet = "javascript:var w=window;var d=w.document;var cp=d.characterSet?d.characterSet:d.charset;" .
+    "w.open('" . SB_Page::absBaseUrl() . "command.php?command=Add%20Bookmark" .
+    "&amp;url='+escape(w.location.href)+'" .
+    "&amp;name='+escape(d.title)+" .
+    "(cp?'&amp;cp='+cp:''),'sbBmkWin','" .
+    $um->getParamB64('user', 'popup_params') . "');void(0)";
 
-$popup = "javascript:window.open('".SB_Page::absBaseUrl()."index.php" .
-    "?target=_blank','sbPopWin',".
+$popup = "javascript:window.open('" . SB_Page::absBaseUrl() . "index.php" .
+    "?target=_blank','sbPopWin'," .
     "'directories=no,width=220,height=600,left=0,top=0,scrollbars=yes,location=no,menubar=no, status=no, toolbar=no');void(0)";
 
 $urlParts = parse_url(SB_Page::absBaseUrl());
 $uniqName = preg_replace("/[^\w]*/", "", $urlParts['host']);
 
-$extra = array
-(
-    'sitebar_client' => array
-    (
+$extra = array(
+    'sitebar_client' => array(
         'label' => 'SiteBar Client',
         'url' => 'https://addons.mozilla.org/firefox/3605/',
         'desc' => SB_P('integrator::hint_sitebar'),
     ),
 
-    'livebookmarks' => array
-    (
+    'livebookmarks' => array(
         'label' => 'Live Bookmarks',
         'url' => sprintf('%sindex.php?w=firefox&amp;mode=download', SB_Page::absBaseUrl()),
         'desc' => SB_P('integrator::hint_livebookmarks'),
     ),
 
-    'sidebar' => array
-    (
+    'sidebar' => array(
         'label' => 'Sidebar',
-        'url' => sprintf("javascript:sidebar.addPanel('SiteBar','%sindex.php','')",SB_Page::absBaseUrl()),
+        'url' => sprintf("javascript:sidebar.addPanel('SiteBar','%sindex.php','')", SB_Page::absBaseUrl()),
         'desc' => SB_P('integrator::hint_sidebar'),
     ),
 
-    'search_engine' => array
-    (
+    'search_engine' => array(
         'label' => 'Add Search Engine',
-        'url' => sprintf("javascript:void(window.sidebar.addSearchEngine('%s', '%s', '%s', '%s'))",
-                    SB_Page::absBaseUrl().'integrator.php?lang='.SB_GetLanguage() . '&amp;search_engine=/sitebar'.$uniqName.'.src',
-                    SB_Page::absBaseUrl().''.SB_Skin::imgsrc('root_transparent').'?rename=/sitebar'.$uniqName.'.png',
-                    strlen($um->getParamB64('config','feed_root_name'))?$um->getParamB64('config','feed_root_name'):'SiteBar',
-                    SB_T("Bookmarks")),
+        'url' => sprintf(
+            "javascript:void(window.sidebar.addSearchEngine('%s', '%s', '%s', '%s'))",
+            SB_Page::absBaseUrl() . 'integrator.php?lang=' . SB_GetLanguage() . '&amp;search_engine=/sitebar' . $uniqName . '.src',
+            SB_Page::absBaseUrl() . '' . SB_Skin::imgsrc('root_transparent') . '?rename=/sitebar' . $uniqName . '.png',
+            strlen($um->getParamB64('config', 'feed_root_name')) ? $um->getParamB64('config', 'feed_root_name') : 'SiteBar',
+            SB_T("Bookmarks")
+        ),
         'desc' => SB_P('integrator::hint_search_engine'),
     ),
 
-    'sidebar_mozilla' => array
-    (
+    'sidebar_mozilla' => array(
         'label' => 'Sidebar',
-        'url' => sprintf("javascript:sidebar.addPanel('SiteBar','%sindex.php','')",SB_Page::absBaseUrl()),
+        'url' => sprintf("javascript:sidebar.addPanel('SiteBar','%sindex.php','')", SB_Page::absBaseUrl()),
         'desc' => SB_P('integrator::hint_sidebar_mozilla'),
     ),
 
-    'sidebar_konqueror' => array
-    (
+    'sidebar_konqueror' => array(
         'label' => 'Sidebar',
         'url' => null,
         'desc' => SB_P('integrator::hint_sidebar_konqueror', SB_Page::absBaseUrl()),
     ),
 
-    'hotlist' => array
-    (
+    'hotlist' => array(
         'label' => 'Add to Panel',
-        'url' => SB_Page::absBaseUrl().'index.php',
-        'params' => array('title'=>'SiteBar', 'rel'=>'sidebar'),
+        'url' => SB_Page::absBaseUrl() . 'index.php',
+        'params' => array('title' => 'SiteBar', 'rel' => 'sidebar'),
         'desc' => SB_P('integrator::hint_hotlist'),
     ),
 
-    'install' => array
-    (
+    'install' => array(
         'label' => 'Install',
-        'url' => 'integrator.php?lang='.SB_GetLanguage() . '&amp;install=1',
+        'url' => 'integrator.php?lang=' . SB_GetLanguage() . '&amp;install=1',
         'desc' => SB_P('integrator::hint_install'),
     ),
 
-    'uninstall' => array
-    (
+    'uninstall' => array(
         'label' => 'Uninstall',
-        'url' => 'integrator.php?lang='.SB_GetLanguage() . '&amp;install=0',
+        'url' => 'integrator.php?lang=' . SB_GetLanguage() . '&amp;install=0',
         'desc' => SB_P('integrator::hint_uninstall'),
     ),
 
-    'searchbar' => array
-    (
+    'searchbar' => array(
         'label' => 'Show in Search Bar',
         'url' => sprintf("javascript:void(_search=open('%sindex.php','_search'))", SB_Page::absBaseUrl()),
         'desc' => SB_P('integrator::hint_searchbar'),
     ),
 
-    'maxthon_sidebar' => array
-    (
+    'maxthon_sidebar' => array(
         'label' => 'Sidebar Plugin',
         'url' => sprintf("http://sitebar.org/plugin/maxthon/?sidebar=%s", SB_Page::absBaseUrlShort()),
         'desc' => SB_P('integrator::hint_maxthon_sidebar'),
     ),
 
-    'maxthon_toolbar' => array
-    (
+    'maxthon_toolbar' => array(
         'label' => 'Toolbar Plugin',
         'url' => sprintf("http://sitebar.org/plugin/maxthon/?toolbar=%s", SB_Page::absBaseUrlShort()),
         'desc' => SB_P('integrator::hint_maxthon_toolbar'),
     ),
 
-    'gentoo' => array
-    (
+    'gentoo' => array(
         'label' => 'Gentoo Ebuild',
         'url' => 'http://www.gentoo-portage.com/www-apps/sitebar',
         'desc' => SB_P('integrator::hint_gentoo'),
     ),
 
-    'debian' => array
-    (
+    'debian' => array(
         'label' => 'Debian',
         'url' => 'http://packages.debian.org/unstable/web/sitebar',
         'desc' => SB_P('integrator::hint_debian'),
     ),
 
-    'phplm' => array
-    (
+    'phplm' => array(
         'label' => 'PHP Layers Menu',
         'url' => 'http://phplayersmenu.sourceforge.net/',
         'desc' => SB_P('integrator::hint_phplm', sprintf('%sindex.php?w=phplm', SB_Page::absBaseUrl())),
@@ -286,45 +257,41 @@ $extra = array
 
 );
 
-$general = array
-(
-    'addpage' => array
-    (
+$general = array(
+    'addpage' => array(
         'label' => 'Add Page to SiteBar',
         'url' => $bookmarklet,
         'desc' => SB_P('integrator::hint_addpage'),
     ),
 
-    'window' => array
-    (
+    'window' => array(
         'label' => 'SiteBar',
-        'url' => SB_Page::absBaseUrl().'index.php',
+        'url' => SB_Page::absBaseUrl() . 'index.php',
         'desc' => SB_P('integrator::hint_window'),
     ),
-    'dir' => array
-    (
+    'dir' => array(
         'label' => 'SiteBar Directory',
-        'url' => SB_Page::absBaseUrl().'index.php?w=dir',
+        'url' => SB_Page::absBaseUrl() . 'index.php?w=dir',
         'desc' => SB_P('integrator::hint_dir'),
     ),
-    'popup' => array
-    (
+    'popup' => array(
         'label' => 'SiteBar Pop-up',
         'url' => $popup,
         'desc' => SB_P('integrator::hint_popup'),
     ),
-    'iframe' => array
-    (
+    'iframe' => array(
         'label' => 'SiteBar iframe',
-        'url' => SB_Page::absBaseUrl().'iframe.php',
-        'desc' => str_replace('<IFRAME>','&lt;IFRAME&gt;',
-                      SB_P('integrator::hint_iframe', array(SB_Page::absBaseUrl().'iframe.php'))),
+        'url' => SB_Page::absBaseUrl() . 'iframe.php',
+        'desc' => str_replace(
+            '<IFRAME>',
+            '&lt;IFRAME&gt;',
+            SB_P('integrator::hint_iframe', array(SB_Page::absBaseUrl() . 'iframe.php'))
+        ),
     ),
-    'google' => array
-    (
+    'google' => array(
         'label' => 'Google Widget',
-        'url' => SB_Page::absBaseUrl().'google.php',
-        'desc' => SB_P('integrator::hint_google', array(SB_Page::absBaseUrl().'google.php')),
+        'url' => SB_Page::absBaseUrl() . 'google.php',
+        'desc' => SB_P('integrator::hint_google', array(SB_Page::absBaseUrl() . 'google.php')),
     ),
 );
 
@@ -360,63 +327,51 @@ $general = array
 <?php
     $lang = SB_GetLanguage();
 
-    foreach ($browsers as $id => $param)
-    {
-        echo "<tr>\r";
-            echo "<td><a".($browser == $id?" class=\"selected\"":"")." href=\"integrator.php?lang=$lang&amp;browser=$id\" title=\"".SB_T('Integration Instructions')."\">".SB_T($param['label'])."</a></td>\r";
-            echo "<td>${param['platforms']}</td>\n";
-            echo "<td>";
-            if (isset($param['homepage']) && $param['homepage']!='')
-            {
-                echo "[<a href=\"${param['homepage']}\">Homepage</a>]";
-            }
-            else
-            {
-                echo "&nbsp;";
-            }
-            echo "</td>\r";
-        echo "</tr>\r";
+foreach ($browsers as $id => $param) {
+    echo "<tr>\r";
+    echo "<td><a" . ($browser == $id ? " class=\"selected\"" : "") . " href=\"integrator.php?lang=$lang&amp;browser=$id\" title=\"" . SB_T('Integration Instructions') . "\">" . SB_T($param['label']) . "</a></td>\r";
+    echo "<td>${param['platforms']}</td>\n";
+    echo "<td>";
+    if (isset($param['homepage']) && $param['homepage'] != '') {
+        echo "[<a href=\"${param['homepage']}\">Homepage</a>]";
+    } else {
+        echo "&nbsp;";
     }
+    echo "</td>\r";
+    echo "</tr>\r";
+}
 
 ?>
     </table>
 
     <p class="comment">
 <?php
-        if ($browser == '')
-        {
-            echo SB_P('integrator::hint');
-        }
-        else
-        {
-            echo '<a href="integrator.php?lang='.SB_GetLanguage().'">'.SB_T('Usage Tips for All Browsers').'</a>';
-        }
+if ($browser == '') {
+    echo SB_P('integrator::hint');
+} else {
+    echo '<a href="integrator.php?lang=' . SB_GetLanguage() . '">' . SB_T('Usage Tips for All Browsers') . '</a>';
+}
 ?>
     </p>
 
     <h2>
 <?php
-        if ($browser == '')
-        {
-            echo SB_T('Usage Tips for All Browsers');
-        }
-        else
-        {
-            echo SB_T('Usage/Integration Tips for %s', array($browsers[$browser]['label']));
-        }
+if ($browser == '') {
+    echo SB_T('Usage Tips for All Browsers');
+} else {
+    echo SB_T('Usage/Integration Tips for %s', array($browsers[$browser]['label']));
+}
 ?>
     </h2>
 <?php
 
-        if ($browser != '')
-        {
-            if ( $browsers[$browser]['usage'] != '')
-            {
-                echo '<p class="browsertip">'."\r".
-                     $browsers[$browser]['usage'].
-                     "</p>\r";
-            }
-        }
+if ($browser != '') {
+    if ($browsers[$browser]['usage'] != '') {
+        echo '<p class="browsertip">' . "\r" .
+             $browsers[$browser]['usage'] .
+             "</p>\r";
+    }
+}
 
 ?>
 
@@ -427,56 +382,46 @@ $general = array
         </tr>
 <?php
 
-    foreach ($extra as $id => $params)
-    {
-        if (!isset($browsers[$browser]['extra']) || !in_array($id, $browsers[$browser]['extra']))
-        {
-            continue;
-        }
-
-        $urlparams = '';
-        if (isset($params['params']))
-        {
-            foreach ($params['params'] as $att => $val)
-            {
-                $urlparams .= " $att='" . $val . "'";
-            }
-        }
-
-        echo "<tr>\n";
-            if ($params['url'])
-            {
-                echo "<td class='extra'><a $urlparams href=\"${params['url']}\">".SB_T($params['label'])."</a></td>\n";
-            }
-            else
-            {
-                echo "<td class='extra'>".SB_T($params['label'])."</td>\n";
-            }
-            echo "<td class='desc'>${params['desc']}</td>\n";
-        echo "</tr>\n";
+foreach ($extra as $id => $params) {
+    if (!isset($browsers[$browser]['extra']) || !in_array($id, $browsers[$browser]['extra'])) {
+        continue;
     }
 
-    foreach ($general as $id => $params)
-    {
-        if (isset($browsers[$browser])
+    $urlparams = '';
+    if (isset($params['params'])) {
+        foreach ($params['params'] as $att => $val) {
+            $urlparams .= " $att='" . $val . "'";
+        }
+    }
+
+    echo "<tr>\n";
+    if ($params['url']) {
+        echo "<td class='extra'><a $urlparams href=\"${params['url']}\">" . SB_T($params['label']) . "</a></td>\n";
+    } else {
+        echo "<td class='extra'>" . SB_T($params['label']) . "</td>\n";
+    }
+    echo "<td class='desc'>${params['desc']}</td>\n";
+    echo "</tr>\n";
+}
+
+foreach ($general as $id => $params) {
+    if (
+        isset($browsers[$browser])
         &&  isset($browsers[$browser]['exclude'])
-        &&  in_array($id, $browsers[$browser]['exclude']))
-        {
-            continue;
-        }
-
-        echo "<tr>\r";
-            if ($params['url'])
-            {
-                echo "<td class=\"general\"><a href=\"${params['url']}\">".SB_T($params['label'])."</a></td>\r";
-            }
-            else
-            {
-                echo "<td class=\"general\">".SB_T($params['label'])."</td>\r";
-            }
-            echo "<td class=\"desc\">${params['desc']}</td>\r";
-        echo "</tr>\r";
+        &&  in_array($id, $browsers[$browser]['exclude'])
+    ) {
+        continue;
     }
+
+    echo "<tr>\r";
+    if ($params['url']) {
+        echo "<td class=\"general\"><a href=\"${params['url']}\">" . SB_T($params['label']) . "</a></td>\r";
+    } else {
+        echo "<td class=\"general\">" . SB_T($params['label']) . "</td>\r";
+    }
+    echo "<td class=\"desc\">${params['desc']}</td>\r";
+    echo "</tr>\r";
+}
 
 ?>
     </table>
@@ -503,25 +448,26 @@ function IEInstall()
 
     $code     = '{3F218DFB-00FF-297C-4D54-57696C4A6F6F}';
     $title    = 'SiteBar';
-    $url      = SB_Page::absBaseUrl().'index.php';
+    $url      = SB_Page::absBaseUrl() . 'index.php';
     $reg      = '';
     $filename = '';
-    $ctxUrl   = SB_Page::absBaseUrl().'ctxmenu.php';
+    $ctxUrl   = SB_Page::absBaseUrl() . 'ctxmenu.php';
 
     require_once('./inc/converter.inc.php');
 
     $charsetKey = 'Charset in MS Windows';
-    $c = new SB_Converter(!$um || $um->getParam('config','use_conv_engine'),
-        (SB_T($charsetKey)==$charsetKey?null:SB_T($charsetKey)));
+    $c = new SB_Converter(
+        !$um || $um->getParam('config', 'use_conv_engine'),
+        (SB_T($charsetKey) == $charsetKey ? null : SB_T($charsetKey))
+    );
 
     $addLink = $c->fromUTF8(SB_T('Add Link to SiteBar'));
     $addPage = $c->fromUTF8(SB_T('Add Page to SiteBar'));
 
-    if ($install)
-    {
+    if ($install) {
         $filename = "InstallSiteBar.reg";
 
-// See http://msdn.microsoft.com/workshop/browser/ext/tutorials/explorer.asp
+        // See http://msdn.microsoft.com/workshop/browser/ext/tutorials/explorer.asp
 
         $reg = <<<__INSTALL
 REGEDIT4
@@ -571,9 +517,7 @@ REGEDIT4
 "BandCLSID" = "$code"
 "Default Visible"="Yes"
 __INSTALL;
-    }
-    else
-    {
+    } else {
         $filename = 'UnInstallSiteBar.reg';
         $reg = <<<__UNINSTALL
 REGEDIT4
@@ -588,10 +532,10 @@ REGEDIT4
 __UNINSTALL;
     }
 
-    header('Content-Type: application/octet-stream'."\r");
-    header('Content-Disposition: attachment; filename="'.$filename."\"\r");
-    header('Content-Transfer-Encoding: binary'."\r");
-    header('Content-Length: ' . strlen($reg)."\r");
+    header('Content-Type: application/octet-stream' . "\r");
+    header('Content-Disposition: attachment; filename="' . $filename . "\"\r");
+    header('Content-Transfer-Encoding: binary' . "\r");
+    header('Content-Length: ' . strlen($reg) . "\r");
     echo $reg;
 
     exit;
@@ -601,14 +545,13 @@ function SearchEngine()
 {
     $um = SB_UserManager::staticInstance();
 
-    $name = $um->getParamB64('config','feed_root_name');
+    $name = $um->getParamB64('config', 'feed_root_name');
 
-    if (!strlen($name))
-    {
+    if (!strlen($name)) {
         $name = 'SiteBar';
     }
 
-?>
+    ?>
 # SiteBar plug-in
 
 <search
@@ -623,8 +566,8 @@ function SearchEngine()
 <input name="sourceid" value="sitebar-search">
 
 </search>
-<?php
-    exit;
+    <?php
+        exit;
 }
 
 ?>

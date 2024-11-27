@@ -104,5 +104,3 @@ Groups {groups}.
 SQL queries {queries}.
 DB/Total time {time_db}/{time_total} sec ({time_pct}%).
 _P;
-
-?>

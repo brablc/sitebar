@@ -1,4 +1,5 @@
 <?php
+
 /******************************************************************************
  *  SiteBar 3 - The Bookmark Server for Personal and Team Use.                *
  *  Copyright (C) 2003-2008  Ondrej Brablc <http://brablc.com/mailto?o>       *
@@ -21,52 +22,44 @@ $SB_loader_title['opera'] = 'Opera Hotlist 2.0';
 
 class SB_Loader_opera extends SB_LoaderInterface
 {
-    var $lines;
+    public $lines;
 
-    function __construct($useEngine=true, $charSet=null)
+    public function __construct($useEngine = true, $charSet = null)
     {
         parent::__construct($useEngine, $charSet);
     }
 
-    function load(&$lines, &$root)
+    public function load(&$lines, &$root)
     {
-        $this->lines =& $lines;
+        $this->lines = & $lines;
         return $this->loadOpera($root);
     }
 
-    function stripBinaryData(&$value)
+    public function stripBinaryData(&$value)
     {
-        return preg_replace('/\x02\x02/',"\n", $value);
+        return preg_replace('/\x02\x02/', "\n", $value);
     }
 
-    function loadOpera(&$parent)
+    public function loadOpera(&$parent)
     {
-        while (($line = array_shift($this->lines))!==null)
-        {
+        while (($line = array_shift($this->lines)) !== null) {
             $line = $this->toUTF8($line);
             // Open node
-            if ($line == "#FOLDER")
-            {
+            if ($line == "#FOLDER") {
                 $rec = array();
-                while ($line != "")
-                {
+                while ($line != "") {
                     $line = trim(array_shift($this->lines));
-                    $parts = explode('=',$line,2);
+                    $parts = explode('=', $line, 2);
 
-                    if (count($parts)>1)
-                    {
-                        list($name,$value) = $parts;
-                        if ($name=='NAME')
-                        {
+                    if (count($parts) > 1) {
+                        list($name, $value) = $parts;
+                        if ($name == 'NAME') {
                             $rec['name'] = $value;
                         }
-                        if ($name=='DESCRIPTION')
-                        {
+                        if ($name == 'DESCRIPTION') {
                             $rec['comment'] = $this->stripBinaryData($value);
                         }
-                    }
-                    else
-                    {
+                    } else {
                         break;
                     }
                 }
@@ -80,38 +73,29 @@ class SB_Loader_opera extends SB_LoaderInterface
             }
 
             // Add link to current node
-            if ($line == "#URL")
-            {
+            if ($line == "#URL") {
                 $rec = array();
-                while ($line != "")
-                {
+                while ($line != "") {
                     $line = trim(array_shift($this->lines));
-                    $parts = explode('=',$line,2);
+                    $parts = explode('=', $line, 2);
 
-                    if (count($parts)>1)
-                    {
-                        list($name,$value) = $parts;
+                    if (count($parts) > 1) {
+                        list($name, $value) = $parts;
 
-                        if ($name=='NAME')
-                        {
+                        if ($name == 'NAME') {
                             $rec['name'] = $value;
                         }
-                        if ($name=='URL')
-                        {
+                        if ($name == 'URL') {
                             $rec['url'] = $value;
                         }
-                        if ($name=='DESCRIPTION')
-                        {
+                        if ($name == 'DESCRIPTION') {
                             $rec['comment'] = $this->stripBinaryData($value);
                         }
-                    }
-                    else
-                    {
+                    } else {
                         break;
                     }
                 }
-                if (isset($rec['url']))
-                {
+                if (isset($rec['url'])) {
                     $parent->addLink(new SB_Tree_Link($rec));
                     $this->importedLinks++;
                 }
@@ -119,12 +103,10 @@ class SB_Loader_opera extends SB_LoaderInterface
             }
 
             // Close node - break recursion
-            if ($line == "-")
-            {
+            if ($line == "-") {
                 return true;
             }
         }
         return true;
     }
 }
-?>

@@ -200,5 +200,3 @@ Izvoz i uvoz baze podataka moguće je obaviti koristeći <a href='http://www.php
 Tablice sitebar_favicon (do verzije 3.2.6) i sitebar_cache (od verzije 3.3) nije potrebno prebacivati, njihov sadržaj će automatski biti obnovljen.
 
 _P;
-
-?>

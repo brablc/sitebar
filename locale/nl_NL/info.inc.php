@@ -1,13 +1,9 @@
 <?php
 
-$info = array
-(
+$info = array(
     'language' => 'Nederlands',
-    'authors' => array
-    (
+    'authors' => array(
         'Eric Hameleers' => 'http://www.slackware.com/~alien/',
         'Henri Wiering' => null,
     ),
 );
-
-?>

@@ -1,4 +1,5 @@
 <?php
+
 /******************************************************************************
  *  SiteBar 3 - The Bookmark Server for Personal and Team Use.                *
  *  Copyright (C) 2004-2008  Ondrej Brablc <http://brablc.com/mailto?o>       *
@@ -24,21 +25,18 @@ $tree = SB_Tree::staticInstance();
 $link = $tree->getLink($_GET['id']);
 
 // We allow redirect only as long as the original link exists
-if ($link)
-{
+if ($link) {
     $node = $tree->getNode($link->id_parent);
-    $acl =& $node->getACL();
+    $acl = & $node->getACL();
 
     // But if it has been changed, we only let authorized users to see the new value
-    if ($acl && $acl['allow_select'])
-    {
+    if ($acl && $acl['allow_select']) {
         $url = $link->getUrl();
 
-        if (strlen($url))
-        {
-            $url = str_replace('%SEARCH%', SB_safeVal($_COOKIE,'SB3SEARCH'), $url);
+        if (strlen($url)) {
+            $url = str_replace('%SEARCH%', SB_safeVal($_COOKIE, 'SB3SEARCH'), $url);
             $tree->countVisit($link);
-            header('Location: '. $url );
+            header('Location: ' . $url);
             exit;
         }
     }

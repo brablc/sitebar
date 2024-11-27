@@ -338,5 +338,3 @@ $para['hook::statistics'] = <<<_P
 SQL查詢 {queries}。
 資料庫/所有時間 {time_db}/{time_total} 秒 ({time_pct}%)。
 _P;
-
-?>

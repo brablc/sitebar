@@ -383,5 +383,3 @@ programmet <a href='http://www.phpmyadmin.net/'>phpMyAdmin</a>. <b>MERK:</b> Tab
 (til 3.2.6) eller sitebar_cache (fra og med 3.3) behøver du ikke å overføre. Innholdet i de to 
 tabellene blir automatisk bygget opp på nytt.
 _P;
-
-?>

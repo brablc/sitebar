@@ -1,4 +1,5 @@
 <?php
+
 /******************************************************************************
  *  SiteBar 3 - The Bookmark Server for Personal and Team Use.                *
  *  Copyright (C) 2005-2008  Ondrej Brablc <http://brablc.com/mailto?o>       *
@@ -25,132 +26,117 @@ header("Content-type: text/plain; charset=UTF-8");
 
 class SB_SanityCheck
 {
-    var $um;
-    var $tree;
-    var $db;
-    var $checked = array();
+    public $um;
+    public $tree;
+    public $db;
+    public $checked = array();
 
-    function __construct()
+    public function __construct()
     {
-        $this->um =& SB_UserManager::staticInstance();
-        $this->tree =& SB_Tree::staticInstance();
-        $this->db =& SB_Database::staticInstance();
+        $this->um = & SB_UserManager::staticInstance();
+        $this->tree = & SB_Tree::staticInstance();
+        $this->db = & SB_Database::staticInstance();
 
-        if (!$this->um->isLogged() || !$this->um->isAdmin())
-        {
-            die ("Access denied!");
+        if (!$this->um->isLogged() || !$this->um->isAdmin()) {
+            die("Access denied!");
         }
     }
 
-    function run()
+    public function run()
     {
         $doall = isset($_GET['do_all']);
 
-        if ($doall || isset($_GET['do_deadusers']))
-        {
+        if ($doall || isset($_GET['do_deadusers'])) {
             $this->deadusers();
         }
-        if ($doall || isset($_GET['do_orphans']))
-        {
+        if ($doall || isset($_GET['do_orphans'])) {
             $this->orphans();
         }
-        if ($doall || isset($_GET['do_aclorphans']))
-        {
+        if ($doall || isset($_GET['do_aclorphans'])) {
             $this->aclorphans();
         }
-        if ($doall || isset($_GET['do_icons']))
-        {
+        if ($doall || isset($_GET['do_icons'])) {
             $this->convertBinaryIcons();
         }
-        if (isset($_GET['do_fix']))
-        {
+        if (isset($_GET['do_fix'])) {
             $this->fix();
         }
-        if (isset($_GET['do_fixgroups']))
-        {
+        if (isset($_GET['do_fixgroups'])) {
             $this->fixgroups();
         }
-        if (isset($_GET['do_fixeveryone']))
-        {
+        if (isset($_GET['do_fixeveryone'])) {
             $this->fixeveryone();
         }
         echo "Done.\r";
     }
 
-    function strip_slashes()
+    public function strip_slashes()
     {
         echo "Strip tripple slashes in link names and descriptions ...\r";
         $rset = $this->db->select('lid, name, comment', 'sitebar_link');
 
-        while (($rec = $this->db->fetchRecord($rset)))
-        {
+        while (($rec = $this->db->fetchRecord($rset))) {
             $update = array();
-            $update['name'] = str_replace("\\\\","\\", $rec['name']);
-            $update['comment'] = str_replace("\\\\","\\", $rec['comment']);
+            $update['name'] = str_replace("\\\\", "\\", $rec['name']);
+            $update['comment'] = str_replace("\\\\", "\\", $rec['comment']);
 
-            if ($update['name'] != $rec['name'] || $update['comment'] != $rec['comment'])
-            {
-                $this->db->update( 'sitebar_link', $update, array( 'lid' => $rec['lid']), array(1062));
+            if ($update['name'] != $rec['name'] || $update['comment'] != $rec['comment']) {
+                $this->db->update('sitebar_link', $update, array( 'lid' => $rec['lid']), array(1062));
             }
         }
 
         echo "Strip tripple slashes in node names and descriptions ...\r";
         $rset = $this->db->select('nid, name, comment', 'sitebar_node');
 
-        while (($rec = $this->db->fetchRecord($rset)))
-        {
+        while (($rec = $this->db->fetchRecord($rset))) {
             $update = array();
-            $update['name'] = str_replace("\\\\","\\", $rec['name']);
-            $update['comment'] = str_replace("\\\\","\\", $rec['comment']);
+            $update['name'] = str_replace("\\\\", "\\", $rec['name']);
+            $update['comment'] = str_replace("\\\\", "\\", $rec['comment']);
 
-            if ($update['name'] != $rec['name'] || $update['comment'] != $rec['comment'])
-            {
-                $this->db->update( 'sitebar_node', $update, array( 'nid' => $rec['nid']), array(1062));
+            if ($update['name'] != $rec['name'] || $update['comment'] != $rec['comment']) {
+                $this->db->update('sitebar_node', $update, array( 'nid' => $rec['nid']), array(1062));
             }
         }
     }
 
-    function _fix_zeroes(&$value)
+    public function _fix_zeroes(&$value)
     {
-        $value = str_replace("\0",'\0', $value);
+        $value = str_replace("\0", '\0', $value);
     }
 
-    function _fix_slashes(&$value)
+    public function _fix_slashes(&$value)
     {
-        $value = str_replace("\\\\","\\", $value);
+        $value = str_replace("\\\\", "\\", $value);
     }
 
-    function _fix_apos(&$value)
+    public function _fix_apos(&$value)
     {
-        $value = str_replace("&#39;","'", $value);
+        $value = str_replace("&#39;", "'", $value);
     }
 
-    function _fix_nbsp(&$value)
+    public function _fix_nbsp(&$value)
     {
-        $value = str_replace("&nbsp;"," ", $value);
+        $value = str_replace("&nbsp;", " ", $value);
     }
 
-    function _fix_entities(&$value)
+    public function _fix_entities(&$value)
     {
-        if ( preg_match('/[&<>\'"]/',$value) )
-        {
+        if (preg_match('/[&<>\'"]/', $value)) {
             $entity = array('&amp;','&lt;','&gt;','&apos;','&quot;');
             $char   = array('&','<','>','\'','"');
             $value = str_replace($entity, $char, $value);
         }
     }
 
-    function fix()
+    public function fix()
     {
         echo "Walk all links in database ...\r";
         $rset = $this->db->select('lid, name, comment, url', 'sitebar_link');
 
-        while (($rec = $this->db->fetchRecord($rset)))
-        {
+        while (($rec = $this->db->fetchRecord($rset))) {
             $update = array();
 
-            foreach (array('name','comment','url') as $column)
-            {
+            foreach (array('name','comment','url') as $column) {
                 $decoded = $rec[$column];
 
                 $this->_fix_zeroes($decoded);
@@ -159,28 +145,24 @@ class SB_SanityCheck
                 $this->_fix_apos($decoded);
                 $this->_fix_nbsp($decoded);
 
-                if ($decoded != $rec[$column])
-                {
-                    echo '- '.$decoded."\r";
+                if ($decoded != $rec[$column]) {
+                    echo '- ' . $decoded . "\r";
                     $update[$column] = $decoded;
                 }
             }
 
-            if (count($update))
-            {
-                $this->db->update( 'sitebar_link', $update, array( 'lid' => $rec['lid']), array(1062));
+            if (count($update)) {
+                $this->db->update('sitebar_link', $update, array( 'lid' => $rec['lid']), array(1062));
             }
         }
 
         echo "Walk all nodes in database ...\r";
         $rset = $this->db->select('nid, name, comment', 'sitebar_node');
 
-        while (($rec = $this->db->fetchRecord($rset)))
-        {
+        while (($rec = $this->db->fetchRecord($rset))) {
             $update = array();
 
-            foreach (array('name','comment') as $column)
-            {
+            foreach (array('name','comment') as $column) {
                 $decoded = $rec[$column];
 
                 $this->_fix_zeroes($decoded);
@@ -189,21 +171,19 @@ class SB_SanityCheck
                 $this->_fix_apos($decoded);
                 $this->_fix_nbsp($decoded);
 
-                if ($decoded != $rec[$column])
-                {
-                    echo '- '.$decoded."\r";
+                if ($decoded != $rec[$column]) {
+                    echo '- ' . $decoded . "\r";
                     $update[$column] = $decoded;
                 }
             }
 
-            if (count($update))
-            {
-                $this->db->update( 'sitebar_node', $update, array( 'nid' => $rec['nid']), array(1062));
+            if (count($update)) {
+                $this->db->update('sitebar_node', $update, array( 'nid' => $rec['nid']), array(1062));
             }
         }
     }
 
-    function orphans()
+    public function orphans()
     {
         echo "Fetch ids of all links in database ...\r";
 
@@ -214,13 +194,12 @@ class SB_SanityCheck
         echo "  - whether the node without parent is the root,\r";
         echo "  - whether there is a user for the node.\r";
 
-        while (($rec = $this->db->fetchRecord($rset)))
-        {
+        while (($rec = $this->db->fetchRecord($rset))) {
             $this->checkNode($rec['nid']);
         }
     }
 
-    function aclorphans()
+    public function aclorphans()
     {
         echo "Fetch ids of all acl nodes in database ...\r";
 
@@ -231,40 +210,38 @@ class SB_SanityCheck
         echo "  - whether the node without parent is the root,\r";
         echo "  - whether there is a user for the node.\r";
 
-        while (($rec = $this->db->fetchRecord($rset)))
-        {
+        while (($rec = $this->db->fetchRecord($rset))) {
             $this->checkNodeACL($rec['nid']);
         }
     }
 
-    function deadusers()
+    public function deadusers()
     {
         echo "Delete users with no visits ...\r";
 
-        $sql =<<<_SQL
+        $sql = <<<_SQL
 SELECT u.uid, u.email
 FROM `sitebar_user` u
 WHERE u.uid > 2 AND visits = 0;
 _SQL;
 
         $rset = $this->db->raw($sql);
-        while (($rec = $this->db->fetchRecord($rset)))
-        {
+        while (($rec = $this->db->fetchRecord($rset))) {
             echo "Deleting user #${rec['uid']} ${rec['email']}\r";
             $this->um->removeUser($rec['uid']);
         }
         echo "\n";
     }
 
-    function fixgroups()
+    public function fixgroups()
     {
-        $default_groups = $this->um->getParamArray('config','default_groups');
+        $default_groups = $this->um->getParamArray('config', 'default_groups');
 
         echo "For each user other than built in ...\r";
 
-        $groups = implode("','",$default_groups);
+        $groups = implode("','", $default_groups);
         $groupCount = count($default_groups);
-        $sql =<<<_SQL
+        $sql = <<<_SQL
 SELECT u.uid, SUM( IF( g.name IN ('$groups'), 1, 0) ) DGROUPS, COUNT(g.gid) AGROUPS
 FROM `sitebar_user` u LEFT OUTER JOIN `sitebar_group` g ON g.uid = u.uid
 WHERE u.uid > 2
@@ -274,19 +251,17 @@ _SQL;
 
         echo "Fixing users: ";
         $rset = $this->db->raw($sql);
-        while (($rec = $this->db->fetchRecord($rset)))
-        {
+        while (($rec = $this->db->fetchRecord($rset))) {
             echo $rec['uid'] . " ";
-            foreach ($default_groups as $group)
-            {
-                $group = array('uid'=>$rec['uid'], 'name'=>$group);
+            foreach ($default_groups as $group) {
+                $group = array('uid' => $rec['uid'], 'name' => $group);
                 $this->um->addGroup($group);
             }
         }
         echo "\n";
     }
 
-    function fixeveryone()
+    public function fixeveryone()
     {
         echo "Delete membership of other that built in users ...\r";
         $this->db->raw("DELETE FROM sitebar_member WHERE uid>2 AND gid=2");
@@ -294,7 +269,7 @@ _SQL;
         $this->db->raw("DELETE FROM sitebar_acl WHERE gid=2 and nid>2");
     }
 
-    function convertBinaryIcons()
+    public function convertBinaryIcons()
     {
         echo "Convert binary icons ...\r";
 
@@ -304,13 +279,10 @@ _SQL;
 
         $converted = 0;
 
-        while (($rec = $this->db->fetchRecord($rset)))
-        {
-            if (preg_match("/^data:image\/(.*?);base64,(.*)$/", $rec['favicon'], $reg))
-            {
-                $update = array
-                (
-                    'favicon'=>$fc->saveFaviconBase64($reg[2]),
+        while (($rec = $this->db->fetchRecord($rset))) {
+            if (preg_match("/^data:image\/(.*?);base64,(.*)$/", $rec['favicon'], $reg)) {
+                $update = array(
+                    'favicon' => $fc->saveFaviconBase64($reg[2]),
                 );
 
                 $this->tree->updateLink($rec['lid'], $update);
@@ -318,52 +290,42 @@ _SQL;
             }
         }
 
-        echo 'Converted '.$converted." favicons.\r";
+        echo 'Converted ' . $converted . " favicons.\r";
     }
 
-    function checkNode($nid)
+    public function checkNode($nid)
     {
-        if (isset($this->checked[$nid]))
-        {
+        if (isset($this->checked[$nid])) {
             return true;
         }
 
         $this->checked[$nid]++;
 
-        $rset = $this->db->select('*', 'sitebar_node', array('nid'=>$nid));
+        $rset = $this->db->select('*', 'sitebar_node', array('nid' => $nid));
         $rec = $this->db->fetchRecord($rset);
 
-        if (is_array($rec))
-        {
-            if ($rec['nid_parent']==0)
-            {
+        if (is_array($rec)) {
+            if ($rec['nid_parent'] == 0) {
                 echo "Root: " . $rec['name'] . "\r";
-                $rset = $this->db->select('*', 'sitebar_root', array('nid'=>$nid));
+                $rset = $this->db->select('*', 'sitebar_root', array('nid' => $nid));
                 $root = $this->db->fetchRecord($rset);
 
-                if (is_array($root))
-                {
-                    $rset = $this->db->select('*', 'sitebar_user', array('uid'=>$root['uid']));
+                if (is_array($root)) {
+                    $rset = $this->db->select('*', 'sitebar_user', array('uid' => $root['uid']));
                     $user = $this->db->fetchRecord($rset);
 
-                    if (is_array($user))
-                    {
+                    if (is_array($user)) {
                         echo "User: " . $user['name'] . '[' . $user['email'] . ']\r';
-                    }
-                    else
-                    {
+                    } else {
                         echo "!!! Orfan\r";
                     }
-                }
-                else
-                {
+                } else {
                     echo "!!! Invisible\r";
                 }
                 return true;
             }
 
-            if ($rec['nid'] == $rec['nid_parent'])
-            {
+            if ($rec['nid'] == $rec['nid_parent']) {
                 echo "!!! Recursive parent!\r";
             }
 
@@ -374,13 +336,12 @@ _SQL;
         return false;
     }
 
-    function checkNodeACL($nid)
+    public function checkNodeACL($nid)
     {
-        $rset = $this->db->select('*', 'sitebar_node', array('nid'=>$nid));
+        $rset = $this->db->select('*', 'sitebar_node', array('nid' => $nid));
         $rec = $this->db->fetchRecord($rset);
 
-        if (!is_array($rec))
-        {
+        if (!is_array($rec)) {
             echo "!!! Missing node: " . $nid . "\r";
         }
     }
@@ -388,5 +349,3 @@ _SQL;
 
 $sc = new SB_SanityCheck();
 $sc->run();
-
-?>

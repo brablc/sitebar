@@ -1,7 +1,6 @@
 <?php
 
-$topic = array
-(
+$topic = array(
     100 => 'Usage Tips',
         101 => 'Drag &amp; Drop',
         103 => 'Tool Bar Functions',
@@ -21,5 +20,3 @@ $topic = array
         304 => 'Writers',
         305 => 'Migration',
 );
-
-?>

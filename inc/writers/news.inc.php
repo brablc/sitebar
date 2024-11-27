@@ -1,4 +1,5 @@
 <?php
+
 /******************************************************************************
  *  SiteBar 3 - The Bookmark Server for Personal and Team Use.                *
  *  Copyright (C) 2005-2008  Ondrej Brablc <http://brablc.com/mailto?o>       *
@@ -29,40 +30,37 @@ require_once('./inc/writers/dir.inc.php');
 
 class SB_Writer_news extends SB_Writer_dir
 {
-    var $wantLoad = true;
+    public $wantLoad = true;
 
-    function __construct()
+    public function __construct()
     {
         parent::__construct();
         $this->switches['flat'] = 1;
     }
 
-    function drawStyleSheet()
+    public function drawStyleSheet()
     {
-        echo '<?xml-stylesheet'.
-             ' href="'. $this->getXSLPath('xbel2news') .'"'.
+        echo '<?xml-stylesheet' .
+             ' href="' . $this->getXSLPath('xbel2news') . '"' .
              ' type="text/xsl"?>' . "\r";
     }
 
-    function getShortTitle()
+    public function getShortTitle()
     {
         $name = '';
 
-        if ($this->switches['root'])
-        {
+        if ($this->switches['root']) {
             // We have only one root in this case but placed in a fake root
             $node = $this->tree->getNode($this->switches['root']);
             $name = $node->name;
-        }
-        else
-        {
+        } else {
             $name = 'SiteBar';
         }
 
         return sprintf(SB_T('%s Bookmark News'), $name);
     }
 
-    function load()
+    public function load()
     {
         SB_WriterInterface::load();
         $this->wantLoad = false;
@@ -75,38 +73,35 @@ class SB_Writer_news extends SB_Writer_dir
         $this->root = $newroot;
     }
 
-    function addSorted(&$root, $sortMode)
+    public function addSorted(&$root, $sortMode)
     {
         $this->sortLinks($sortMode);
-        $sub = new SB_Tree_Node(array
-        (
-            'name'=>SB_T($this->tree->sortModeLabel[$sortMode]),
-            'nid'=> $sortMode,
-            'nid_parent' => ($this->switches['root']?$this->switches['root']:''),
+        $sub = new SB_Tree_Node(array(
+            'name' => SB_T($this->tree->sortModeLabel[$sortMode]),
+            'nid' => $sortMode,
+            'nid_parent' => ($this->switches['root'] ? $this->switches['root'] : ''),
         ));
-        foreach ($this->root->getLinksSlice(10) as $link)
-        {
+        foreach ($this->root->getLinksSlice(10) as $link) {
             $sub->addLink($link);
         }
         $root->addNode($sub);
     }
 
-    function wantLoadChildren(&$node)
+    public function wantLoadChildren(&$node)
     {
         return $this->wantLoad;
     }
 
-    function getMetaDataAtt()
+    public function getMetaDataAtt()
     {
         $att = parent::getMetaDataAtt();
         $att['style'] = $this->getSkinsPath('news.css');
         return $att;
     }
 
-    function getLinkAttMap(&$bmkAtt, &$node, &$link)
+    public function getLinkAttMap(&$bmkAtt, &$node, &$link)
     {
         parent::getLinkAttMap($bmkAtt, $node, $link);
         unset($bmkAtt['id']);
     }
 }
-?>

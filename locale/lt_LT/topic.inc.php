@@ -1,7 +1,6 @@
 <?php
 
-$topic = array
-(
+$topic = array(
 '100' => 'Pasiūlymai naudojimuisi',
 '101' => 'Drag & Drop',
 '102' => 'Nuorodų talpinimas',
@@ -19,5 +18,3 @@ $topic = array
 '302' => 'Saugumo mechanizmas',
 '303' => 'Odos',
 );
-
-?>

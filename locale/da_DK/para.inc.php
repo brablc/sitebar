@@ -168,5 +168,3 @@ _P;
 $para['groupname::Public'] = <<<_P
 Frit tilgængelig
 _P;
-
-?>

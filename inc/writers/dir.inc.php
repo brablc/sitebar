@@ -1,4 +1,5 @@
 <?php
+
 /******************************************************************************
  *  SiteBar 3 - The Bookmark Server for Personal and Team Use.                *
  *  Copyright (C) 2004-2008  Ondrej Brablc <http://brablc.com/mailto?o>       *
@@ -28,34 +29,32 @@ require_once('./inc/writers/xbel.inc.php');
 
 class SB_Writer_dir extends SB_Writer_xbel
 {
-    function __construct()
+    public function __construct()
     {
         parent::__construct();
-        $this->um->setParam('user','mix_mode','nodes');
+        $this->um->setParam('user', 'mix_mode', 'nodes');
     }
 
-    function allowAnonymous()
+    public function allowAnonymous()
     {
         return true;
     }
 
-    function getMaxLevel()
+    public function getMaxLevel()
     {
-        return $this->switches['root']?2:1;
+        return $this->switches['root'] ? 2 : 1;
     }
 
-    function load()
+    public function load()
     {
-        if (!$this->switches['flat'])
-        {
+        if (!$this->switches['flat']) {
             $this->tree->maxLevel = $this->getMaxLevel();
         }
 
         parent::load();
 
         // We want single rooted tree, add fake folder
-        if (!$this->switches['root'] || $this->switches['flat'])
-        {
+        if (!$this->switches['root'] || $this->switches['flat']) {
             $oldroot = $this->root;
             $this->root = new SB_Tree_Node(array());
             $this->root->name = $oldroot->name;
@@ -64,20 +63,19 @@ class SB_Writer_dir extends SB_Writer_xbel
         }
     }
 
-    function wantLoadChildren(&$node)
+    public function wantLoadChildren(&$node)
     {
-        return $node->level<=$this->getMaxLevel();
+        return $node->level <= $this->getMaxLevel();
     }
 
-    function drawXMLPI()
+    public function drawXMLPI()
     {
         parent::drawXMLPI();
-
     }
 
-    function drawDOCTYPE()
+    public function drawDOCTYPE()
     {
-?>
+        ?>
 <!DOCTYPE xbel PUBLIC
     "+//IDN sitebar.org//DTD XML Bookmark Exchange Language for SiteBar 1.0//EN//XML"
     "http://sitebar.org/xml/xbel-sitebar-1.0.dtd"
@@ -90,17 +88,17 @@ class SB_Writer_dir extends SB_Writer_xbel
         imglink        CDATA #IMPLIED
     >
 ]>
-<?php
+        <?php
     }
 
-    function drawStyleSheet()
+    public function drawStyleSheet()
     {
-        echo '<?xml-stylesheet'.
-             ' href="'. $this->getXSLPath('xbel2dir') .'"'.
+        echo '<?xml-stylesheet' .
+             ' href="' . $this->getXSLPath('xbel2dir') . '"' .
              ' type="text/xsl"?>' . "\r";
     }
 
-    function getMetaDataAtt()
+    public function getMetaDataAtt()
     {
         $att = parent::getMetaDataAtt();
         $att['style'] = $this->getSkinsPath('directory.css');

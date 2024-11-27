@@ -1,4 +1,5 @@
 <?php
+
 /******************************************************************************
  *  SiteBar 3 - The Bookmark Server for Personal and Team Use.                *
  *  Copyright (C) 2004-2008  Ondrej Brablc <http://brablc.com/mailto?o>       *
@@ -21,20 +22,19 @@
 
 class SB_Localizer
 {
-    var $dir = './locale';
-    var $text;
-    var $para;
-    var $paraDefault;
-    var $lang;
-    var $langDefault = 'en_US';
-    var $pluginPaths = array();
+    public $dir = './locale';
+    public $text;
+    public $para;
+    public $paraDefault;
+    public $lang;
+    public $langDefault = 'en_US';
+    public $pluginPaths = array();
 
-    function __construct()
+    public function __construct()
     {
         $this->lang = $this->langDefault;
 
-        if (!is_dir($this->dir))
-        {
+        if (!is_dir($this->dir)) {
             $this->dir = '../locale';
         }
 
@@ -42,44 +42,42 @@ class SB_Localizer
     }
 
     // Obsolete, use staticInstance
-    function & getInstance()
+    public function & getInstance()
     {
         return SB_Localizer::staticInstance();
     }
 
-    static function & staticInstance()
+    public static function & staticInstance()
     {
         static $instance;
 
-        if (!$instance)
-        {
+        if (!$instance) {
             $instance = new SB_Localizer();
         }
 
         return $instance;
     }
 
-    function getLanguages()
+    public function getLanguages()
     {
         static $langs = null;
 
-        if ($langs)
-        {
+        if ($langs) {
             return $langs;
         }
 
         $langs = array();
 
-        if ($dir = opendir($this->dir))
-        {
-            while (($dirName = readdir($dir)) !== false)
-            {
-                $infofile = $this->dir.'/'.$dirName.'/info.inc.php';
-                if (!is_dir($this->dir.'/'.$dirName) || !is_file($infofile)) continue;
+        if ($dir = opendir($this->dir)) {
+            while (($dirName = readdir($dir)) !== false) {
+                $infofile = $this->dir . '/' . $dirName . '/info.inc.php';
+                if (!is_dir($this->dir . '/' . $dirName) || !is_file($infofile)) {
+                    continue;
+                }
 
                 include($infofile);
 
-                $info['dir']=$dirName;
+                $info['dir'] = $dirName;
                 $langs[] = $info;
             }
             closedir($dir);
@@ -96,54 +94,43 @@ class SB_Localizer
         return $langs;
     }
 
-    function getBrowserLang()
+    public function getBrowserLang()
     {
         static $fmt = '/^(%s).*?(;q=[0-9]\\.[0-9])?$/i';
 
-        if (!empty($_SERVER['HTTP_ACCEPT_LANGUAGE']))
-        {
+        if (!empty($_SERVER['HTTP_ACCEPT_LANGUAGE'])) {
             $str = $_SERVER['HTTP_ACCEPT_LANGUAGE'];
 
-            foreach ($this->getLanguages() as $lang)
-            {
-                $dir = str_replace('_','-',$lang['dir']);
+            foreach ($this->getLanguages() as $lang) {
+                $dir = str_replace('_', '-', $lang['dir']);
 
-                if (preg_match(sprintf($fmt, $dir), $str))
-                {
+                if (preg_match(sprintf($fmt, $dir), $str)) {
                     return $lang['dir'];
                 }
 
-                if (isset($lang['aliases']))
-                {
-                    foreach ($lang['aliases'] as $dirName)
-                    {
-                        $dir = str_replace('_','-',$dirName);
+                if (isset($lang['aliases'])) {
+                    foreach ($lang['aliases'] as $dirName) {
+                        $dir = str_replace('_', '-', $dirName);
 
-                        if (preg_match(sprintf($fmt, $dir), $str))
-                        {
+                        if (preg_match(sprintf($fmt, $dir), $str)) {
                             return $lang['dir'];
                         }
                     }
                 }
             }
 
-            foreach ($this->getLanguages() as $lang)
-            {
-                list($ln,$country) = explode('_',$lang['dir']);
+            foreach ($this->getLanguages() as $lang) {
+                list($ln, $country) = explode('_', $lang['dir']);
 
-                if (preg_match(sprintf($fmt, $ln), $str))
-                {
+                if (preg_match(sprintf($fmt, $ln), $str)) {
                     return $lang['dir'];
                 }
 
-                if (isset($lang['aliases']))
-                {
-                    foreach ($lang['aliases'] as $dirName)
-                    {
-                        list($ln,$country) = explode('_',$dirName);
+                if (isset($lang['aliases'])) {
+                    foreach ($lang['aliases'] as $dirName) {
+                        list($ln, $country) = explode('_', $dirName);
 
-                        if (preg_match(sprintf($fmt, $ln), $str))
-                        {
+                        if (preg_match(sprintf($fmt, $ln), $str)) {
                             return $lang['dir'];
                         }
                     }
@@ -154,24 +141,21 @@ class SB_Localizer
         return null;
     }
 
-    function setPlugins(&$pluginPaths)
+    public function setPlugins(&$pluginPaths)
     {
-        $this->pluginPaths =& $pluginPaths;
+        $this->pluginPaths = & $pluginPaths;
         $this->loadDefault();
     }
 
-    function loadDefault()
+    public function loadDefault()
     {
-        if (require($this->dir.'/'.$this->langDefault.'/para.inc.php'))
-        {
+        if (require($this->dir . '/' . $this->langDefault . '/para.inc.php')) {
             $this->text = array();
 
-            foreach ($this->pluginPaths as $pluginPath)
-            {
+            foreach ($this->pluginPaths as $pluginPath) {
                 $langfile = $pluginPath . '/locale/' . $this->langDefault . '/para.inc.php';
 
-                if (is_file($langfile))
-                {
+                if (is_file($langfile)) {
                     include($langfile);
                 }
             }
@@ -181,124 +165,100 @@ class SB_Localizer
         }
     }
 
-    function getText($msg, $params=null)
+    public function getText($msg, $params = null)
     {
         $lmsg = '';
-        if ($this->isDefault())
-        {
+        if ($this->isDefault()) {
             $lmsg = $msg;
-        }
-        else
-        {
-            if (isset($this->text[strtolower($msg)]))
-            {
+        } else {
+            if (isset($this->text[strtolower($msg)])) {
                 $lmsg = $this->text[strtolower($msg)];
-                if (substr($lmsg,0,3) == '<@>')
-                {
+                if (substr($lmsg, 0, 3) == '<@>') {
                     $lmsg = $msg;
                 }
-            }
-            else
-            {
+            } else {
                 $lmsg = $msg;
             }
         }
 
-        if ($params)
-        {
+        if ($params) {
             $lmsg = vsprintf($lmsg, $params);
         }
 
         return $lmsg;
     }
 
-    function getPara($id, $params=null)
+    public function getPara($id, $params = null)
     {
         $lmsg = '';
 
-        if (isset($this->para[$id]))
-        {
+        if (isset($this->para[$id])) {
             $lmsg = $this->para[$id];
-            if (substr($lmsg,0,3) == '<@>')
-            {
+            if (substr($lmsg, 0, 3) == '<@>') {
                 $lmsg = $this->paraDefault[$id];
             }
-        }
-        elseif (isset($this->paraDefault[$id]))
-        {
+        } elseif (isset($this->paraDefault[$id])) {
             $lmsg = $this->paraDefault[$id];
-        }
-        else
-        {
+        } else {
             $lmsg = $id;
             $params = null;
         }
 
-        if ($params)
-        {
+        if ($params) {
             $lmsg = vsprintf($lmsg, $params);
         }
 
         return $lmsg;
     }
 
-    function isDefault()
+    public function isDefault()
     {
-        return $this->lang==$this->langDefault;
+        return $this->lang == $this->langDefault;
     }
 
-    function getLang()
+    public function getLang()
     {
-        return $this->lang?$this->lang:$this->langDefault;
+        return $this->lang ? $this->lang : $this->langDefault;
     }
 
-    function setLang($lang)
+    public function setLang($lang)
     {
-        if (!$lang)
-        {
+        if (!$lang) {
             $lang = $this->langDefault;
         }
 
-        $this->lang=$lang;
+        $this->lang = $lang;
 
-        $file = $this->dir.'/'.$this->lang.'/text.inc.php';
+        $file = $this->dir . '/' . $this->lang . '/text.inc.php';
 
-        if (is_file($file))
-        {
+        if (is_file($file)) {
             include($file);
 
-            if (!$this->isDefault())
-            {
-                foreach ($this->pluginPaths as $pluginPath)
-                {
-                    $langfile = $pluginPath . '/locale/'.$lang.'/text.inc.php';
+            if (!$this->isDefault()) {
+                foreach ($this->pluginPaths as $pluginPath) {
+                    $langfile = $pluginPath . '/locale/' . $lang . '/text.inc.php';
 
-                    if (is_file($langfile))
-                    {
+                    if (is_file($langfile)) {
                         include($langfile);
                     }
                 }
 
                 // transform the text keys into lower case so as to make the lookup case insensitive
-                foreach ($text as $key => $value)
-                {
+                foreach ($text as $key => $value) {
                     $this->text[strtolower($key)] = $value;
                 }
             }
         }
 
-        $file = $this->dir.'/'.$this->lang.'/para.inc.php';
+        $file = $this->dir . '/' . $this->lang . '/para.inc.php';
 
-        if (is_file($file))
-        {
+        if (is_file($file)) {
             include($file);
 
-            foreach ($this->pluginPaths as $pluginPath)
-            {
-                $langfile = $pluginPath . '/locale/'.$lang.'/para.inc.php';
+            foreach ($this->pluginPaths as $pluginPath) {
+                $langfile = $pluginPath . '/locale/' . $lang . '/para.inc.php';
 
-                if (is_file($langfile))
-                {
+                if (is_file($langfile)) {
                     include($langfile);
                 }
             }
@@ -307,16 +267,14 @@ class SB_Localizer
         }
     }
 
-    function getHelpTopics()
+    public function getHelpTopics()
     {
-        include($this->dir.'/'.$this->langDefault.'/topic.inc.php');
+        include($this->dir . '/' . $this->langDefault . '/topic.inc.php');
         $defaultTopic = $topic;
-        include($this->dir.'/'.$this->lang.'/topic.inc.php');
+        include($this->dir . '/' . $this->lang . '/topic.inc.php');
 
-        foreach ($defaultTopic as $id => $label)
-        {
-            if (!isset($topic[$id]))
-            {
+        foreach ($defaultTopic as $id => $label) {
+            if (!isset($topic[$id])) {
                 $topic[$id] = $defaultTopic[$id];
             }
         }
@@ -324,45 +282,43 @@ class SB_Localizer
         return $topic;
     }
 
-    function getHelp($id)
+    public function getHelp($id)
     {
-        include($this->dir.'/'.$this->langDefault.'/help.inc.php');
+        include($this->dir . '/' . $this->langDefault . '/help.inc.php');
         $defaultHelp = $help;
-        include($this->dir.'/'.$this->lang.'/help.inc.php');
+        include($this->dir . '/' . $this->lang . '/help.inc.php');
 
-        echo $help[$id]?$help[$id]:$defaultHelp[$id];
+        echo $help[$id] ? $help[$id] : $defaultHelp[$id];
     }
 }
 
-function SB_T($msg, $params=null)
+function SB_T($msg, $params = null)
 {
-    if (trim($msg)=='')
-    {
+    if (trim($msg) == '') {
         return $msg;
     }
-    $SB_Localizer =& SB_Localizer::staticInstance();
+    $SB_Localizer = & SB_Localizer::staticInstance();
     return $SB_Localizer->getText($msg, $params);
 }
 
-function SB_P($id, $params=null)
+function SB_P($id, $params = null)
 {
-    $SB_Localizer =& SB_Localizer::staticInstance();
+    $SB_Localizer = & SB_Localizer::staticInstance();
     return $SB_Localizer->getPara($id, $params);
 }
 
-function SB_C($context, $msg, $params=null)
+function SB_C($context, $msg, $params = null)
 {
-    return SB_P($context.'::'.$msg, $params);
+    return SB_P($context . '::' . $msg, $params);
 }
 
-function SB_A($id, $pairs, $open='{', $close='}')
+function SB_A($id, $pairs, $open = '{', $close = '}')
 {
-    $SB_Localizer =& SB_Localizer::staticInstance();
+    $SB_Localizer = & SB_Localizer::staticInstance();
     $para = $SB_Localizer->getPara($id);
 
-    foreach ($pairs as $key => $value)
-    {
-        $para = str_replace($open.$key.$close, $value, $para);
+    foreach ($pairs as $key => $value) {
+        $para = str_replace($open . $key . $close, $value, $para);
     }
 
     return $para;
@@ -370,26 +326,24 @@ function SB_A($id, $pairs, $open='{', $close='}')
 
 function SB_SetLanguage($lang)
 {
-    $SB_Localizer =& SB_Localizer::staticInstance();
+    $SB_Localizer = & SB_Localizer::staticInstance();
     return $SB_Localizer->setLang($lang);
 }
 
 function SB_GetLanguage()
 {
-    $SB_Localizer =& SB_Localizer::staticInstance();
+    $SB_Localizer = & SB_Localizer::staticInstance();
     return $SB_Localizer->getLang();
 }
 
 function SB_GetHelpTopics()
 {
-    $SB_Localizer =& SB_Localizer::staticInstance();
+    $SB_Localizer = & SB_Localizer::staticInstance();
     return $SB_Localizer->getHelpTopics();
 }
 
 function SB_GetHelp($params)
 {
-    $SB_Localizer =& SB_Localizer::staticInstance();
+    $SB_Localizer = & SB_Localizer::staticInstance();
     return $SB_Localizer->getHelp($params['topic']);
 }
-
-?>

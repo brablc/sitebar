@@ -825,5 +825,3 @@ _SBHD;
 $para['groupname::Public'] = <<<_SBHD
 Publiek
 _SBHD;
-
-?>

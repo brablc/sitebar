@@ -1,7 +1,6 @@
 <?php
 
-$topic = array
-(
+$topic = array(
 '100' => 'Uso de Dicas',
 '101' => 'Arrastar & Largar',
 '102' => 'Adicionar Links',
@@ -19,5 +18,3 @@ $topic = array
 '302' => 'Mecanismo de Segurança',
 '303' => 'Skins',
 );
-
-?>

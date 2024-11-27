@@ -1,4 +1,5 @@
 <?php
+
 /******************************************************************************
  *  SiteBar 3 - The Bookmark Server for Personal and Team Use.                *
  *  Copyright (C) 2004-2008  Ondrej Brablc <http://brablc.com/mailto?o>       *
@@ -26,11 +27,9 @@ $favicon_md5 = key($_GET);
 
 $lid = $_GET[$favicon_md5];
 
-if ('.'.$lid != '.'.intval($lid))
-{
+if ('.' . $lid != '.' . intval($lid)) {
     // We may have encoded favicon URL there
     $lid = base64_decode($lid);
 }
 
-$fc->faviconReturn( $favicon_md5, $lid, isset($_GET['refresh']));
-?>
+$fc->faviconReturn($favicon_md5, $lid, isset($_GET['refresh']));

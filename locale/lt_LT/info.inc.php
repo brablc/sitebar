@@ -1,10 +1,7 @@
 <?php
 
-$info = array
-(
+$info = array(
     'language' => 'Lietuviškai',
     'author' => 'Linas Gricius',
     'url' => null,
 );
-
-?>

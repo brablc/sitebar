@@ -260,5 +260,3 @@ Si algún usuario quiere incluir su tema en la distribución oficial de SiteBar 
 y probar su tema con la última versión estable de SiteBar. Como norma el logo de SiteBar y SourceForge deben de estar en la
 página, sin embargo el logo de SiteBar puede ser libremente actualizado.
 _P;
-
-?>

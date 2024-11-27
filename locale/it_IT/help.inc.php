@@ -77,5 +77,3 @@ SiteBar &#232; stato testato con i seguenti browser:
     <li>Internet Explorer 6.0
     <li>Opera 7.11, 7.21 </ul> I seguenti navigatori sono accessibili solo in lettura: <ul> <li>Pocket Internet Explorer 2002 <li>Netscape Navigator 4.78 </ul>
 _P;
-
-?>

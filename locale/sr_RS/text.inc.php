@@ -1265,5 +1265,3 @@ _SBHD;
 $text['Skin designed by'] = <<<_SBHD
 Кожу дизајнирао
 _SBHD;
-
-?>

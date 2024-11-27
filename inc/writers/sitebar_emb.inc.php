@@ -1,4 +1,5 @@
 <?php
+
 /******************************************************************************
  *  SiteBar 3 - The Bookmark Server for Personal and Team Use.                *
  *  Copyright (C) 2004-2008  Ondrej Brablc <http://brablc.com/mailto?o>       *
@@ -28,7 +29,7 @@ require_once('./inc/writers/sitebar.inc.php');
 
 class SB_Writer_sitebar_emb extends SB_Writer_sitebar
 {
-    function __construct()
+    public function __construct()
     {
         parent::__construct();
     }
@@ -36,48 +37,61 @@ class SB_Writer_sitebar_emb extends SB_Writer_sitebar
     // Make following function to do nothing with option to call
     // them with true parameter to call parent's function.
 
-    function setOutputHandler($doit=false)
+    public function setOutputHandler($doit = false)
     {
-        if ($doit) parent::setOutputHandler();
+        if ($doit) {
+            parent::setOutputHandler();
+        }
     }
 
-    function drawCacheControl($doit=false)
+    public function drawCacheControl($doit = false)
     {
-        if ($doit) parent::drawCacheControl();
+        if ($doit) {
+            parent::drawCacheControl();
+        }
     }
 
-    function drawContentType($doit=false)
+    public function drawContentType($doit = false)
     {
-        if ($doit) parent::drawContentType();
+        if ($doit) {
+            parent::drawContentType();
+        }
     }
 
-    function drawHeadPage($doit=false)
+    public function drawHeadPage($doit = false)
     {
-        if ($doit) parent::drawHeadPage();
+        if ($doit) {
+            parent::drawHeadPage();
+        }
     }
 
-    function drawHeadLogo($doit=false)
+    public function drawHeadLogo($doit = false)
     {
-        if ($doit) parent::drawHeadLogo();
+        if ($doit) {
+            parent::drawHeadLogo();
+        }
     }
 
-    function drawToolBar($doit=false)
+    public function drawToolBar($doit = false)
     {
-        if ($doit) parent::drawToolBar();
+        if ($doit) {
+            parent::drawToolBar();
+        }
     }
 
-    function drawFoot($doit=false)
+    public function drawFoot($doit = false)
     {
-        if ($doit) parent::drawFoot();
+        if ($doit) {
+            parent::drawFoot();
+        }
     }
 
-    function run()
+    public function run()
     {
-        $this->um->setParam('user','use_tooltips', false);
-        $this->um->setParam('user','extern_commander', false);
-        $this->um->setParam('user','auto_close', false);
+        $this->um->setParam('user', 'use_tooltips', false);
+        $this->um->setParam('user', 'extern_commander', false);
+        $this->um->setParam('user', 'auto_close', false);
         $this->loadOpenNodesOnly = false;
         parent::run();
     }
 }
-?>

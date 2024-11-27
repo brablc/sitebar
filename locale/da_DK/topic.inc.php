@@ -1,7 +1,6 @@
 <?php
 
-$topic = array
-(
+$topic = array(
 '100' => 'Tips',
 '101' => 'Træk & slip',
 '103' => 'Værktøjslinie funktioner',
@@ -19,5 +18,3 @@ $topic = array
 '304' => 'Forfattere',
 '305' => 'Migration',
 );
-
-?>

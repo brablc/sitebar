@@ -1,4 +1,5 @@
 <?php
+
 /******************************************************************************
  *  SiteBar 3 - The Bookmark Server for Personal and Team Use.                *
  *  Copyright (C) 2004-2008  Ondrej Brablc <http://brablc.com/mailto?o>       *
@@ -23,24 +24,24 @@ require_once('./inc/writer.inc.php');
 
 class SB_Writer_netscape extends SB_WriterInterface
 {
-    function __construct()
+    public function __construct()
     {
         parent::__construct();
     }
 
-    function getExtension()
+    public function getExtension()
     {
         return ".html";
     }
 
-    function drawContentType()
+    public function drawContentType()
     {
         header('Content-Type: text/html; charset=' . $this->charSet);
     }
 
-    function drawHead()
+    public function drawHead()
     {
-?>
+        ?>
 <!DOCTYPE NETSCAPE-Bookmark-file-1>
 <!-- This is an automatically generated file.
      It will be read and overwritten.
@@ -50,45 +51,43 @@ class SB_Writer_netscape extends SB_WriterInterface
 <H1>Bookmarks</H1>
 
 <DL><p>
-<?php
+        <?php
     }
 
-    function drawNodeOpen(&$node, $last=false)
+    public function drawNodeOpen(&$node, $last = false)
     {
         $filler = str_repeat("\t", $node->level);
 
-        $added = ($node->added?strtotime($node->added):mktime());
+        $added = ($node->added ? strtotime($node->added) : mktime());
 
         echo $filler . '<DT><H3 ADD_DATE="' . $added . '">' . $this->quoteText($node->name) . "</H3>\r";
 
-        if ($node->comment)
-        {
-            echo $filler. '<DD>' . $this->quoteText($node->comment) . "\r";
+        if ($node->comment) {
+            echo $filler . '<DD>' . $this->quoteText($node->comment) . "\r";
         }
         echo $filler . "<DL><p>\r";
     }
 
-    function drawNodeClose(&$node)
+    public function drawNodeClose(&$node)
     {
         $filler = str_repeat("\t", $node->level);
         echo $filler . "</DL><p>\r";
     }
 
-    function drawLink(&$node, &$link, $last=false)
+    public function drawLink(&$node, &$link, $last = false)
     {
         $filler = str_repeat("\t", $node->level);
 
-        echo $filler . '<DT><A'.
-             ' HREF="' . $link->url . '"'.
+        echo $filler . '<DT><A' .
+             ' HREF="' . $link->url . '"' .
              ' ADD_DATE="' . strtotime($link->added) . '"' .
              ' LAST_VISIT="' . strtotime($link->visited) . '"' .
              ' LAST_MODIFIED="' . strtotime($link->changed) . '"' .
-             ($link->favicon?' ICON="'. $link->favicon . '"':'') .
+             ($link->favicon ? ' ICON="' . $link->favicon . '"' : '') .
              '>' . $this->quoteText($link->name) . "</A>\r";
 
-        if ($link->comment)
-        {
-           echo $filler.'<DD>'.$this->quoteText($link->comment)."\r";
+        if ($link->comment) {
+            echo $filler . '<DD>' . $this->quoteText($link->comment) . "\r";
         }
     }
 }

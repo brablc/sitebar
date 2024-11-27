@@ -550,5 +550,3 @@ Grupy {groups}.
 Zapytania SQL {queries}.
 DB/Całkowity czas {time_db}/{time_total} sek. ({time_pct}%).
 _P;
-
-?>

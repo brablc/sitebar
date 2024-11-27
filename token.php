@@ -1,4 +1,5 @@
 <?php
+
 /******************************************************************************
  *  SiteBar 3 - The Bookmark Server for Personal and Team Use.                *
  *  Copyright (C) 2005-2008  Ondrej Brablc <http://brablc.com/mailto?o>       *
@@ -21,5 +22,3 @@ require_once('./inc/token.inc.php');
 
 $token = SB_Token::staticInstance();
 $token->validate(key($_GET), current($_GET), true);
-
-?>

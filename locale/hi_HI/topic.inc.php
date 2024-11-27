@@ -1,1 +1,3 @@
-<?php $topic = array(); ?>
+<?php
+
+$topic = array();

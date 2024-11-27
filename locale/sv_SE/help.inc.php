@@ -240,5 +240,3 @@ För att överföra från en existerande SiteBar-installation till en annan serv
 Exportering och importering kan göras genom <a href='http://www.phpmyadmin.net/' target='_blank'>phpMyAdmin</a>.
 Tabellen sitebar_favicon (till och med 3.2.6) eller sitebar_cache (från och med 3.3) behöver inte överföras, dess innehåll kommer att byggas om.
 _P;
-
-?>

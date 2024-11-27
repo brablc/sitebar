@@ -1071,5 +1071,3 @@ _P;
 $text['There is no conversion engine available to convert from %s character set!'] = <<<_P
 Nem áll rendelkezésre átalakító a(z) %s karakterkészlethez!
 _P;
-
-?>

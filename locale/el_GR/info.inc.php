@@ -1,12 +1,8 @@
 <?php
 
-$info = array
-(
+$info = array(
     'language' => 'Ελληνικά',
-    'authors' => array
-    (
+    'authors' => array(
       'George Giftogiannis' => null,
     ),
 );
-
-?>

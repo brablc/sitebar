@@ -1,4 +1,5 @@
 <?php
+
 /******************************************************************************
  *  SiteBar 3 - The Bookmark Server for Personal and Team Use.                *
  *  Copyright (C) 2006-2008  Ondrej Brablc <http://brablc.com/mailto?o>       *
@@ -16,6 +17,7 @@
  *  You should have received a copy of the GNU Affero General Public License  *
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.     *
  ******************************************************************************/
+
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -29,28 +31,23 @@
 
 <?php
     $height = "400px";
-    if (isset($_GET['height']))
-    {
-        if (preg_match('/^(\d+)(.*)?$/',$_GET['height'],$reg))
-        {
-            $height = $reg[1];
-            if ($reg[2] == '%')
-            {
-                $height .= '%';
-            }
-            else
-            {
-                $height .= 'px';
-            }
+if (isset($_GET['height'])) {
+    if (preg_match('/^(\d+)(.*)?$/', $_GET['height'], $reg)) {
+        $height = $reg[1];
+        if ($reg[2] == '%') {
+            $height .= '%';
+        } else {
+            $height .= 'px';
         }
     }
+}
 
-    require_once('./inc/errorhandler.inc.php');
-    require_once('./inc/page.inc.php');
-    require_once('./inc/usermanager.inc.php');
+require_once('./inc/errorhandler.inc.php');
+require_once('./inc/page.inc.php');
+require_once('./inc/usermanager.inc.php');
 
-    $um = SB_UserManager::staticInstance();
-    $url = SB_Page::absBaseUrl();
+$um = SB_UserManager::staticInstance();
+$url = SB_Page::absBaseUrl();
 
 
 ?>

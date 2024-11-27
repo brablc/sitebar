@@ -1,4 +1,5 @@
 <?php
+
 /******************************************************************************
  *  SiteBar 3 - The Bookmark Server for Personal and Team Use.                *
  *  Copyright (C) 2004-2008  Ondrej Brablc <http://brablc.com/mailto?o>       *
@@ -21,22 +22,19 @@ $SB_loader_title['opml_rss'] = 'OPML RSS Type';
 
 class SB_Loader_opml_rss extends SB_LoaderInterface
 {
-    function __construct($useEngine=true, $charSet=null)
+    public function __construct($useEngine = true, $charSet = null)
     {
         parent::__construct($useEngine, $charSet);
     }
 
-    function getAttributeMap()
+    public function getAttributeMap()
     {
-        static $map = array
-        (
-            'node' => array
-            (
+        static $map = array(
+            'node' => array(
                 'title' => 'name',
                 'description' => 'comment',
             ),
-            'link' => array
-            (
+            'link' => array(
                 'description' => 'comment',
                 'title' => 'name',
                 'htmlURL'  => 'url',
@@ -48,29 +46,30 @@ class SB_Loader_opml_rss extends SB_LoaderInterface
         return $map;
     }
 
-    function createNode($xmlTag)
+    public function createNode($xmlTag)
     {
-        if (isset($xmlTag['attributes']['htmlURL'])
-        ||  isset($xmlTag['attributes']['htmlurl'])
-        ||  isset($xmlTag['attributes']['htmlUrl']))
-        {
+        if (
+            isset($xmlTag['attributes']['htmlURL'])
+            ||  isset($xmlTag['attributes']['htmlurl'])
+            ||  isset($xmlTag['attributes']['htmlUrl'])
+        ) {
             return null;
         }
 
-        return parent::createNode(array('tag'=>'node', 'attributes'=>$xmlTag['attributes']));
+        return parent::createNode(array('tag' => 'node', 'attributes' => $xmlTag['attributes']));
     }
 
-    function createLink($xmlTag)
+    public function createLink($xmlTag)
     {
-        return parent::createLink(array('tag'=>'link', 'attributes'=>$xmlTag['attributes']));
+        return parent::createLink(array('tag' => 'link', 'attributes' => $xmlTag['attributes']));
     }
 
-    function getNodeTag()
+    public function getNodeTag()
     {
         return 'outline';
     }
 
-    function getLinkTag()
+    public function getLinkTag()
     {
         return 'outline';
     }

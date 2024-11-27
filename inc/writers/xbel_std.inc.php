@@ -1,4 +1,5 @@
 <?php
+
 /******************************************************************************
  *  SiteBar 3 - The Bookmark Server for Personal and Team Use.                *
  *  Copyright (C) 2004-2008  Ondrej Brablc <http://brablc.com/mailto?o>       *
@@ -28,36 +29,35 @@ require_once('./inc/writers/xbel.inc.php');
 
 class SB_Writer_xbel_std extends SB_Writer_xbel
 {
-    function __construct()
+    public function __construct()
     {
         parent::__construct();
     }
 
-    function drawContentType()
+    public function drawContentType()
     {
         header('Content-Type: text/xml; charset=utf-8');
     }
 
-    function drawDOCTYPE()
+    public function drawDOCTYPE()
     {
-?>
+        ?>
 <!DOCTYPE xbel PUBLIC
     "+//IDN python.org//DTD XML Bookmark Exchange Language 1.0//EN//XML"
     "http://pyxml.sourceforge.net/topics/dtds/xbel-1.0.dtd">
-<?php
+        <?php
     }
 
-    function getNodeAttMap(&$nodeAtt, &$node)
+    public function getNodeAttMap(&$nodeAtt, &$node)
     {
         $nodeAtt['id'] = 'n' . $node->id;
 
-        if ($node->added)
-        {
+        if ($node->added) {
             $nodeAtt['added'] = $this->getDateISO8601($node->added);
         }
     }
 
-    function getLinkAttMap(&$bmkAtt, &$node, &$link)
+    public function getLinkAttMap(&$bmkAtt, &$node, &$link)
     {
         $bmkAtt['href'] = $this->quoteAtt($link->url);
         $bmkAtt['modified'] = $this->getDateISO8601($link->changed);

@@ -1,4 +1,5 @@
 <?php
+
 /******************************************************************************
  *  SiteBar 3 - The Bookmark Server for Personal and Team Use.                *
  *  Copyright (C) 2004-2008  Ondrej Brablc <http://brablc.com/mailto?o>       *
@@ -27,51 +28,49 @@ require_once('./inc/writer.inc.php');
 
 class SB_Writer_phplm extends SB_WriterInterface
 {
-    var $path = '';
+    public $path = '';
 
-    function __construct()
+    public function __construct()
     {
         parent::__construct();
     }
 
-    function fatal($text, $arg = null)
+    public function fatal($text, $arg = null)
     {
-        die(".|".$text);
+        die(".|" . $text);
     }
 
-    function drawNodeOpen(&$node, $last=false)
+    public function drawNodeOpen(&$node, $last = false)
     {
-        if ($node->level==1 && $this->switches['root'])
-        {
+        if ($node->level == 1 && $this->switches['root']) {
             return;
         }
 
         $this->path = implode('/', $this->nodes);
 
-        $this->write(array
-        (
-            str_repeat('.',$node->level-1),
+        $this->write(array(
+            str_repeat('.', $node->level - 1),
             $node->name,
             null,
             $node->comment
         ));
     }
 
-    function drawLink(&$node, &$link, $last=false)
+    public function drawLink(&$node, &$link, $last = false)
     {
         $this->path = implode('/', $this->nodes);
-        $comment = preg_replace("/[\n\r]/m",' ',$link->comment);
+        $comment = preg_replace("/[\n\r]/m", ' ', $link->comment);
 
-        if ($link->favicon
-        &&  $this->um->getParam('user','use_favicons')
-        &&  $this->um->getParam('config','use_favicon_cache'))
-        {
-            $link->favicon = SB_Page::absBaseUrl(). 'favicon.php?' . md5($link->favicon) . '=' . $link->id;
+        if (
+            $link->favicon
+            &&  $this->um->getParam('user', 'use_favicons')
+            &&  $this->um->getParam('config', 'use_favicon_cache')
+        ) {
+            $link->favicon = SB_Page::absBaseUrl() . 'favicon.php?' . md5($link->favicon) . '=' . $link->id;
         }
 
-        $this->write(array
-        (
-            str_repeat('.',$node->level),
+        $this->write(array(
+            str_repeat('.', $node->level),
             $link->name,
             $this->quoteAtt($link->url),
             $comment,
@@ -79,11 +78,9 @@ class SB_Writer_phplm extends SB_WriterInterface
         ));
     }
 
-    function write($arr)
+    public function write($arr)
     {
         $str = implode('|', $arr);
         echo $str . "\n";
     }
 }
-
-?>
