@@ -657,9 +657,7 @@ _DOC;
 
         if ($this->switches['user'] && strlen($this->switches['user'])) {
             $message = SB_T("Hide bookmarks from %s!", $this->switches['user']);
-            echo '
-<div id="info"><a href="' . SB_Page::absBaseUrl() . '?user=">' . $message . '</a></div>
-';
+            echo '<div id="info"><a href="' . SB_Page::absBaseUrl() . '?user=">' . htmlspecialchars($message) . '</a></div>';
         }
 
         if ($this->um->isAdmin()) {
