@@ -484,9 +484,9 @@ class SB_Writer_sitebar extends SB_WriterInterface
         // those funny tag endings.
 
         $coloring = 'onmousedown="SB_buttonDown(this);" ' .
-                    'onmouseup="SB_buttonUp(this);" ' .
-                    'onmouseover="SB_buttonOver(this);' . ($this->useToolTips ? 'SB_toolTip(this,event);' : '') . '" ' .
-                    'onmouseout="SB_buttonOut(this);' . ($this->useToolTips ? 'SB_toolTipHide()' : '') . ';"';
+        'onmouseup="SB_buttonUp(this);" ' .
+        'onmouseover="SB_buttonOver(this);' . ($this->useToolTips ? 'SB_toolTip(this,event);' : '') . '" ' .
+        'onmouseout="SB_buttonOut(this);' . ($this->useToolTips ? 'SB_toolTipHide()' : '') . ';"';
 
         $title = ($this->useToolTips ? 'x_title' : 'title');
 
@@ -502,46 +502,41 @@ class SB_Writer_sitebar extends SB_WriterInterface
 
         $usefilter = true;
         ?>
-<div id="toolbarPlace" class="hidden"></div>
-<div id="toolbar" class="cmnSubTitle">
-    <div id="tlbSearch"><input id="fldSearch" class="siteBarPageBackground" type="text"
-             onkeyup="SB_storeSearch(this); var e=(event?event:window.event); if (e.keyCode==13) SB_defaultSearch('<?php echo SB_Page::targetWindow() ?>','<?php echo $this->um->getParam('user', 'default_search_tool') ?>');"
-             value="<?php echo SB_safeVal($_COOKIE, 'SB3SEARCH') ?>"><?php if ($usefilter) :
-                    ?><img id="btnFilter" src="<?php echo SB_Skin::imgsrc('filter')?>"
-                    <?php echo $title ?>="<?php echo SB_T('Filter Loaded Bookmarks')?>"
-             onclick="SB_filter(true)" <?php echo $coloring?> alt="F"
-       >
-                    <?php endif;
-                    if (!$this->um->getParam('user', 'hide_xslt') || $this->um->getParam('user', 'use_search_engine')) :
-                        ?><a href="<?php echo SB_Page::absBaseUrl() ?>search.php" <?php echo SB_Page::target(); ?>
-            ><img id="btnSearch" src="<?php echo SB_Skin::imgsrc('search')?>"
-                         <?php echo $title ?>="<?php echo SB_T('Backend Bookmark Search')?>"
-                         <?php echo $coloring?> alt=""
-       ></a>
-                    <?php endif;
-                    if ($this->um->getParam('user', 'use_search_engine')) :
-                        ?><a href="<?php echo SB_Page::absBaseUrl() ?>search.php?web=1"
-                         <?php echo SB_Page::target();?>><img id="btnSearchWeb" src="<?php echo $favicon ?>"
-                         <?php echo $title ?>="<?php echo SB_T('Search Web')?>"
-                         <?php echo $coloring?> alt=""
-      ></a>
-                    <?php endif;?></div>
+    <div id="toolbarPlace" class="hidden"></div>
+    <div id="toolbar" class="cmnSubTitle">
+      <div id="tlbSearch"><input id="fldSearch" class="siteBarPageBackground" type="text"
+        onkeyup="SB_storeSearch(this); var e=(event?event:window.event); if (e.keyCode==13) SB_defaultSearch('<?php echo SB_Page::targetWindow() ?>','<?php echo $this->um->getParam('user', 'default_search_tool') ?>');"
+        value="<?php echo SB_safeVal($_COOKIE, 'SB3SEARCH') ?>"><?php if ($usefilter) :
+            ?><img id="btnFilter" src="<?php echo SB_Skin::imgsrc('filter')?>"
+            <?php echo $title ?>="<?php echo SB_T('Filter Loaded Bookmarks')?>"
+          onclick="SB_filter(true)" <?php echo $coloring?> alt="F"><?php endif;
+        if (!$this->um->getParam('user', 'hide_xslt') || $this->um->getParam('user', 'use_search_engine')) :
+            ?><a href="<?php echo SB_Page::absBaseUrl() ?>search.php" 
+          <?php echo SB_Page::target(); ?>
+        ><img id="btnSearch" src="<?php echo SB_Skin::imgsrc('search')?>"
+            <?php echo $title ?>="<?php echo SB_T('Backend Bookmark Search')?>"
+            <?php echo $coloring?> alt="" ></a><?php endif;
+        if ($this->um->getParam('user', 'use_search_engine')) :
+            ?><a href="<?php echo SB_Page::absBaseUrl() ?>search.php?web=1"
+          <?php echo SB_Page::target();?>><img id="btnSearchWeb" src="<?php echo $favicon ?>"
+            <?php echo $title ?>="<?php echo SB_T('Search Web')?>"
+            <?php echo $coloring?> alt=""></a><?php endif;?></div>
       <div id="tlbOther"><img id="btnCollapse" src="<?php echo SB_Skin::imgsrc('collapse')?>"
-             <?php echo $title ?>="<?php echo SB_T('Collapse/Expand All')?>"
-             onclick="SB_collapseAll();" <?php echo $coloring?> alt=""
-       ><?php if ($this->um->getParam('user', 'use_hiding')) :
-            ?><img id="btnReloadAll" src="<?php echo SB_Skin::imgsrc('reload_all')?>"
-             <?php echo $title ?>="<?php echo SB_T('Reload with Hidden Folders')?>"
-             onclick="SB_reloadAll();" <?php echo $coloring?> alt=""
-       >
+        <?php echo $title ?>="<?php echo SB_T('Collapse/Expand All')?>"
+        onclick="SB_collapseAll();" <?php echo $coloring?> alt=""
+      ><?php if ($this->um->getParam('user', 'use_hiding')) :
+          ?><img id="btnReloadAll" src="<?php echo SB_Skin::imgsrc('reload_all')?>"
+        <?php echo $title ?>="<?php echo SB_T('Reload with Hidden Folders')?>"
+          onclick="SB_reloadAll();" <?php echo $coloring?> alt=""
+        >
         <?php endif;?><img id="btnReload" src="<?php echo SB_Skin::imgsrc('reload')?>"
-             <?php echo $title ?>="<?php echo SB_T('Reload')?>"
-             onclick="SB_reloadPage();" <?php echo $coloring?> alt=""
-       ></div>
-</div>
+          <?php echo $title ?>="<?php echo SB_T('Reload')?>"
+          onclick="SB_reloadPage();" <?php echo $coloring?> alt=""
+        ></div>
+    </div>
         <?php
 
-         $msgFile = "./inc/message.inc.php";
+             $msgFile = "./inc/message.inc.php";
         if (is_file($msgFile)) {
             include($msgFile);
         }
