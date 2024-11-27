@@ -4998,7 +4998,7 @@ class SB_CommandWindow extends SB_ErrorHandler
                 $members = null;
             }
 
-            $params = "nid_acl={$node->id}&amp;command_gid=${gid}";
+            $params = "nid_acl={$node->id}&amp;command_gid={$gid}";
 
             $commands = array(
                 array(
@@ -5131,7 +5131,7 @@ class SB_CommandWindow extends SB_ErrorHandler
         </tr>
             <?php
             if ($showGroup) {
-                echo "<script>SB_showShareGroup(${gid});</script>";
+                echo "<script>SB_showShareGroup({$gid});</script>";
             }
         }
 

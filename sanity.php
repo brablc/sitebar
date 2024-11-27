@@ -227,7 +227,7 @@ _SQL;
 
         $rset = $this->db->raw($sql);
         while (($rec = $this->db->fetchRecord($rset))) {
-            echo "Deleting user #${rec['uid']} ${rec['email']}\r";
+            echo "Deleting user #{$rec['uid']} {$rec['email']}\r";
             $this->um->removeUser($rec['uid']);
         }
         echo "\n";

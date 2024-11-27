@@ -33,9 +33,9 @@ function niceUrl($writer)
     global $um;
 
     if ($um->getParam('config', 'use_nice_url')) {
-        return "concat('${baseurl}news/$writer/',substring(./@id,2),'/',\$root)";
+        return "concat('{$baseurl}news/$writer/',substring(./@id,2),'/',\$root)";
     } else {
-        return "concat('${baseurl}index.php?w=$writer&amp;flat=1&amp;sort=',substring(./@id,2),'&amp;root=',\$root)";
+        return "concat('{$baseurl}index.php?w=$writer&amp;flat=1&amp;sort=',substring(./@id,2),'&amp;root=',\$root)";
     }
 }
 

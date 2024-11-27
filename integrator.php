@@ -330,10 +330,10 @@ $general = array(
 foreach ($browsers as $id => $param) {
     echo "<tr>\r";
     echo "<td><a" . ($browser == $id ? " class=\"selected\"" : "") . " href=\"integrator.php?lang=$lang&amp;browser=$id\" title=\"" . SB_T('Integration Instructions') . "\">" . SB_T($param['label']) . "</a></td>\r";
-    echo "<td>${param['platforms']}</td>\n";
+    echo "<td>{$param['platforms']}</td>\n";
     echo "<td>";
     if (isset($param['homepage']) && $param['homepage'] != '') {
-        echo "[<a href=\"${param['homepage']}\">Homepage</a>]";
+        echo "[<a href=\"{$param['homepage']}\">Homepage</a>]";
     } else {
         echo "&nbsp;";
     }
@@ -396,11 +396,11 @@ foreach ($extra as $id => $params) {
 
     echo "<tr>\n";
     if ($params['url']) {
-        echo "<td class='extra'><a $urlparams href=\"${params['url']}\">" . SB_T($params['label']) . "</a></td>\n";
+        echo "<td class='extra'><a $urlparams href=\"{$params['url']}\">" . SB_T($params['label']) . "</a></td>\n";
     } else {
         echo "<td class='extra'>" . SB_T($params['label']) . "</td>\n";
     }
-    echo "<td class='desc'>${params['desc']}</td>\n";
+    echo "<td class='desc'>{$params['desc']}</td>\n";
     echo "</tr>\n";
 }
 
@@ -415,11 +415,11 @@ foreach ($general as $id => $params) {
 
     echo "<tr>\r";
     if ($params['url']) {
-        echo "<td class=\"general\"><a href=\"${params['url']}\">" . SB_T($params['label']) . "</a></td>\r";
+        echo "<td class=\"general\"><a href=\"{$params['url']}\">" . SB_T($params['label']) . "</a></td>\r";
     } else {
         echo "<td class=\"general\">" . SB_T($params['label']) . "</td>\r";
     }
-    echo "<td class=\"desc\">${params['desc']}</td>\r";
+    echo "<td class=\"desc\">{$params['desc']}</td>\r";
     echo "</tr>\r";
 }
 

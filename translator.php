@@ -676,10 +676,10 @@ endif;
 
 \$info = array
 (
-    'language' => '${_REQUEST['language']}',
+    'language' => '{$_REQUEST['language']}',
     'authors' => array
     (
-    '${_REQUEST['author']}' => '${_REQUEST['url']}',
+    '{$_REQUEST['author']}' => '{$_REQUEST['url']}',
     ),
 );
 
