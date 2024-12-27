@@ -58,24 +58,7 @@ Online documentation can be found at http://sitebar.org/userguide.php
 System Requirements
 ===================
 
-   Backend:
-   - MySQL 5.x
-   - PHP 7.0
-     - `apt-get -y install libapache2-mod-php7.0 php7.0-mysql php7.0-xml`
-   - outbound HTTP connection for link validation and favicon harvesting
-   (see http://sitebar.org/requirements.php for more details)
-
-   Browser (full featured access):
-   - "HTML 4.01 Transitional" compatible browser with DOM 2 support
-     and innerHTML defined (non standard attribute)
-   - XSLT support for some features
-   - Cookies ON, Javacript ON
-   - Tested with:
-       Internet Explorer 5.5, 6.0
-       Maxthon 1.1
-       Mozilla 1.7
-       Mozilla Firefox 1.5
-       Opera 8.5
+See [docker-compose.yml](https://github.com/brablc/sitebar-docker/blob/master/docker/docker-compose.yml) for currently supported versions.
 
 Development Team
 ================
